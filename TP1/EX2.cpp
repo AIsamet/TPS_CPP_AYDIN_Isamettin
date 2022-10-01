@@ -1,58 +1,7 @@
 #include <iostream>
+#include "EX1.h"
+
 using namespace std;
-
-
-//1.1.1
-int Somme(int a, int b) {
-    return a + b;
-}
-
-//1.1.2
-void Inverse(int& a, int& b) {
-    int temp = a;
-    a = b;
-    b = temp;
-}
-
-//1.1.3
-void TroisEntiersPtr(int* a, int* b, int* c)
-{
-    *c = *a + *b;
-    cout << *c << endl;;
-}
-
-void TroisEntiersRef(int& a, int& b, int& c)
-{
-    c = a + b;
-    cout << c << endl;
-}
-
-//1.1.4
-void Tableau() {
-    int tableau[10];
-    for (int i = 0; i < 10; i++) {
-        tableau[i] = rand() % 100;
-    }
-    cout << "valeurs non triés : " << endl;
-    for (int i = 0; i < 10; i++) {
-        cout << tableau[i] << endl;
-    }
-
-    for (int i = 0; i < 10; i++) {
-
-        for (int z = 0; z < 10; z++) {
-
-            if (tableau[z] > tableau[i]) {
-
-                Inverse(tableau[i], tableau[z]);
-            }
-        }
-    }
-    cout << "valeurs triés : " << endl;
-    for (int i = 0; i < 10; i++) {
-        cout << tableau[i] << endl;
-    }
-}
 
 int PointsJoueurs(int echangeJoueur) {
     switch (echangeJoueur) {
@@ -132,7 +81,7 @@ void ScoreTenis() {
                 cout << "Joueur A Gagne !" << endl;
             }
             else if (nbEchangeJoueurUn == nbEchangeJoueurDeux) {
-                cout << "Egalité" << endl;
+                cout << "Egalit�" << endl;
             }
 
         }
@@ -156,30 +105,33 @@ void ScoreTenis() {
     }
 }
 
-int main()
-{
-    //1.1.1
-    int a = 1;
-    int b = 2;
-    int c = 0;
-    //cout << somme(a,b);
+//void ScoreTenis(int nbechangesA, int nbechangesB) {
+//	cout << "Etat des points : \nA : " << nbechangesA << endl << "B : " << nbechangesB << endl << endl;
+//
+//	//EGALITE A 40
+//	if (nbechangesA == 3 and nbechangesA == nbechangesB) {
+//		cout << "Le gagnant de la balle aura l'avantage et la balle de jeu." << endl;
+//	}
+//	//AVANTAGE JOUEUR A
+//	else if (nbechangesA == 4 and nbechangesB == 3) {
+//		cout << "Le joueur A a l'avantage et la balle de jeu." << endl;
+//	}
+//	//AVANTAGE JOUEUR B
+//	else if (nbechangesB == 4 and nbechangesA == 3) {
+//		cout << "Le joueur B a l'avantage et la balle de jeu." << endl;
+//	}
+//	//JOUEUR A GAGNE SUITE A AVANTAGE
+//	else if (nbechangesA == 5 and nbechangesB == 3) {
+//		cout << "Le joueur A gagne le jeu" << endl;
+//	}
+//	//JOUEUR B GAGNE SUITE A AVANTAGE
+//	else if (nbechangesB == 5 and nbechangesA == 3) {
+//		cout << "Le joueur B gagne le jeu" << endl;
+//	}
+//	//EGALITE FINALE
+//	else if (nbechangesA == 4 and nbechangesA == nbechangesB) {
+//		cout << "Egalite" << endl;
+//	}
+//}
 
-    //1.1.2
-    /*Inverse(a,b);
-    cout << a << "\n" << b << endl;*/
 
-    //1.1.3
-    /*TroisEntiersPtr(&a,&b,&c);
-    TroisEntiersRef(a,b,c);*/
-
-    //1.1.4
-    //Tableau();
-
-    //2
-
-    ScoreTenis();
-
-
-
-    return 0;
-}
