@@ -17,22 +17,20 @@ string PointsJoueurs(int echangeJoueur, int echangeJoueurB) {
     case 3:
         return "40";
         break;
-    case 4:
+    default :
         if (echangeJoueur-1 == echangeJoueurB) {
             return "Avantage";
             break;
         }
-        else if (echangeJoueur-2 == echangeJoueurB) {
+        else if (echangeJoueur-2 >= echangeJoueurB) {
             return "Jeu";
             break;
         }
-        return "bug";
+        else if (echangeJoueurB == echangeJoueur) {
+            return "Egalite";
+        }
+        return "40";
         break;
-    case 5:
-        return "Jeu";
-        break;
-    default:
-        return "default";
     }
 }
 
@@ -66,51 +64,71 @@ void ScoreTenis() {
     int nbEchangeJoueurDeux = 0;
     int i = 0;
 
-    while ((jeuJoueurUn < 3 && jeuJoueurDeux < 3) || (jeuJoueurUn == jeuJoueurDeux) || (jeuJoueurUn + 2 != jeuJoueurDeux && jeuJoueurDeux + 2 != jeuJoueurUn)) {
+    //while ((setJoueurUn < 3 && setJoueurDeux < 3) || (setJoueurUn == setJoueurDeux) || (setJoueurUn + 2 != setJoueurDeux && setJoueurDeux + 2 != setJoueurUn)) {
 
-        nbEchangeJoueurUn = 0;
-        nbEchangeJoueurDeux = 0;
+    //    jeuJoueurUn = 0;
+    //    jeuJoueurDeux = 0;
 
-        cout << "Jeu numero " << i+1 << "\n\n";
+
+        while ((jeuJoueurUn <= 6 && jeuJoueurDeux <= 6) || (jeuJoueurUn == jeuJoueurDeux) || (jeuJoueurUn + 2 != jeuJoueurDeux && jeuJoueurDeux + 2 != jeuJoueurUn)) {
+
+            nbEchangeJoueurUn = 0;
+            nbEchangeJoueurDeux = 0;
+
+            cout << "Jeu numero " << i + 1 << "\n\n";
+
+            AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux);
+                                                                                                                       //SI a-2 == b on arrete la boucle (!(nbEchangeJoueurUn-2 >= nbEchangeJoueurDeux) && !(nbEchangeJoueurDeux -2 >= nbEchangeJoueurUn))
+            while ((nbEchangeJoueurUn < 4 && nbEchangeJoueurDeux < 4) || (PointsJoueurs(nbEchangeJoueurUn,nbEchangeJoueurDeux)!="Jeu" && PointsJoueurs(nbEchangeJoueurDeux,nbEchangeJoueurUn) != "Jeu")) {
+
+                if ((rand() % 2) == 0) {
+                    nbEchangeJoueurUn += 1;
+                    cout << "------------------------------------------------" << endl;
+                    cout << "Le joueur A gagne l'echange, etat des points : " << "\n\n";
+                }
+                else {
+                    nbEchangeJoueurDeux += 1;
+                    cout << "------------------------------------------------" << endl;
+                    cout << "Le joueur B gagne l'echange, etat des points : " << "\n\n";
+                }
+
+                AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux);
+                cout << nbEchangeJoueurUn << "\n" << nbEchangeJoueurDeux << endl;
+                //this_thread::sleep_for(std::chrono::seconds(1));
+            }
+
+            cout << "------------------------------------------------" << endl;
+
+            if (nbEchangeJoueurUn > nbEchangeJoueurDeux) {
+                jeuJoueurUn += 1;
+                cout << "Le joueur A gagne le jeu" << "\n\n";
+            }
+            else {
+                jeuJoueurDeux += 1;
+                cout << "Le joueur B gagne le jeu" << "\n\n";
+            }
+
+            nbEchangeJoueurUn = 0;
+            nbEchangeJoueurDeux = 0;
+            AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux);
+            cout << nbEchangeJoueurUn << "\n" << nbEchangeJoueurDeux << endl;
+
+            cout << "***********************************************************************************************************************" << endl;
+
+            i++;
+        }
 
         AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux);
 
-        while ((nbEchangeJoueurUn < 3 && nbEchangeJoueurDeux < 3) || (nbEchangeJoueurUn == nbEchangeJoueurDeux) || (nbEchangeJoueurUn + 2 != nbEchangeJoueurDeux && nbEchangeJoueurDeux + 2 != nbEchangeJoueurUn)) {
+        
 
-            if ((rand() % 2) == 0) {
-                nbEchangeJoueurUn += 1;
-                cout << "------------------------------------------------" << endl;
-                cout << "Le joueur A gagne l'echange, etat des points : " << "\n\n";
-            }
-            else {
-                nbEchangeJoueurDeux += 1;
-                cout << "------------------------------------------------" << endl;
-                cout << "Le joueur B gagne l'echange, etat des points : " << "\n\n";
-            }
-
-            AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux);
-
-            //this_thread::sleep_for(std::chrono::seconds(1));
-        }
-
-        if(nbEchangeJoueurUn > nbEchangeJoueurDeux) {
-            jeuJoueurUn += 1;
-            cout << "Le joueur A gagne le jeu" << "\n\n";
-        }
-        else {
-            jeuJoueurDeux += 1;
-            cout << "Le joueur B gagne le jeu" << "\n\n";
-        }
-
-        cout << "***********************************************************************************************************************" << endl;
-
-        i++;
     }
-
-    AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux);
-
-
-
-}
+    //if (jeuJoueurUn > jeuJoueurDeux) {
+    //    setJoueurUn += 1;
+    //}
+    //else {
+    //    setJoueurDeux += 1;
+    //}
+//}
 
 
