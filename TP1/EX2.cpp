@@ -88,7 +88,7 @@ void ScoreTenis() {
 
 
 	//Il faut 2 sets sur un match a 3 set pour gagner le match
-	while ((setJoueurUn <= 3 && setJoueurDeux <= 3) && (setJoueurUn != 2 && setJoueurDeux != 2)) {
+	while ((setJoueurUn < 3 && setJoueurDeux < 3) && (setJoueurUn != 2 && setJoueurDeux != 2)) {
 
 		// Il faut 6 jeux avec 2 point de difference pour gagner le set
 		while ((jeuJoueurUn < 6 && jeuJoueurDeux < 6) || (JeuJoueurs(jeuJoueurUn, jeuJoueurDeux) != "Jeu" && JeuJoueurs(jeuJoueurDeux, jeuJoueurUn) != "Jeu")) {
