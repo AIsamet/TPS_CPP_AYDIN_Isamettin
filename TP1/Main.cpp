@@ -26,7 +26,7 @@ int main()
     /*Tableau();*/
 
     //2
-    //ScoreTenis();
+    //ScoreTennis();
 
     //3.1.1
     //Prenom();
@@ -35,7 +35,7 @@ int main()
     //PrenomNom();
 
     //3.2.1 && 3.2.2
-    devinettenNombre();
+    //devinettenNombre();
 
     return 0;
 }

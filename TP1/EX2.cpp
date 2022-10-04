@@ -76,7 +76,7 @@ void AfficherScore(int nbEchangeJoueurUn, int nbEchangeJoueurDeux, int jeuJoueur
 //MATCH PEUT SE JOUER EN 3 OU 5 SETS
 
 
-void ScoreTenis() {
+void ScoreTennis() {
 	int setJoueurUn = 0;
 	int setJoueurDeux = 0;
 	int jeuJoueurUn = 0;

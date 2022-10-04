@@ -32,7 +32,7 @@ void PrenomNom() {
 }
 
 //3.2.1 && 3.2.2
-void devinettenNombre()
+void DevinettenNombre()
 {
 	srand(time(NULL));
 	int aDeviner = rand() % 1001;

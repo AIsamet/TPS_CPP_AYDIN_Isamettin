@@ -6,7 +6,7 @@
 
 void Prenom();
 void PrenomNom();
-void devinettenNombre();
+void DevinettenNombre();
 
 
 #endif
