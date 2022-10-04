@@ -24,12 +24,18 @@
     <ClCompile Include="EX2.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="EX3.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EX1.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
     <ClInclude Include="EX2.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="EX3.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
   </ItemGroup>

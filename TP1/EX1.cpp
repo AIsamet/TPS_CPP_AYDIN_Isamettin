@@ -1,4 +1,3 @@
-#include "EX1.h"
 #include <iostream>
 using namespace std;
 

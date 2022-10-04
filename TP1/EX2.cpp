@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>         // std::chrono::seconds
-#include "EX1.h"
 
 using namespace std;
 
@@ -85,7 +84,7 @@ void ScoreTenis() {
 	int nbEchangeJoueurUn = 0;
 	int nbEchangeJoueurDeux = 0;
 	int i = 0;
-
+	srand(time(NULL));
 
 	//Il faut 2 sets sur un match a 3 set pour gagner le match
 	while ((setJoueurUn < 3 && setJoueurDeux < 3) && (setJoueurUn != 2 && setJoueurDeux != 2)) {

@@ -3,6 +3,8 @@ using namespace std;
 
 #include "EX1.h"
 #include "EX2.h"
+#include "EX3.h"
+
 
 int main()
 {
@@ -24,7 +26,16 @@ int main()
     /*Tableau();*/
 
     //2
-    ScoreTenis();
+    //ScoreTenis();
+
+    //3.1.1
+    //Prenom();
+
+    //3.1.2
+    //PrenomNom();
+
+    //3.2.1 && 3.2.2
+    devinettenNombre();
 
     return 0;
 }
