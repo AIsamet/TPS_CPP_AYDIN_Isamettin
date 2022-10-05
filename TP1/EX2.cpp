@@ -94,7 +94,7 @@ void ScoreTennis() {
 
 			cout << "Jeu numero " << i + 1 << "\n\n";
 
-			// Il faut 4 echanges pour gagner le jeu (sans cas d'egalité)
+			// Il faut 4 echanges pour gagner le jeu + cas d'égalités
 			while ((nbEchangeJoueurUn < 4 && nbEchangeJoueurDeux < 4) || (PointsJoueurs(nbEchangeJoueurUn, nbEchangeJoueurDeux) != "Jeu" && PointsJoueurs(nbEchangeJoueurDeux, nbEchangeJoueurUn) != "Jeu")) {
 
 				if ((rand() % 2) == 0) {

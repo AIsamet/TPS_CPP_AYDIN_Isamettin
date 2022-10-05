@@ -8,6 +8,8 @@ using namespace std;
 
 int main()
 {
+    srand(time(NULL));
+
     //1.1.1
     //int a = 1;
     //int b = 2;
@@ -25,17 +27,20 @@ int main()
     //1.1.4
     //Tableau();
 
+    //BONUS 1.1.4
+    //Tableau1();
+
     //2
     //ScoreTennis();
 
     //3.1.1
     //Prenom();
 
-    //3.1.2
+    //3.1.2 + BONUS
     //PrenomNom();
 
     //3.2.1 && 3.2.2
-    DevinettenNombre();
+    //DevinettenNombre();
 
     return 0;
 }
