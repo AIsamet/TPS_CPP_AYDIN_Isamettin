@@ -9,11 +9,10 @@ void Prenom() {
 	cout << "Enchanté " << prenom << endl;
 }
 
-//3.1.2
+//3.1.2 + BONUS
 void PrenomNom() {
 	string nom = "";
 	string prenom = "";
-	string delimiter = " ";
 	
 	cout << "Quel est ton nom complet ? (nom prenom)" << endl;
 	cin >> nom >> prenom;
@@ -38,7 +37,7 @@ void DevinettenNombre()
 	int aDeviner = rand() % 1001;
 	int entreeUtilisateur = -1;
 	int essais = 1;
-	cout << aDeviner << "\n\n";
+	cout << "Essai dond de deviner mon nombre entre 0 et 1000" << aDeviner << "\n\n";
 
 	while (entreeUtilisateur != aDeviner) {
 		cout << "Essai numero : " << essais << endl;

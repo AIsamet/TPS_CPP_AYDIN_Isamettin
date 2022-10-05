@@ -38,16 +38,14 @@ void Tableau() {
         cout << tableau[i] << endl;
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 9; i++) {
 
-        for (int z = 0; z < 10; z++) {
-
-            if (tableau[z] > tableau[i]) {
-
-                Inverse(tableau[i], tableau[z]);
-            }
+        for (int j = 0; j < 9; j++) {
+            if (tableau[j] > tableau[j + 1])
+                Inverse(tableau[j], tableau[j + 1]);
         }
     }
+
     cout << "valeurs triés : " << endl;
     for (int i = 0; i < 10; i++) {
         cout << tableau[i] << endl;

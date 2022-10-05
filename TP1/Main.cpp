@@ -9,10 +9,10 @@ using namespace std;
 int main()
 {
     //1.1.1
-    /*int a = 1;
-    int b = 2;
-    int c = 0;
-    cout << Somme(a,b) << endl;*/
+    //int a = 1;
+    //int b = 2;
+    //int c = 0;
+    //cout << Somme(a,b) << endl;
 
     //1.1.2
     /*Inverse(a,b);
@@ -23,7 +23,7 @@ int main()
     TroisEntiersRef(a,b,c);*/
 
     //1.1.4
-    /*Tableau();*/
+    //Tableau();
 
     //2
     //ScoreTennis();
@@ -35,7 +35,7 @@ int main()
     //PrenomNom();
 
     //3.2.1 && 3.2.2
-    //devinettenNombre();
+    DevinettenNombre();
 
     return 0;
 }

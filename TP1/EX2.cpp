@@ -99,16 +99,18 @@ void ScoreTennis() {
 
 				if ((rand() % 2) == 0) {
 					nbEchangeJoueurUn += 1;
-					//cout << "Le joueur A gagne l'echange, etat des points : " << "\n\n";
-					//AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);
+
+					//DESACTIVEZ LES COMMENTAIRES POUR AVOIR LES DETAILS DES JEUX
+					/*cout << "Le joueur A gagne l'echange, etat des points : " << "\n\n";
+					AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);*/
 				}
 				else {
 					nbEchangeJoueurDeux += 1;
-					//cout << "Le joueur B gagne l'echange, etat des points : " << "\n\n";
-					//AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);
-				}
 
-				//std::this_thread::sleep_for(500ms);
+					//DESACTIVEZ LES COMMENTAIRES POUR AVOIR LES DETAILS DES JEUX
+					/*cout << "Le joueur B gagne l'echange, etat des points : " << "\n\n";
+					AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);*/
+				}
 			}
 
 			if (nbEchangeJoueurUn > nbEchangeJoueurDeux) {
@@ -124,7 +126,6 @@ void ScoreTennis() {
 			nbEchangeJoueurDeux = 0;
 			AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);
 			i++;
-			//std::this_thread::sleep_for(2000ms);
 		}
 
 		if (jeuJoueurUn > jeuJoueurDeux) {
