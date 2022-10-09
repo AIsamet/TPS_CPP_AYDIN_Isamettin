@@ -31,7 +31,15 @@ int main()
     //Tableau1();
 
     //2
-    //ScoreTennis();
+    //Parametres de la fonction AfficherScore : 
+    //AfficherScore(int nbEchangeJoueurUn, int nbEchangeJoueurDeux, int jeuJoueurUn, int jeuJoueurDeux, int setJoueurUn, int setJoueurDeux)
+    // 
+    //AfficherScore(7, 6, 0, 0, 0, 0);
+    // 
+    // RQ: La consigne m'etait un peu flou de ce fait je suis peut-etre allé un peu plus loin que la demande de base en 
+    //     simulant un jeu de tennis en entier avec des random que vous pouvez tester avec la fonction SimulationTennis()
+    // 
+    //SimulationTennis();
 
     //3.1.1
     //Prenom();

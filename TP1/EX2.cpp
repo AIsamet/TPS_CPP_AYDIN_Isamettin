@@ -76,7 +76,7 @@ void AfficherScore(int nbEchangeJoueurUn, int nbEchangeJoueurDeux, int jeuJoueur
 //MATCH PEUT SE JOUER EN 3 OU 5 SETS
 
 
-void ScoreTennis() {
+void SimulationTennis() {
 	int setJoueurUn = 0;
 	int setJoueurDeux = 0;
 	int jeuJoueurUn = 0;
@@ -100,16 +100,16 @@ void ScoreTennis() {
 				if ((rand() % 2) == 0) {
 					nbEchangeJoueurUn += 1;
 
-					//DESACTIVEZ LES COMMENTAIRES POUR AVOIR LES DETAILS DES JEUX
-					/*cout << "Le joueur A gagne l'echange, etat des points : " << "\n\n";
-					AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);*/
+					//DESACTIVEZ/ACTIVEZ LES COMMENTAIRES POUR AVOIR OU NON LES DETAILS DES JEUX
+					cout << "Le joueur A gagne l'echange, etat des points : " << "\n\n";
+					AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);
 				}
 				else {
 					nbEchangeJoueurDeux += 1;
 
-					//DESACTIVEZ LES COMMENTAIRES POUR AVOIR LES DETAILS DES JEUX
-					/*cout << "Le joueur B gagne l'echange, etat des points : " << "\n\n";
-					AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);*/
+					//DESACTIVEZ/ACTIVEZ LES COMMENTAIRES POUR AVOIR LES DETAILS DES JEUX
+					cout << "Le joueur B gagne l'echange, etat des points : " << "\n\n";
+					AfficherScore(nbEchangeJoueurUn, nbEchangeJoueurDeux, jeuJoueurUn, jeuJoueurDeux, setJoueurUn, setJoueurDeux);
 				}
 			}
 

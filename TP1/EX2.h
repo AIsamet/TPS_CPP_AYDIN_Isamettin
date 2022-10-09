@@ -6,7 +6,7 @@
 
 std::string PointsJoueurs(int echangeJoueur, int echangeJoueurB);
 string JeuJoueurs(int jeuJoueurUn, int jeuJoueurDeux);
-void ScoreTennis();
+void SimulationTennis();
 void AfficherScore(int nbEchangeJoueurUn, int nbEchangeJoueurDeux, int jeuJoueurUn, int jeuJoueurDeux, int setJoueurUn, int setJoueurDeux);
 
 
