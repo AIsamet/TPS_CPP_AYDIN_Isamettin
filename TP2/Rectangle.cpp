@@ -53,9 +53,9 @@ inline void Rectangle::SetLongueur(const int& Longueur)
 	longueur = Longueur;
 }
 
-inline void Rectangle::SetCoinSupGauche(const Point& SupGauche)
+inline void Rectangle::SetCoinSupGauche(const Point& CoinSupGauche)
 {
-	coinSupGauche = SupGauche;
+	coinSupGauche = CoinSupGauche;
 }
 
 //2.2.2 Méthode qui retourne le périmètre d'une instance de Rectangle

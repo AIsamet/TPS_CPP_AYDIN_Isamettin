@@ -24,10 +24,10 @@ public:
     inline float GetSurface() const;
 
 	//3.2.3
-	bool EstSurCercle(const Point& p) const;
+	bool EstSurCercle(const Point& Point) const;
 
 	//3.2.4
-	bool EstDansCercle(const Point& p) const;
+	bool EstDansCercle(const Point& Point) const;
 
 //3.1.1
 private:

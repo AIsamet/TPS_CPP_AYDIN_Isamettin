@@ -62,17 +62,17 @@ inline float Cercle::GetSurface() const
 }
 
 //3.2.3 Méthode qui retourne un booleen true si un point passé en paramètre est sur l'instance de Cercle, sinon false
-bool Cercle::EstSurCercle(const Point& p) const {
+bool Cercle::EstSurCercle(const Point& Point) const {
 
     //On return true si la distance entre le centre du cercle et le point est egal au rayon du cercle
-	if (centre.DistanceTo(p) == (static_cast<float>(GetDiametre()) / 2)) { return true; }
+	if (centre.DistanceTo(Point) == (static_cast<float>(diametre) / 2)) { return true; }
 	else return false;
 }
 
 //3.2.4 Méthode qui retourne un booleen true si un point passé en paramètre est dans l'instance de Cercle, sinon false
-bool Cercle::EstDansCercle(const Point& p) const {
+bool Cercle::EstDansCercle(const Point& Point) const {
 
     //On return true si la distance entre le centre du cercle et le point est inferieur au rayon du cercle
-	if (centre.DistanceTo(p) < (static_cast<float>(GetDiametre()) / 2)) { return true; }
+	if (centre.DistanceTo(Point) < (static_cast<float>(diametre) / 2)) { return true; }
 	else return false;
 }

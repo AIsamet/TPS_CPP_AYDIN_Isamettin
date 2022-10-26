@@ -26,10 +26,10 @@ public:
     inline int GetSurface() const;
 
 	//BONUS 2.3.1
-    bool EstPlusGrandPerimetre(const Rectangle& p) const;
+    bool EstPlusGrandPerimetre(const Rectangle& Rectangle) const;
 
 	//BONUS 2.3.2
-    bool EstPlusGrandSurface(const Rectangle& p) const;
+    bool EstPlusGrandSurface(const Rectangle& Rectangle) const;
 
 //2.1.1 & 2.1.2
 private:

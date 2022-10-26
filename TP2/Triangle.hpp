@@ -8,7 +8,7 @@ class Triangle {
 public:
     //4.1.1
 	Triangle();
-	Triangle(const Point& p1, const Point& p2, const Point& p3);
+	Triangle(const Point& PointUn, const Point& PointDeux, const Point& PointTrois);
 	~Triangle();
 	string Afficher() const;
 
@@ -17,9 +17,9 @@ public:
     inline Point GetP2() const;
     inline Point GetP3() const;
 
-    inline void SetP1(const Point& p);
-    inline void SetP2(const Point& p);
-    inline void SetP3(const Point& p);
+    inline void SetP1(const Point& Point);
+    inline void SetP2(const Point& Point);
+    inline void SetP3(const Point& Point);
 
 	//4.2.2
     inline float GetBase() const;
@@ -32,9 +32,9 @@ public:
 
 //4.1.1
 private:
-	Point p1;
-	Point p2;
-	Point p3;
+	Point pointUn;
+	Point pointDeux;
+	Point pointTrois;
 };
 
 #endif /* Triangle_hpp */

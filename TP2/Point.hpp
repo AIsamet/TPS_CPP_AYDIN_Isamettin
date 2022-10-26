@@ -22,7 +22,7 @@ struct Point {
 
 	//Ajout d'une methode distanceTo pour calculer la distance vers un point p
 	//afin de simplifier les methodes dans les classes Cercle et Triangle
-    float DistanceTo(const Point& p) const;
+    float DistanceTo(const Point& Point) const;
 };
 
 #endif /* Point_hpp */

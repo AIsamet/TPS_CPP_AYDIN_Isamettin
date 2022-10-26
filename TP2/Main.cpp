@@ -6,23 +6,23 @@
 
 int main(int argc, const char* argv[]) {
 
-	const float coordonneX = 0;
-	const float coordonneY = 2.5;
-	const Point p(coordonneX, coordonneY);
+	const float COORDONNEE_X = 0;
+	const float COORDONNEE_Y = 2.5;
+	const Point p(COORDONNEE_X, COORDONNEE_Y);
 
-	const int largeurRectangle(20);
-	const int longueurRectangle(40);
-	const Point coinSupGaucheRectangle(10, 20);
-	Rectangle rectangle(largeurRectangle, longueurRectangle, coinSupGaucheRectangle);
+	const int LARGEUR_RECTANGLE(20);
+	const int LONGUEUR_RECTANGLE(40);
+	const Point COIN_SUP_GAUCHE_RECTANGLE(10, 20);
+	Rectangle rectangle(LARGEUR_RECTANGLE, LONGUEUR_RECTANGLE, COIN_SUP_GAUCHE_RECTANGLE);
 
-	const int largeurRectangleDeux(10);
-	const int longueurRectangleDeux(20);
-	const Point coinSupGaucheRectangleDeux(10, 20);
-	Rectangle rectangleDeux(largeurRectangleDeux, longueurRectangleDeux, coinSupGaucheRectangleDeux);
+	const int LARGEUR_RECTANGLE_DEUX(10);
+	const int LONGUEUR_RECTANGLE_DEUX(20);
+	const Point COIN_SUP_GAUCHE_RECTANGLE_DEUX(10, 20);
+	Rectangle rectangleDeux(LARGEUR_RECTANGLE_DEUX, LONGUEUR_RECTANGLE_DEUX, COIN_SUP_GAUCHE_RECTANGLE_DEUX);
 
-	const Point centreCercle(0, 0);
-	const int diametreCercle(5);
-	Cercle cercle(centreCercle, diametreCercle);
+	const Point CENTRE_CERCLE(0, 0);
+	const int DIAMETRE_CERCLE(5);
+	Cercle cercle(CENTRE_CERCLE, DIAMETRE_CERCLE);
 
 	////JEU DE TEST POUR AVOIR UN TRIANGLE EQUILATERAL
 	//const Point pointUnTriangle(1,2);
@@ -34,10 +34,10 @@ int main(int argc, const char* argv[]) {
 	//const Point pointDeuxTriangle(0, 10);
 	//const Point pointTroisTriangle(10, 0);
 
-	const Point pointUnTriangle(0, 0);
-	const Point pointDeuxTriangle(0, 10);
-	const Point pointTroisTriangle(10, 0);
-	Triangle triangle(pointUnTriangle, pointDeuxTriangle, pointTroisTriangle);
+	const Point POINT_UN_TRIANGLE(0, 0);
+	const Point POINT_DEUX_TRIANGLE(0, 10);
+	const Point POINT_TROIS_TRIANGLE(10, 0);
+	Triangle triangle(POINT_UN_TRIANGLE, POINT_DEUX_TRIANGLE, POINT_TROIS_TRIANGLE);
 
 	//RECTANGLE + BONUS
 	cout << "\n========= Rectangle 1 =========\n" << rectangle.Afficher() << endl;
