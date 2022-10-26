@@ -6,8 +6,8 @@
 
 int main(int argc, const char* argv[]) {
 
-	const int coordonneX = 0;
-	const int coordonneY = 5;
+	const float coordonneX = 0;
+	const float coordonneY = 2.5;
 	const Point p(coordonneX, coordonneY);
 
 	const int largeurRectangle(20);
@@ -21,18 +21,18 @@ int main(int argc, const char* argv[]) {
 	Rectangle rectangleDeux(largeurRectangleDeux, longueurRectangleDeux, coinSupGaucheRectangleDeux);
 
 	const Point centreCercle(0, 0);
-	const int diametreCercle(10);
+	const int diametreCercle(5);
 	Cercle cercle(centreCercle, diametreCercle);
 
 	////JEU DE TEST POUR AVOIR UN TRIANGLE EQUILATERAL
-	//const Point p1(1,2);
-	//const Point p2(5,4);
-	//const Point p3(3-sqrt(3),3+2*sqrt(3));
+	//const Point pointUnTriangle(1,2);
+	//const Point pointDeuxTriangle(5,4);
+	//const Point pointTroisTriangle(3-sqrt(3),3+2*sqrt(3));
 
 	////JEU DE TEST POUR AVOIR UN TRIANGLE RECTANGLE + ISOCELE
-	//const Point p1(0, 0);
-	//const Point p2(0, 10);
-	//const Point p3(10, 0);
+	//const Point pointUnTriangle(0, 0);
+	//const Point pointDeuxTriangle(0, 10);
+	//const Point pointTroisTriangle(10, 0);
 
 	const Point pointUnTriangle(0, 0);
 	const Point pointDeuxTriangle(0, 10);

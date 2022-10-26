@@ -23,8 +23,8 @@ string Point::Afficher() const {
 	return "x : " + to_string(x) + ", y : " + to_string(y) + "\n";
 }
 
-//Méthode qui calcule la distance de l'instance Point vers un point passe en paramètre
+//Méthode qui retourne la distance d'une instance de Point vers un point passé en paramètre
 //Suivant la formule : sqrt ( pow ( x - p.x, 2 ) + pow ( y - p.y, 2 ) )
-double Point::DistanceTo(const Point& p) const {
+float Point::DistanceTo(const Point& p) const {
 	return sqrt(pow(x - p.x, 2) + pow(y - p.y, 2));
 }

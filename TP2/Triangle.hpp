@@ -22,9 +22,9 @@ public:
     inline void SetP3(const Point& p);
 
 	//4.2.2
-    inline double GetBase() const;
-    inline double GetHauteur() const;
-    inline double GetSurface() const;
+    inline float GetBase() const;
+    inline float GetHauteur() const;
+    inline float GetSurface() const;
     inline string GetLongueurs() const;
     inline bool EstIsocele() const;
     inline bool EstRectangle() const;

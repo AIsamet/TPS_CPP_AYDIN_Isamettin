@@ -54,10 +54,10 @@ inline void Triangle::SetP3(const Point& p) {
 }
 
 //4.2.2 MÈthode qui retourne la base d'une instance de Triangle (le cotÈ ayant la plus grande longueur)
-inline double Triangle::GetBase() const {
-	double d1 = p1.DistanceTo(p2);
-	double d2 = p2.DistanceTo(p3);
-	double d3 = p3.DistanceTo(p1);
+inline float Triangle::GetBase() const {
+	float d1 = p1.DistanceTo(p2);
+	float d2 = p2.DistanceTo(p3);
+	float d3 = p3.DistanceTo(p1);
 
 	if (d1 >= d2 and d1 >= d3) { return d1; }
 	else if (d2 >= d1 and d2 >= d3) { return d2; }
@@ -67,14 +67,14 @@ inline double Triangle::GetBase() const {
 //MÈthode qui retourne la surface d'une instance de Triangle
 //Suivant la formule de HÈron : sqrt( d * ( d - a ) ( d - b ) ( d - c ) ),
 //o˘ù a, b et c sont les longueurs de chaque cotÈ respectif du triangle et d le demi-pÈrimËètre du triangle
-inline double Triangle::GetSurface() const {
-	double demiPerimetre = (p1.DistanceTo(p2) + p2.DistanceTo(p3) + p3.DistanceTo(p1)) / 2;
+inline float Triangle::GetSurface() const {
+	float demiPerimetre = (p1.DistanceTo(p2) + p2.DistanceTo(p3) + p3.DistanceTo(p1)) / 2;
 	return sqrt(demiPerimetre * (demiPerimetre - p1.DistanceTo(p2)) * (demiPerimetre - p2.DistanceTo(p3)) * (demiPerimetre - p3.DistanceTo(p1)));
 }
 
 //MÈthode qui retourne la hauteur d'une instance de Triangle
 //Suivant la formule : ( Surface / ( Base * 0,5 ) )
-inline double Triangle::GetHauteur() const {
+inline float Triangle::GetHauteur() const {
 	return (GetSurface() / (GetBase() * 0.5));
 }
 
@@ -112,9 +112,9 @@ inline bool Triangle::EstRectangle() const {
 
 //MÈthode qui retourne un booleen true si l'instance de Triangle est ÈquilatÈral, sinon false
 inline bool Triangle::EstEquilateral() const {
-	float a = floor(p1.DistanceTo(p2) * 100) / 100;
-	float b = floor(p2.DistanceTo(p3) * 100) / 100;
-	float c = floor(p3.DistanceTo(p1) * 100) / 100;
+	float a = p1.DistanceTo(p2) / 100;
+	float b = p2.DistanceTo(p3) / 100;
+	float c = p3.DistanceTo(p1) / 100;
 
 	if (a == b && b == c && c == a) {
 		return true;

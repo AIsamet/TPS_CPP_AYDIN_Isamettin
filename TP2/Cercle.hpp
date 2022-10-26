@@ -20,8 +20,8 @@ public:
     inline void SetDiametre(const int& Diametre);
 
 	//3.2.2
-    inline double GetPerimetre() const;
-    inline double GetSurface() const;
+    inline float GetPerimetre() const;
+    inline float GetSurface() const;
 
 	//3.2.3
 	bool EstSurCercle(const Point& p) const;

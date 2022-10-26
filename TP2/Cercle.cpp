@@ -48,29 +48,31 @@ inline void Cercle::SetDiametre(const int& Diametre)
 
 //3.2.2 Méthode qui retourne le périmètre d'une instance de Cercle
 //Suivant la formule : ( 2 * pi * rayon )
-inline double Cercle::GetPerimetre() const
+inline float Cercle::GetPerimetre() const
 {
-	return (2 * M_PI * (diametre / 2));
+	return (2 * M_PI * (static_cast<float>(diametre) / 2));
 }
 
 //3.2.2 Méthode qui retourne la surface d'une instance de Cercle
 //Suivant la formule : ( pi * ( rayon * rayon ) )
-inline double Cercle::GetSurface() const
+inline float Cercle::GetSurface() const
 {
-	double rayon = diametre / 2;
+	float rayon = static_cast<float>(diametre) / 2;
 	return (M_PI * (rayon * rayon));
 }
 
 //3.2.3 Méthode qui retourne un booleen true si un point passé en paramètre est sur l'instance de Cercle, sinon false
 bool Cercle::EstSurCercle(const Point& p) const {
+
     //On return true si la distance entre le centre du cercle et le point est egal au rayon du cercle
-	if (centre.DistanceTo(p) == (GetDiametre() / 2)) { return true; }
+	if (centre.DistanceTo(p) == (static_cast<float>(GetDiametre()) / 2)) { return true; }
 	else return false;
 }
 
 //3.2.4 Méthode qui retourne un booleen true si un point passé en paramètre est dans l'instance de Cercle, sinon false
 bool Cercle::EstDansCercle(const Point& p) const {
+
     //On return true si la distance entre le centre du cercle et le point est inferieur au rayon du cercle
-	if (centre.DistanceTo(p) < (GetDiametre() / 2)) { return true; }
+	if (centre.DistanceTo(p) < (static_cast<float>(GetDiametre()) / 2)) { return true; }
 	else return false;
 }

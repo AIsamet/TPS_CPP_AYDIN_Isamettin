@@ -58,7 +58,7 @@ inline void Rectangle::SetCoinSupGauche(const Point& SupGauche)
 	coinSupGauche = SupGauche;
 }
 
-//2.2.2 Méthode qui retourne le périmètre d'une instance de rectangle
+//2.2.2 Méthode qui retourne le périmètre d'une instance de Rectangle
 //Suivant la formule : ( longueur + largeur ) * 2
 inline int Rectangle::GetPerimetre() const
 {
