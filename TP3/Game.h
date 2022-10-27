@@ -1,4 +1,6 @@
-#pragma once
+#ifndef Game_h
+#define Game_h
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -11,3 +13,5 @@ public:
 private:
 
 };
+
+#endif
