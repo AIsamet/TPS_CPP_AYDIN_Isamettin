@@ -6,7 +6,6 @@ class Grid
 {
 public:
 	Grid();
-	~Grid();
 	void InitGrid();
 
 private:

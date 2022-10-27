@@ -4,11 +4,12 @@
 class Cell
 {
 public:
-	Cell(int Line, int Column, int IsAvailable);
-	~Cell();
+	Cell(const int& Line, const int& Column, const int& Owner);
+	Cell();
 
 private:
 	int line;
 	int column;
-	bool isAvailable;
+	//0 = free; 1 = player 1; 2 = player 2
+	int owner;
 };
