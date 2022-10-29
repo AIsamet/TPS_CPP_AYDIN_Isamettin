@@ -1,9 +1,23 @@
 #include "Grid.h"
 
 Grid::Grid() {
+   
 }
 
-Cell Grid::GetGrid(int i, int j) {
+Grid::Grid(int i,int j) {
+	InitGrid(i, j);
+}
+
+void Grid::InitGrid(int i, int j) {
+    gameGrid.resize(i);
+	
+	for (int k = 0; k < i; k++) {
+		gameGrid[k].resize(j);
+	}	
+
+}
+
+Cell Grid::GetCell(int i, int j) {
 	return gameGrid[i][j];
 }
 

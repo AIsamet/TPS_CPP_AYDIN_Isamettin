@@ -1,9 +1,8 @@
 #ifndef Game_h
 #define Game_h
 
-#include <iostream>
-#include <vector>
-using namespace std;
+#include "Morpion.h"
+
 
 class Game
 {

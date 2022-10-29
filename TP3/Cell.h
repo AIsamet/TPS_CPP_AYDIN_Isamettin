@@ -1,25 +1,21 @@
 #ifndef Cell_h
 #define Cell_h
 
-#include "Game.h"
+#include <iostream>
+#include <vector>
+using namespace std;
 
 class Cell
 {
 public:
 	Cell();
 	int GetOwner();
-	int GetCoordonneX();
-	int GetCoordonneY();
-	string DisplayCell();
-	
 	void setOwner(int i);
-
+	string DisplayCell();
 	
 private:
 	static int ID;
 	int id;
-	int coordonneX;
-	int coordonneY;
 	//0 = free; 1 = player 1; 2 = player 2;
 	int owner;
 };

@@ -4,18 +4,8 @@
 int Cell::ID = 1;
 
 Cell::Cell() {
-	coordonneX = 0;
-	coordonneY = 0;
 	owner = 0;
 	id = Cell::ID++;
-}
-
-int Cell::GetCoordonneX() {
-	return coordonneX;
-}
-
-int Cell::GetCoordonneY() {
-	return coordonneY;
 }
 
 int Cell::GetOwner(){

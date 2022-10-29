@@ -7,12 +7,13 @@ class Grid
 {
 public:
 	Grid();
+	Grid(int i, int j);
+	void InitGrid(int i, int j);
+	Cell GetCell(int i, int j);
 	void DisplayGrid();
-	Cell GetGrid(int i, int j);
 
 private:
-	//ATTENTION IL INITIALISE TOUTE LES CASES
-	Cell gameGrid[3][3];
+	vector<vector<Cell> > gameGrid;
 };
 
 #endif

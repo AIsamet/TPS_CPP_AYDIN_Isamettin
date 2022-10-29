@@ -5,11 +5,14 @@
 
 class Morpion
 {
+	
 public:
 	Morpion();
+	Grid GetGrid();
 
 private:
 	Grid grid;
+
 };
 
 #endif
