@@ -3,16 +3,20 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
 
 class Cell
 {
 public:
 	Cell();
-	int GetOwner();
-	void SetOwner(int NewOwner);
-	string DisplayCell();
-	
+
+	int GetId() const;
+	int GetOwner() const;
+	void SetOwner(const int& NewOwner);
+
+	string DisplayCell() const;
+
 private:
 	static int ID;
 	int id;

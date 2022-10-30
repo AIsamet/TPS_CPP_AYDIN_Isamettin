@@ -1,5 +1,4 @@
 #include "Cell.h"
-#include <string>
 
 int Cell::ID = 1;
 
@@ -8,15 +7,19 @@ Cell::Cell() {
 	id = Cell::ID++;
 }
 
-int Cell::GetOwner(){
+int Cell::GetId() const {
+	return id;
+}
+
+int Cell::GetOwner() const{
 	return owner;
 }
 
-void Cell::SetOwner(int NewOwner) {
+void Cell::SetOwner(const int& NewOwner) {
 	owner = NewOwner;
 }
 
-string Cell::DisplayCell() {
+string Cell::DisplayCell() const{
 	string str = " ";
 	if (owner == 0) {
 		str = to_string(id);

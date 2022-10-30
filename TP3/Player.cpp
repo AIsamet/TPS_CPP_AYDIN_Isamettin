@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(){
+Player::Player() {
 }
 
 Player::Player(int id, string name) {
@@ -9,10 +9,10 @@ Player::Player(int id, string name) {
 	this->points = 0;
 }
 
-int Player::GetId() {
+int Player::GetId() const{
 	return id;
 }
 
-string Player::GetName() {
+string Player::GetName() const {
 	return name;
 }

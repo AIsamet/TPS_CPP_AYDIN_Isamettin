@@ -9,9 +9,9 @@ class Player
 {
 public:
 	Player();
-	Player(int id,string name);
-	int GetId();
-	string GetName();
+	Player(int id, string name);
+	int GetId() const;
+	string GetName()const ;
 
 private:
 	int id;

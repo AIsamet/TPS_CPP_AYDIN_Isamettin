@@ -1,15 +1,12 @@
 #include "Game.h"
-#include <string>
-
-#include "Morpion.h"
 
 Game::Game() {
-	
+
 }
 
 int main() {
-	Morpion newMorpion(3, 3);
-	newMorpion.InitGame();
+	Morpion newMorpion;
+	newMorpion.StartGame();
 
 
 	return 0;
