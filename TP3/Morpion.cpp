@@ -115,9 +115,9 @@ bool Morpion::CheckEquality() const {
 	int line = 0;
 	int column = 0;
 
-	for (line = 0; line < 3; line++)
+	for (line = 0; line < gameGrid.size(); line++)
 	{
-		for (column = 0; column < 3; column++)
+		for (column = 0; column < gameGrid[0].size(); column++)
 		{
 			if (gameGrid[line][column].GetOwner() == 0)
 			{
@@ -142,9 +142,9 @@ bool Morpion::CheckWinByLine(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (line = 0; line < 3; line++) {
+	for (line = 0; line < gameGrid.size(); line++) {
 
-		for (column = 0; column < 3; column++) {
+		for (column = 0; column < gameGrid[0].size(); column++) {
 
 			if (gameGrid[line][column].GetOwner() == player.GetId()) {
 				count++;
@@ -162,9 +162,9 @@ bool Morpion::CheckWinByColumn(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (column = 0; column < 3; column++) {
+	for (column = 0; column < gameGrid[0].size(); column++) {
 
-		for (line = 0; line < 3; line++) {
+		for (line = 0; line < gameGrid.size(); line++) {
 
 			if (gameGrid[line][column].GetOwner() == player.GetId()) {
 				count++;
