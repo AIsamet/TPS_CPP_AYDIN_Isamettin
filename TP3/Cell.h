@@ -15,7 +15,8 @@ public:
 	int GetOwner() const;
 	void SetOwner(const int& NewOwner);
 
-	string DisplayCell() const;
+	string DisplayCellMorpion() const;
+	string DisplayCellPuissance4() const;
 
 private:
 	static int ID;

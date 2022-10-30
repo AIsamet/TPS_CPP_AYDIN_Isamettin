@@ -1,14 +1,14 @@
-#ifndef Morpion_h
-#define Morpion_h
+#ifndef Puissance4_h
+#define Puissance4_h
 
 #include "Game.h"
 
-class Morpion : public Game
+class Puissance4 : public Game
 {
 
 public:
-	Morpion();
-	Morpion(string player1Name, string player2Name);
+	Puissance4();
+	Puissance4(string player1Name, string player2Name);
 
 	Player GetPlayer1() const;
 	Player GetPlayer2() const;
