@@ -236,7 +236,7 @@ bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 		}
 	}
 
-	for (column = 6; column > 4; column--) {
+	for (column = 6; column > 2; column--) {
 
 		if (gameGrid[line][column].GetOwner() == player.GetId()) {
 			totalCount++;
