@@ -207,24 +207,19 @@ bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 	int column = 0;
 	int totalCount = 0;
 	int countDiagonal = 0;
-
-
+	int gridColumnNumber = gameGrid[0].size() - 1;
 
 	for (column = 0; column < 4; column++) {
 
 		if (gameGrid[line][column].GetOwner() == player.GetId()) {
-			totalCount++;
-			countDiagonal = 1;
 
-			while (countDiagonal < 4) {
+			for (countDiagonal = 0; countDiagonal < 4; countDiagonal++) {
 
 				if (gameGrid[line + countDiagonal][column + countDiagonal].GetOwner() == player.GetId()) {
 					totalCount++;
-					countDiagonal++;
 				}
 				else {
 					totalCount = 0;
-					countDiagonal = 4;
 				}
 			}
 			if (totalCount == 4) {
@@ -233,24 +228,14 @@ bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 			else {
 				totalCount = 0;
 			}
-		}
-	}
 
-	for (column = 6; column > 2; column--) {
+			for (countDiagonal = 0; countDiagonal < 4; countDiagonal++) {
 
-		if (gameGrid[line][column].GetOwner() == player.GetId()) {
-			totalCount++;
-			countDiagonal = 1;
-
-			while (countDiagonal < 4) {
-
-				if (gameGrid[line + countDiagonal][column - countDiagonal].GetOwner() == player.GetId()) {
+				if (gameGrid[line + countDiagonal][gridColumnNumber - column - countDiagonal].GetOwner() == player.GetId()) {
 					totalCount++;
-					countDiagonal++;
 				}
 				else {
 					totalCount = 0;
-					countDiagonal = 4;
 				}
 			}
 			if (totalCount == 4) {
