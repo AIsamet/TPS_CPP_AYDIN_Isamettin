@@ -3,12 +3,11 @@
 
 #include "Morpion.h"
 
-
 class Game
 {
 public:
 	Game();
-
+	
 private:
 
 };

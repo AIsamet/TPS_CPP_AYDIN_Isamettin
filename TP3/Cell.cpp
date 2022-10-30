@@ -12,8 +12,8 @@ int Cell::GetOwner(){
 	return owner;
 }
 
-void Cell::setOwner(int i) {
-	owner = i;
+void Cell::SetOwner(int NewOwner) {
+	owner = NewOwner;
 }
 
 string Cell::DisplayCell() {

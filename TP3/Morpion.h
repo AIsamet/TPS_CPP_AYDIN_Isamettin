@@ -1,17 +1,33 @@
 #ifndef Morpion_h
 #define Morpion_h
 
-#include "Grid.h"
+#include "Cell.h"
+#include "Player.h"
 
 class Morpion
 {
 	
 public:
 	Morpion();
-	Grid GetGrid();
+	Morpion(int i, int j);
+
+	Cell& GetCell(int idCell);
+	Player GetPlayer();
+	
+	void DisplayPlate();
+	void InitGrid(int i, int j);
+	void InputPlayer(Player player);
+	void InitGame();
+	bool CheckEquality();
+	bool CheckWin(Player player);
+	bool CheckWinByLine(Player player);
+	bool CheckWinByColumn(Player player);
+	bool CheckWinByDiagonal(Player player);
 
 private:
-	Grid grid;
+	vector<vector<Cell> > gameGrid;
+	Player player1;
+	Player player2;
 
 };
 

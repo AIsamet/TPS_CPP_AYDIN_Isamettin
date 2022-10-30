@@ -1,14 +1,20 @@
 #ifndef Player_h
 #define Player_h
 
-#include "Game.h"
+#include <iostream>
+#include <vector>
+using namespace std;
 
 class Player
 {
 public:
 	Player();
+	Player(int id,string name);
+	int GetId();
+	string GetName();
 
 private:
+	int id;
 	string name;
 	int points;
 };

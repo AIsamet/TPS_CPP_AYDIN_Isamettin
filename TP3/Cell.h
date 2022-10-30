@@ -10,7 +10,7 @@ class Cell
 public:
 	Cell();
 	int GetOwner();
-	void setOwner(int i);
+	void SetOwner(int NewOwner);
 	string DisplayCell();
 	
 private:
