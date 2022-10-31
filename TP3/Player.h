@@ -7,16 +7,18 @@ using namespace std;
 
 class Player
 {
+	
 public:
 	Player();
 	Player(int id, string name);
-	int GetId() const;
-	string GetName()const ;
+	
+	inline int GetId() const { return this->id; }
+	inline string GetName() const { return this->name; }
+	inline void SetName(const string& NewName) { this->name = NewName; }
 
 private:
 	int id;
 	string name;
-	int points;
 };
 
 #endif

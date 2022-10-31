@@ -129,14 +129,15 @@
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="Morpion.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Puissance4.cpp" />
-    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Launcher.h" />
     <ClInclude Include="Morpion.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Puissance4.h" />

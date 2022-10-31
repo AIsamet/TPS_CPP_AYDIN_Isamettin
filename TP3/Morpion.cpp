@@ -12,20 +12,13 @@ Morpion::Morpion(string player1Name, string player2Name) {
 	player2 = Player(2, player2Name);
 }
 
-Player Morpion::GetPlayer1() const {
-	return player1;
-}
-
-Player Morpion::GetPlayer2() const {
-	return player2;
-}
-
 void Morpion::InitGrid(const int& line, const int& column) {
 	gameGrid.resize(line);
 
 	for (int k = 0; k < line; k++) {
 		gameGrid[k].resize(column);
 	}
+	Cell::SetIdStatic(1);
 }
 
 Cell& Morpion::GetCellPositionFromId(const int& idCell) {
@@ -52,7 +45,7 @@ Cell& Morpion::GetCellPositionFromId(const int& idCell) {
 }
 
 void Morpion::DisplayPlate() const {
-	cout << "Player A (X)  -  Player B (O)" << endl << endl;
+	cout << "Joueur A (X)  -  Joueur B (O)" << endl << endl;
 	cout << endl;
 
 	cout << "     |     |     " << endl;

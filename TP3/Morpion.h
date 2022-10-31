@@ -10,11 +10,11 @@ public:
 	Morpion();
 	Morpion(string player1Name, string player2Name);
 
-	Player GetPlayer1() const;
-	Player GetPlayer2() const;
+	inline Player GetPlayer1() const { return player1; }
+	inline Player GetPlayer2() const { return player2; }
 
 	void InitGrid(const int& line, const int& column) override;
-	Cell& GetCellPositionFromId(const int& idCell) override;
+	Cell& GetCellPositionFromId(const int& idCell);
 	void DisplayPlate() const override;
 	void InputPlayer(Player player) override;
 	void StartGame() override;

@@ -12,47 +12,17 @@ Puissance4::Puissance4(string player1Name, string player2Name) {
 	player2 = Player(2, player2Name);
 }
 
-Player Puissance4::GetPlayer1() const {
-	return player1;
-}
-
-Player Puissance4::GetPlayer2() const {
-	return player2;
-}
-
 void Puissance4::InitGrid(const int& line, const int& column) {
 	gameGrid.resize(line);
 
 	for (int k = 0; k < line; k++) {
 		gameGrid[k].resize(column);
 	}
-}
-
-Cell& Puissance4::GetCellPositionFromId(const int& idCell) {
-	switch (idCell) {
-	case 0:
-		return gameGrid[0][0];
-	case 1:
-		return gameGrid[0][1];
-	case 2:
-		return gameGrid[0][2];
-	case 3:
-		return gameGrid[1][0];
-	case 4:
-		return gameGrid[1][1];
-	case 5:
-		return gameGrid[1][2];
-	case 6:
-		return gameGrid[2][0];
-	case 7:
-		return gameGrid[2][1];
-	case 8:
-		return gameGrid[2][2];
-	}
+	Cell::SetIdStatic(1);
 }
 
 void Puissance4::DisplayPlate() const {
-	cout << "Player A (X)  -  Player B (O)" << endl << endl;
+	cout << "Joueur A (X)  -  Joueur B (O)" << endl << endl;
 	cout << endl;
 
 	cout << "|  " << "1" << "  |  " << "2" << "  |  " << "3" << "  |  " << "4" << "  |  " << "5" << "  |  " << "6" << "  |  " << "7" << "  |  " << endl;
@@ -79,7 +49,6 @@ void Puissance4::DisplayPlate() const {
 	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl << endl;
 
 }
-
 
 void Puissance4::InputPlayer(Player player) {
 
@@ -246,6 +215,5 @@ bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 			}
 		}
 	}
-
 	return false;
 }
