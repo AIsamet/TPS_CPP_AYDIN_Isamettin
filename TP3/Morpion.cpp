@@ -2,8 +2,8 @@
 
 Morpion::Morpion() {
 	InitGrid(3, 3);
-	this->player1 = Player(1, "A");
-	this->player2 = Player(2, "B");
+	player1 = Player(1, "A");
+	player2 = Player(2, "B");
 }
 
 Morpion::Morpion(string player1Name, string player2Name) {

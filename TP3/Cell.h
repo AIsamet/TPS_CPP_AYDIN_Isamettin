@@ -12,9 +12,9 @@ class Cell
 public:
 	Cell();
 
-	inline int GetIdCell() const { return this->idCell; }
-	inline int GetOwner() const { return this->owner; }
-	inline void SetOwner(const int& NewOwner) { this->owner = NewOwner; }
+	inline int GetIdCell() const { return idCell; }
+	inline int GetOwner() const { return owner; }
+	inline void SetOwner(const int& NewOwner) { owner = NewOwner; }
 	inline void static SetIdStatic(const int& NewIdStatic) { idStatic = NewIdStatic; }
 
 	string DisplayCellMorpion() const;

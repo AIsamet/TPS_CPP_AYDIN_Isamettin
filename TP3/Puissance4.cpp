@@ -2,8 +2,8 @@
 
 Puissance4::Puissance4() {
 	InitGrid(4, 7);
-	this->player1 = Player(1, "A");
-	this->player2 = Player(2, "B");
+	player1 = Player(1, "A");
+	player2 = Player(2, "B");
 }
 
 Puissance4::Puissance4(string player1Name, string player2Name) {

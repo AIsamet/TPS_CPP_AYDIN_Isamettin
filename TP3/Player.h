@@ -12,9 +12,9 @@ public:
 	Player();
 	Player(int id, string name);
 	
-	inline int GetId() const { return this->id; }
-	inline string GetName() const { return this->name; }
-	inline void SetName(const string& NewName) { this->name = NewName; }
+	inline int GetId() const { return id; }
+	inline string GetName() const { return name; }
+	inline void SetName(const string& NewName) { name = NewName; }
 
 private:
 	int id;
