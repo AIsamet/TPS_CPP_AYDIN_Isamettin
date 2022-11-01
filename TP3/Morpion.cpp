@@ -201,6 +201,5 @@ bool Morpion::CheckWinByDiagonal(const Player& player) const {
 	if (count == 3 || countBis == 3) {
 		return true;
 	}
-	count = 0;
 	return false;
 }
