@@ -13,10 +13,10 @@ string Cell::DisplayCellMorpion() const{
 		str = to_string(idCell);
 	}
 	else if (owner == 1) {
-		str = "X";
+		str = "\033[1;31mX\033[0m";
 	}
 	else if (owner == 2) {
-		str = "O";
+		str = "\033[1;32mO\033[0m";
 	}
 	return str;
 }
@@ -27,10 +27,10 @@ string Cell::DisplayCellPuissance4() const {
 		str = " ";
 	}
 	else if (owner == 1) {
-		str = "X";
+		str = "\033[1;31mO\033[0m";
 	}
 	else if (owner == 2) {
-		str = "O";
+		str = "\033[1;32mO\033[0m";
 	}
 	return str;
 }
