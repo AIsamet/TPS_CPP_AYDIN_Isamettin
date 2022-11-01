@@ -45,7 +45,7 @@ Cell& Morpion::GetCellPositionFromId(const int& idCell) {
 }
 
 void Morpion::DisplayPlate() const {
-	cout << "Joueur A (X)  -  Joueur B (O)" << endl << endl;
+	cout << "\033[1;31mJoueur A (X)\033[0m  -  \033[1;32mJoueur B (O)\033[0m" << endl << endl;
 	cout << endl;
 
 	cout << "     |     |     " << endl;
@@ -90,22 +90,29 @@ void Morpion::InputPlayer(Player player) {
 void Morpion::StartGame() {
 	int i = 0;
 	Player currentPlayer = player1;
-	while (CheckWin(currentPlayer) == 0 && CheckEquality() == 0)
+	
+	while (!CheckWin(currentPlayer) && !CheckEquality())
 	{
 		system("cls");
 		DisplayPlate();
-		if (i % 2 == 0) { currentPlayer = player1; }
-		else { currentPlayer = player2; }
-
-		cout << "Tour joueur " << currentPlayer.GetName() << ", dans quelle case voulez - vous jouer ? " << endl;
+		
+		if (i % 2 == 0) {
+			currentPlayer = player1;
+			cout << "Tour \033[1;31mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle colonne voulez - vous jouer ? " << endl;
+		}
+		else {
+			currentPlayer = player2;
+			cout << "Tour \033[1;32mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle colonne voulez - vous jouer ? " << endl;
+		}
+		
 		InputPlayer(currentPlayer);
 		i++;
 	}
 
 	system("cls");
 	DisplayPlate();
-	if (CheckWin(currentPlayer) == 1) { cout << "Le joueur " << currentPlayer.GetName() << " a gagne" << endl; }
-	else if (CheckEquality() == 1) { cout << "Egalite" << endl; }
+	if (CheckWin(currentPlayer)) { cout << "Le joueur " << currentPlayer.GetName() << " a gagne" << endl; }
+	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
 
 bool Morpion::CheckEquality() const {
@@ -126,7 +133,7 @@ bool Morpion::CheckEquality() const {
 }
 
 bool Morpion::CheckWin(const Player& player) const {
-	if (CheckWinByLine(player) == 1 || CheckWinByColumn(player) == 1 || CheckWinByDiagonal(player) == 1) {
+	if (CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player)) {
 		return true;
 	}
 	else {
@@ -152,6 +159,7 @@ bool Morpion::CheckWinByLine(const Player& player) const {
 		}
 		count = 0;
 	}
+	return false;
 }
 
 bool Morpion::CheckWinByColumn(const Player& player) const {
@@ -172,32 +180,27 @@ bool Morpion::CheckWinByColumn(const Player& player) const {
 		}
 		count = 0;
 	}
+	return false;
 }
 
 bool Morpion::CheckWinByDiagonal(const Player& player) const {
 	int line = 0;
 	int column = 0;
 	int count = 0;
+	int countBis = 0;
 
 	for (line = 0; line < 3; line++) {
 
 		if (gameGrid[line][line].GetOwner() == player.GetId()) {
 			count++;
 		}
-	}
-	if (count == 3) {
-		return true;
-	}
-	count = 0;
-
-	for (line = 0; line < 3; line++) {
-
 		if (gameGrid[line][2 - line].GetOwner() == player.GetId()) {
-			count++;
+			countBis++;
 		}
 	}
-	if (count == 3) {
+	if (count == 3 || countBis == 3) {
 		return true;
 	}
 	count = 0;
+	return false;
 }

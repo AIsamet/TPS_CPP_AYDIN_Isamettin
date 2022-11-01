@@ -22,7 +22,7 @@ void Puissance4::InitGrid(const int& line, const int& column) {
 }
 
 void Puissance4::DisplayPlate() const {
-	cout << "Joueur A (X)  -  Joueur B (O)" << endl << endl;
+	cout << "\033[1;31mJoueur A (X)\033[0m  -  \033[1;32mJoueur B (O)\033[0m" << endl << endl;
 	cout << endl;
 
 	cout << "|  " << "1" << "  |  " << "2" << "  |  " << "3" << "  |  " << "4" << "  |  " << "5" << "  |  " << "6" << "  |  " << "7" << "  |  " << endl;
@@ -79,22 +79,29 @@ void Puissance4::InputPlayer(Player player) {
 void Puissance4::StartGame() {
 	int i = 0;
 	Player currentPlayer = player1;
-	while (CheckWin(currentPlayer) == 0 && CheckEquality() == 0)
+	
+	while (!CheckWin(currentPlayer) && !CheckEquality())
 	{
 		system("cls");
 		DisplayPlate();
-		if (i % 2 == 0) { currentPlayer = player1; }
-		else { currentPlayer = player2; }
-
-		cout << "Tour joueur " << currentPlayer.GetName() << ", dans quelle case voulez - vous jouer ? " << endl;
+	
+		if (i % 2 == 0) {
+			currentPlayer = player1; 
+			cout << "Tour \033[1;31mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle colonne voulez - vous jouer ? " << endl;
+		}
+		else {
+			currentPlayer = player2;
+			cout << "Tour \033[1;32mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle colonne voulez - vous jouer ? " << endl;
+		}
+		
 		InputPlayer(currentPlayer);
 		i++;
 	}
-
+	
 	system("cls");
 	DisplayPlate();
-	if (CheckWin(currentPlayer) == 1) { cout << "Le joueur " << currentPlayer.GetName() << " a gagne" << endl; }
-	else if (CheckEquality() == 1) { cout << "Egalite" << endl; }
+	if (CheckWin(currentPlayer)) { cout << "Le joueur " << currentPlayer.GetName() << " a gagne" << endl; }
+	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
 
 bool Puissance4::CheckEquality() const {
@@ -115,7 +122,7 @@ bool Puissance4::CheckEquality() const {
 }
 
 bool Puissance4::CheckWin(const Player& player) const {
-	if (CheckWinByLine(player) == 1 || CheckWinByColumn(player) == 1 || CheckWinByDiagonal(player) == 1) {
+	if (CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player)) {
 		return true;
 	}
 	else {
@@ -145,6 +152,7 @@ bool Puissance4::CheckWinByLine(const Player& player) const {
 		}
 		count = 0;
 	}
+	return false;
 }
 
 bool Puissance4::CheckWinByColumn(const Player& player) const {
@@ -169,14 +177,15 @@ bool Puissance4::CheckWinByColumn(const Player& player) const {
 		}
 		count = 0;
 	}
+	return false;
 }
 
 bool Puissance4::CheckWinByDiagonal(const Player& player) const {
+	const int gridColumnNumber = gameGrid[0].size() - 1;
 	int line = 0;
 	int column = 0;
 	int totalCount = 0;
 	int countDiagonal = 0;
-	int gridColumnNumber = gameGrid[0].size() - 1;
 
 	for (column = 0; column < 4; column++) {
 
