@@ -54,6 +54,14 @@ void Puissance4::InputPlayer(Player player) {
 
 	int input = 0;
 	cin >> input;
+	
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Veuillez entrer un chiffre valide" << endl;
+		cin >> input;
+	}
 
 	if (input < 8 && input > 0) {
 

@@ -1,7 +1,4 @@
 #include "Launcher.h"
-#include "Game.h"
-#include "Morpion.h"
-#include "Puissance4.h"
 
 Launcher::Launcher() {
 	
@@ -23,22 +20,22 @@ int main() {
 
 void Launcher::Start() {
 
-	int choice = 0;
+	string choice;
 	cout << "1. Puissance 4" << endl;
 	cout << "2. Morpion" << endl;
 	cout << "3. Quitter" << endl << endl;
 	cout << "Choix : ";
 	cin >> choice;
 
-	if (choice == 1) {
+	if (choice == "1") {
 		Puissance4 game;
 		game.StartGame();
 	}
-	else if (choice == 2) {
+	else if (choice == "2") {
 		Morpion game;
 		game.StartGame();
 	}
-	else if (choice == 3) {
+	else if (choice == "3") {
 		exit(0);
 	}
 	else {

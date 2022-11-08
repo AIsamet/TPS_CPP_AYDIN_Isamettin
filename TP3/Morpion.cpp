@@ -69,6 +69,14 @@ void Morpion::InputPlayer(Player player) {
 	int input = 0;
 	cin >> input;
 
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Veuillez entrer un chiffre valide" << endl;
+		cin >> input;
+	}
+
 	if (input < 10 && input > 0) {
 		
 		if (GetCellPositionFromId(input - 1).GetOwner() == 0) {
