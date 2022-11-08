@@ -137,7 +137,6 @@
   <ItemGroup>
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Launcher.h" />
     <ClInclude Include="Morpion.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Puissance4.h" />

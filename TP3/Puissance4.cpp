@@ -12,6 +12,7 @@ Puissance4::Puissance4(string player1Name, string player2Name) {
 	player2 = Player(2, player2Name);
 }
 
+//génére une grille de jeu
 void Puissance4::InitGrid(const int& line, const int& column) {
 	gameGrid.resize(line);
 
@@ -21,6 +22,7 @@ void Puissance4::InitGrid(const int& line, const int& column) {
 	Cell::SetIdStatic(1);
 }
 
+//affiche la grille de jeu
 void Puissance4::DisplayPlate() const {
 	cout << "\033[1;31mJoueur A (X)\033[0m  -  \033[1;32mJoueur B (O)\033[0m" << endl << endl;
 	cout << endl;
@@ -50,12 +52,14 @@ void Puissance4::DisplayPlate() const {
 
 }
 
+//demande une entrée au joueur
 void Puissance4::InputPlayer(Player player) {
 
 	int input = 0;
 	cin >> input;
 	
-	while (!std::cin.good())
+	//verifie si l'entrée est un int
+	while (!std::cin.good()) 
 	{
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -63,6 +67,7 @@ void Puissance4::InputPlayer(Player player) {
 		cin >> input;
 	}
 
+	//verifie si l'entrée est valide
 	if (input < 8 && input > 0) {
 
 		for (int ligne = 0; ligne < gameGrid.size(); ligne++) {
@@ -84,6 +89,7 @@ void Puissance4::InputPlayer(Player player) {
 	}
 }
 
+//lance la partie
 void Puissance4::StartGame() {
 	int i = 0;
 	Player currentPlayer = player1;
@@ -112,6 +118,7 @@ void Puissance4::StartGame() {
 	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
 
+//verifie le cas d'une égalité
 bool Puissance4::CheckEquality() const {
 	int line = 0;
 	int column = 0;
@@ -129,6 +136,7 @@ bool Puissance4::CheckEquality() const {
 	return true;
 }
 
+//verifie s'il y a un gagnant
 bool Puissance4::CheckWin(const Player& player) const {
 	if (CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player)) {
 		return true;
@@ -138,6 +146,7 @@ bool Puissance4::CheckWin(const Player& player) const {
 	}
 }
 
+//verifie s'il y a un gagnant par ligne
 bool Puissance4::CheckWinByLine(const Player& player) const {
 	int line = 0;
 	int column = 0;
@@ -163,6 +172,7 @@ bool Puissance4::CheckWinByLine(const Player& player) const {
 	return false;
 }
 
+//verifie s'il y a un gagnant par colonne
 bool Puissance4::CheckWinByColumn(const Player& player) const {
 	int line = 0;
 	int column = 0;
@@ -188,6 +198,7 @@ bool Puissance4::CheckWinByColumn(const Player& player) const {
 	return false;
 }
 
+//verifie s'il y a un gagnant par diagonal
 bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 	const int gridColumnNumber = gameGrid[0].size() - 1;
 	int line = 0;

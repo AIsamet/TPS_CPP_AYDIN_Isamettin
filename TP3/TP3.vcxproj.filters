@@ -50,8 +50,5 @@
     <ClInclude Include="Puissance4.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
-    <ClInclude Include="Launcher.h">
-      <Filter>Fichiers sources</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

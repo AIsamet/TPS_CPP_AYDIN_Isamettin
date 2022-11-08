@@ -17,15 +17,14 @@ public:
 	inline void SetOwner(const int& NewOwner) { owner = NewOwner; }
 	inline void static SetIdStatic(const int& NewIdStatic) { idStatic = NewIdStatic; }
 
-	string DisplayCellMorpion() const;
-	string DisplayCellPuissance4() const;
+	string DisplayCellMorpion() const; //génére un affichage de case pour le jeu morpion
+	string DisplayCellPuissance4() const; //génére un affichage de case pour le jeu puissance 4
 	
 
 private:
-	static int idStatic;
-	int idCell;
-	//0 = free; 1 = player 1; 2 = player 2;
-	int owner;
+	static int idStatic; //variable static auto incrémenté pour générer un idCell
+	int idCell; //permet d'identifier une case
+	int owner; //definit le propriétaire d'une case : 0 = free; 1 = player 1; 2 = player 2;
 };
 
 #endif

@@ -1,24 +1,10 @@
-#include "Launcher.h"
+#include "Game.h"
+#include "Morpion.h"
+#include "Puissance4.h"
 
-Launcher::Launcher() {
-	
-}
+//classe qui va servir de point d'entrée pour le programme
 
-int main() {
-	
-	Launcher launcher;
-	
-	cout << "Bienvenue, a quoi souhaitez vous jouer ?" << endl;
-
-	while (true) {
-		launcher.Start();
-		cout << "\nVoulez-vous rejouer ? Si oui choisissez un jeu, sinon tapez 3" << endl;
-	}
-
-	return 0;
-}
-
-void Launcher::Start() {
+void Start() {
 
 	string choice;
 	cout << "1. Puissance 4" << endl;
@@ -43,4 +29,16 @@ void Launcher::Start() {
 		cout << "Choix incorrect" << endl << endl;
 		Start();
 	}
+}
+
+int main() {
+
+	cout << "Bienvenue, a quoi souhaitez vous jouer ?" << endl;
+
+	while (true) {
+		Start();
+		cout << "\nVoulez-vous rejouer ? Si oui choisissez un jeu, sinon tapez 3" << endl;
+	}
+
+	return 0;
 }

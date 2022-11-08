@@ -12,6 +12,7 @@ Morpion::Morpion(string player1Name, string player2Name) {
 	player2 = Player(2, player2Name);
 }
 
+//génére une grille de jeu
 void Morpion::InitGrid(const int& line, const int& column) {
 	gameGrid.resize(line);
 
@@ -21,6 +22,7 @@ void Morpion::InitGrid(const int& line, const int& column) {
 	Cell::SetIdStatic(1);
 }
 
+//permet de retourner un Cell a partir de son id
 Cell& Morpion::GetCellPositionFromId(const int& idCell) {
 	switch (idCell) {
 	case 0:
@@ -44,6 +46,7 @@ Cell& Morpion::GetCellPositionFromId(const int& idCell) {
 	}
 }
 
+//affiche la grille de jeu
 void Morpion::DisplayPlate() const {
 	cout << "\033[1;31mJoueur A (X)\033[0m  -  \033[1;32mJoueur B (O)\033[0m" << endl << endl;
 	cout << endl;
@@ -64,11 +67,13 @@ void Morpion::DisplayPlate() const {
 	cout << "     |     |     " << endl << endl;
 }
 
+//demande une entrée au joueur
 void Morpion::InputPlayer(Player player) {
 
 	int input = 0;
 	cin >> input;
 
+	//verifie si l'entrée est un int
 	while (!std::cin.good())
 	{
 		std::cin.clear();
@@ -77,6 +82,7 @@ void Morpion::InputPlayer(Player player) {
 		cin >> input;
 	}
 
+	//verifie si l'entrée est valide
 	if (input < 10 && input > 0) {
 		
 		if (GetCellPositionFromId(input - 1).GetOwner() == 0) {
@@ -89,12 +95,12 @@ void Morpion::InputPlayer(Player player) {
 		}
 	}
 	else {
-		
 		cout << "Veuillez saisir un chiffre entre 1 et 9" << endl;
 		InputPlayer(player);
 	}
 }
 
+//lance la partie
 void Morpion::StartGame() {
 	int i = 0;
 	Player currentPlayer = player1;
@@ -123,6 +129,7 @@ void Morpion::StartGame() {
 	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
 
+//verifie le cas d'une égalité
 bool Morpion::CheckEquality() const {
 	int line = 0;
 	int column = 0;
@@ -140,6 +147,7 @@ bool Morpion::CheckEquality() const {
 	return true;
 }
 
+//verifie s'il y a un gagnant
 bool Morpion::CheckWin(const Player& player) const {
 	if (CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player)) {
 		return true;
@@ -149,6 +157,7 @@ bool Morpion::CheckWin(const Player& player) const {
 	}
 }
 
+//verifie s'il y a un gagnant par ligne
 bool Morpion::CheckWinByLine(const Player& player) const {
 	int line = 0;
 	int column = 0;
@@ -170,6 +179,7 @@ bool Morpion::CheckWinByLine(const Player& player) const {
 	return false;
 }
 
+//verifie s'il y a un gagnant par colonne
 bool Morpion::CheckWinByColumn(const Player& player) const {
 	int line = 0;
 	int column = 0;
@@ -191,6 +201,7 @@ bool Morpion::CheckWinByColumn(const Player& player) const {
 	return false;
 }
 
+//verifie s'il y a un gagnant par diagonal
 bool Morpion::CheckWinByDiagonal(const Player& player) const {
 	int line = 0;
 	int column = 0;

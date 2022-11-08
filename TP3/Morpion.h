@@ -14,7 +14,7 @@ public:
 	inline Player GetPlayer2() const { return player2; }
 
 	void InitGrid(const int& line, const int& column) override;
-	Cell& GetCellPositionFromId(const int& idCell);
+	Cell& GetCellPositionFromId(const int& idCell); //permet de retourner une Cell a partir de son idCell
 	void DisplayPlate() const override;
 	void InputPlayer(Player player) override;
 	void StartGame() override;
