@@ -22,6 +22,7 @@ void Start() {
 		game.StartGame();
 	}
 	else if (choice == "3") {
+		cout << "A bientot !" << endl << endl;
 		exit(0);
 	}
 	else {

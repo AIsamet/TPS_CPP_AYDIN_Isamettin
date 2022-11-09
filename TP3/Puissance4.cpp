@@ -24,7 +24,9 @@ void Puissance4::InitGrid(const int& line, const int& column) {
 
 //affiche la grille de jeu
 void Puissance4::DisplayPlate() const {
-	cout << "\033[1;31mJoueur A (X)\033[0m  -  \033[1;32mJoueur B (O)\033[0m" << endl << endl;
+	system("cls");
+
+	cout << "\033[1;31mJoueur " << player1.GetName() << "\033[0m  -  \033[1;32mJoueur " << player2.GetName() << "\033[0m" << endl << endl;
 	cout << endl;
 
 	cout << "|  " << "1" << "  |  " << "2" << "  |  " << "3" << "  |  " << "4" << "  |  " << "5" << "  |  " << "6" << "  |  " << "7" << "  |  " << endl;
@@ -55,11 +57,83 @@ void Puissance4::DisplayPlate() const {
 //demande une entrée au joueur
 void Puissance4::InputPlayer(Player player) {
 
+	if (player.GetIsBot() == 0) {
+		int input = 0;
+		cin >> input;
+
+		//verifie si l'entrée est un int
+		while (!std::cin.good())
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "Veuillez entrer un chiffre valide" << endl;
+			cin >> input;
+		}
+
+		//verifie si l'entrée est valide
+		if (input < 8 && input > 0) {
+
+			for (int ligne = 0; ligne < gameGrid.size(); ligne++) {
+
+				if (gameGrid[ligne][input - 1].GetOwner() == 0) {
+
+					gameGrid[ligne][input - 1].SetOwner(player.GetId());
+					break;
+				}
+				else if (ligne == gameGrid.size() - 1) {
+					cout << "La colonne est pleine, veuillez choisir une autre colonne" << endl;
+					InputPlayer(player);
+				}
+			}
+		}
+		else {
+			cout << "Veuillez saisir un chiffre entre 1 et 7" << endl;
+			InputPlayer(player);
+		}
+	}
+
+	else {
+		for (int ligne = 0; ligne < gameGrid.size(); ligne++) {
+
+			if (gameGrid[ligne][BotRandomInputGenerator()].GetOwner() == 0) {
+
+				gameGrid[ligne][BotRandomInputGenerator()].SetOwner(player.GetId());
+				break;
+			}
+		}
+	}
+}
+
+//genere une case vide a jouer aléatoirement par le bot
+int Puissance4::BotRandomInputGenerator() {
+	srand(time(NULL));
+	int randomPlay;
+
+	while (true) {
+		
+		randomPlay = rand() % 7;
+		for (int ligne = 0; ligne < gameGrid.size(); ligne++) {
+
+			if (gameGrid[ligne][randomPlay].GetOwner() == 0) {
+				return randomPlay;
+			}
+		}
+	}
+}
+
+//fonction qui demande au joueur le type de jeu a lancer
+void Puissance4::AskGameType() {
+
+	system("cls");
 	int input = 0;
+
+	cout << "A quelle mode de jeu voulez vous jouer ? " << endl;
+	cout << "1 - Joueur contre Joueur" << endl;
+	cout << "2 - Joueur contre IA" << endl;
 	cin >> input;
-	
+
 	//verifie si l'entrée est un int
-	while (!std::cin.good()) 
+	while (!std::cin.good())
 	{
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -68,53 +142,73 @@ void Puissance4::InputPlayer(Player player) {
 	}
 
 	//verifie si l'entrée est valide
-	if (input < 8 && input > 0) {
-
-		for (int ligne = 0; ligne < gameGrid.size(); ligne++) {
-
-			if (gameGrid[ligne][input - 1].GetOwner() == 0) {
-
-				gameGrid[ligne][input - 1].SetOwner(player.GetId());
-				break;
-			}
-			else if (ligne == gameGrid.size() - 1) {
-				cout << "La colonne est pleine, veuillez choisir une autre colonne" << endl;
-				InputPlayer(player);
-			}
-		}
+	if (input < 3 && input > 0) {
+		if (input == 1) { SetGameMode(0); }
+		else if (input == 2) { SetGameMode(1); player2.SetName("IA"); player2.SetIsBot(1); }
 	}
 	else {
-		cout << "Veuillez saisir un chiffre entre 1 et 7" << endl;
-		InputPlayer(player);
+		cout << "Veuillez saisir un choix valide" << endl;
+		AskGameType();
 	}
+}
+
+//fonction qui demande aux joueurs leur pseudonyme
+void Puissance4::AskPlayersName() {
+	system("cls");
+	string namePlayer;
+	
+	cout << "Entrez le nom du joueur 1" << endl;
+	cin >> namePlayer;
+	player1.SetName(namePlayer);
+
+	if (!player2.GetIsBot()) {
+		cout << "\nEntrez le nom du joueur 2" << endl;
+		cin >> namePlayer;
+		player2.SetName(namePlayer);
+	}
+}
+
+//fait jouer les tours des joueurs jusqu'a ce qu'il y ait un gagnant ou égalité
+Player Puissance4::PlayGame() {
+	int i = 0;
+	Player currentPlayer = player1;
+
+	while (!CheckWin(currentPlayer) && !CheckEquality())
+	{
+		DisplayPlate();
+
+		if (i % 2 == 0) {
+			currentPlayer = player1;
+			cout << "Tour \033[1;31mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle colonne voulez - vous jouer ? " << endl;
+		}
+
+		else {
+			currentPlayer = player2;
+
+			if (currentPlayer.GetIsBot() == 0) {
+				cout << "Tour \033[1;32mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle colonne voulez - vous jouer ? " << endl;
+			}
+			else {
+				cout << "Le \033[1;32mjoueur " << currentPlayer.GetName() << "\033[0m joue son tour" << endl;
+				this_thread::sleep_for(chrono::milliseconds(500));
+			}
+		}
+
+		InputPlayer(currentPlayer);
+		i++;
+	}
+	return currentPlayer;
 }
 
 //lance la partie
 void Puissance4::StartGame() {
-	int i = 0;
-	Player currentPlayer = player1;
 	
-	while (!CheckWin(currentPlayer) && !CheckEquality())
-	{
-		system("cls");
-		DisplayPlate();
+	AskGameType(); //demande le type de jeu
+	AskPlayersName();
+	Player winner = PlayGame(); //fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
 	
-		if (i % 2 == 0) {
-			currentPlayer = player1; 
-			cout << "Tour \033[1;31mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle colonne voulez - vous jouer ? " << endl;
-		}
-		else {
-			currentPlayer = player2;
-			cout << "Tour \033[1;32mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle colonne voulez - vous jouer ? " << endl;
-		}
-		
-		InputPlayer(currentPlayer);
-		i++;
-	}
-	
-	system("cls");
 	DisplayPlate();
-	if (CheckWin(currentPlayer)) { cout << "Le joueur " << currentPlayer.GetName() << " a gagne" << endl; }
+	if (CheckWin(winner)) { cout << "Le joueur " << winner.GetName() << " a gagne" << endl; }
 	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
 

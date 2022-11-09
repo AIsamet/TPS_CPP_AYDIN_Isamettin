@@ -20,7 +20,6 @@ public:
 	string DisplayCellMorpion() const; //génére un affichage de case pour le jeu morpion
 	string DisplayCellPuissance4() const; //génére un affichage de case pour le jeu puissance 4
 	
-
 private:
 	static int idStatic; //variable static auto incrémenté pour générer un idCell
 	int idCell; //permet d'identifier une case
