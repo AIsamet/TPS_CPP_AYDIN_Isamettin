@@ -18,12 +18,15 @@ public:
 	void InitGrid(const int& line, const int& column) override;
 	Cell& GetCellPositionFromId(const int& idCell); //permet de retourner une Cell a partir de son idCell
 	void DisplayPlate() const override;
+	
 	void InputPlayer(Player player) override;
 	int BotRandomInputGenerator() override;
 	void AskGameType() override;
 	void AskPlayersName() override;
+	
 	Player PlayGame() override;
 	void StartGame() override;
+	
 	bool CheckEquality() const override;
 	bool CheckWin(const Player& player) const override;
 	bool CheckWinByLine(const Player& player) const override;

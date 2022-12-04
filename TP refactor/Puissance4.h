@@ -17,12 +17,15 @@ public:
 
 	void InitGrid(const int& line, const int& column) override;
 	void DisplayPlate() const override;
+	
 	void InputPlayer(Player player) override;
 	int BotRandomInputGenerator() override;
 	void AskGameType() override;
 	void AskPlayersName() override;
+	
 	Player PlayGame() override;
 	void StartGame() override;
+	
 	bool CheckEquality() const override;
 	bool CheckWin(const Player& player) const override;
 	bool CheckWinByLine(const Player& player) const override;

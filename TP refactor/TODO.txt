@@ -1,45 +1,69 @@
-S : Single Responsibility Principle (SRP)
+S : Single Responsibility Principle (SRP) 
 
+	"Une classe ne doit avoir qu'une seule et unique responsabilité"	
 
-	- Deplacer le InputPlayer ? (dans player ou classe distincte)
-
-	- Classe Grid avec :
+	- Nouvelle classe Grid avec :
 		- InitGrid deplacé de puissance 4 et morpion
 		- DisplayGrid (ex DisplayPlate de puissance 4 et morpion)
-		- Deplacer DisplayPlate (depuis morpion/puissance4) en le renomant
 
-	- Classe Input avec :
+	- Nouvelle classe Input avec :
 		- InputPlayer (a renomer, deplacé de puissance 4 et morpion)
 		- BotRandomInputGenerator (deplacé puissance 4 et morpion)
-		- (a reflechir : 
-			- input pour AskGame dans Launcher.cpp
-			- input pour AskGameType dans Puissance 4 et Morpion
-			- input pour AskPlayersName dans Puissance 4 et Morpion)
+		- input pour AskGame dans Launcher.cpp
+		- input pour AskGameType dans Puissance 4 et Morpion
+		- input pour AskPlayersName dans Puissance 4 et Morpion)
 
 	- Classe Game avec :
-		- remonter ce qui est possible depuis Morpion et Puissance 4
+		- remonter ce qui n'est pas override depuis Morpion et Puissance 4 dans Game
 		- renommer PlayGame en PlayRound
+	
+	- Classe Cell avec :
+		- deplacer la methode GetCellPositionFromId depuis morpion vers Cell
+
+	- Créer une classe Checks ?
 
 
 O : Open/Closed Principle
+
+	"Les entités doivent être ouvertes à l'extension et fermées à la modification"
 
 	- Classe Input (ex fonctions Input de morpion et puissance 4) :
 		- Scinder la fonction InputPlayer en 2 fonctions (penser a renomer) : 
 			- 1 InputBot, 1 InputPlayer
 
 
+
 L : Liskov’s Substitution Principle (LSP)
 
-	- Principe respecté pour les heritages de Game; Rien a faire
+	"Les objets dans un programme doivent être remplaçables par des instances de leur sous-type sans pour autant altérer le bon fonctionnement du programme"
+	L’idée du principe est que les enfants ne peuvent pas faire plus ou moins que leur parent.
+
+	4 conditions :
+		- La signature des fonctions (paramètres et retour) doit être identique entre l’enfant et le parent.
+		- Les paramètres de la fonction de l’enfant ne peuvent pas être plus nombreux que ceux du parent.
+		- Le retour de la fonction doit retourner le même type que le parent.
+		- Les exceptions retournées doivent être les mêmes.
+
+	- Principe respecté pour les heritages de Game; rien a faire
+	(RQ : sauf pour GetCellPositionFromId dans Morpion; Mais le cas n'est plus a traiter suite aux modifications SRP)
+
 
 
 I : Interface Segregation Principle (ISP)
 
-	- Nos classes n'implementent pas d'interfaces inutiles : Rien a faire
+	"Aucun client ne devrait être forcé d'implémenter des méthodes / fonctions qu'il n'utilise pas"
+	
+	Equivalent des interfaces en c++ : classes abstraites virtuelles pures 
+		C'est le cas de la classe Game
+
+	- Nos classes filles utilisent toutes les methodes de la classe mère; principe respecté rien a faire
+
 
 D : Dependency Inversion Principle (DIP)
 
-	- Eviter de passer des objets en paramètre lorsqu’une interface est disponible
+	"Une classe doit dépendre de son abstraction, pas de son implémentation"
+	Cad : Nous ne savons pas si Player est implementé pour un jeu, si on l'utilise en tant que 
+	parametre nous pouvons avoir des erreurs, il vaut mieux appeler/créer une interface qui le contient
 
 	Nous n'avons que le Player passé en parametre pour les fonctions:
 			- bool CheckWin(const Player& player) const override;
@@ -48,4 +72,6 @@ D : Dependency Inversion Principle (DIP)
 	   		- bool CheckWinByDiagonal(const Player& player) const override;
 			- void InputPlayer(Player player) override;
 
-	Et aussi dans les constructeurs de Morpion et Puissance 4
+	- Il faut deplacer les attributs player dans la classe mere Game qui nous sert d'interface
+	  ainsi nous serrons certain qu'un heritier de Game contient l'attribut player et cela nous 
+	  evitera les bugs lors des appel des methodes ci-dessus
