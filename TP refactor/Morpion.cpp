@@ -1,71 +1,15 @@
 #include "Morpion.h"
 
 Morpion::Morpion() {
-	InitGrid(3, 3);
+	gameGridMorpion = Grid(3, 3);
 	player1 = Player(1, "A");
 	player2 = Player(2, "B");
 }
 
 Morpion::Morpion(string player1Name, string player2Name) {
-	InitGrid(3, 3);
-	player1 = Player(1, player1Name);
-	player2 = Player(2, player2Name);
-}
-
-//génére une grille de jeu
-void Morpion::InitGrid(const int& line, const int& column) {
-	gameGrid.resize(line);
-
-	for (int k = 0; k < line; k++) {
-		gameGrid[k].resize(column);
-	}
-	Cell::SetIdStatic(1);
-}
-
-//permet de retourner un Cell a partir de son id
-Cell& Morpion::GetCellPositionFromId(const int& idCell) {
-	switch (idCell) {
-	case 0:
-		return gameGrid[0][0];
-	case 1:
-		return gameGrid[0][1];
-	case 2:
-		return gameGrid[0][2];
-	case 3:
-		return gameGrid[1][0];
-	case 4:
-		return gameGrid[1][1];
-	case 5:
-		return gameGrid[1][2];
-	case 6:
-		return gameGrid[2][0];
-	case 7:
-		return gameGrid[2][1];
-	case 8:
-		return gameGrid[2][2];
-	}
-}
-
-//affiche la grille de jeu
-void Morpion::DisplayPlate() const {
-
-	cout << "\033[1;31mJoueur " << player1.GetName() << " (X)\033[0m  -  \033[1;32mJoueur " << player2.GetName() << " (O)\033[0m" << endl << endl;
-	cout << endl;
-
-	cout << "     |     |     " << endl;
-	cout << "  " << gameGrid[0][0].DisplayCellMorpion() << "  |  " << gameGrid[0][1].DisplayCellMorpion() << "  |  " << gameGrid[0][2].DisplayCellMorpion() << endl;
-
-	cout << "_____|_____|_____" << endl;
-	cout << "     |     |     " << endl;
-
-	cout << "  " << gameGrid[1][0].DisplayCellMorpion() << "  |  " << gameGrid[1][1].DisplayCellMorpion() << "  |  " << gameGrid[1][2].DisplayCellMorpion() << endl;
-
-	cout << "_____|_____|_____" << endl;
-	cout << "     |     |     " << endl;
-
-	cout << "  " << gameGrid[2][0].DisplayCellMorpion() << "  |  " << gameGrid[2][1].DisplayCellMorpion() << "  |  " << gameGrid[2][2].DisplayCellMorpion() << endl;
-
-	cout << "     |     |     " << endl << endl;
+	gameGridMorpion = Grid(3, 3);
+	player1 = Player(1, "A");
+	player2 = Player(2, "B");
 }
 
 //demande une entrée au joueur
@@ -87,12 +31,12 @@ void Morpion::InputPlayer(Player player) {
 		//verifie si l'entrée est valide
 		if (input < 10 && input > 0) {
 
-			if (GetCellPositionFromId(input - 1).GetOwner() == 0) {
+			if (gameGridMorpion.GetCellPositionFromId(input - 1).GetOwner() == 0) {
 
-				GetCellPositionFromId(input - 1).SetOwner(player.GetId());
+				gameGridMorpion.GetCellPositionFromId(input - 1).SetOwner(player.GetId());
 			}
 			else {
-
+				
 				cout << "Case deja prise" << endl; InputPlayer(player);
 			}
 		}
@@ -103,7 +47,7 @@ void Morpion::InputPlayer(Player player) {
 	}
 
 	else {
-		GetCellPositionFromId(BotRandomInputGenerator()).SetOwner(player.GetId());
+		gameGridMorpion.GetCellPositionFromId(BotRandomInputGenerator()).SetOwner(player.GetId());
 	}
 }
 
@@ -112,7 +56,7 @@ int Morpion::BotRandomInputGenerator() {
 	srand(time(NULL));
 	int randomPlay = rand() % 10;
 
-	while (GetCellPositionFromId(randomPlay).GetOwner() != 0) {
+	while (gameGridMorpion.GetCellPositionFromId(randomPlay).GetOwner() != 0) {
 		randomPlay = rand() % 10;
 	}
 	
@@ -167,14 +111,15 @@ void Morpion::AskPlayersName() {
 }
 
 //fait jouer les tours des joueurs jusqu'a ce qu'il y ait un gagnant ou égalité
-Player Morpion::PlayGame() {
+Player Morpion::PlayRound() {
 	int i = 0;
 	Player currentPlayer = player1;
 
 	while (!CheckWin(currentPlayer) && !CheckEquality())
 	{
 		system("cls");
-		DisplayPlate();
+		Player::DisplayPlayersPuissance4(GetPlayer1(), GetPlayer2());
+		gameGridMorpion.DisplayGridMorpion();
 
 		if (i % 2 == 0) {
 			currentPlayer = player1;
@@ -204,10 +149,11 @@ void Morpion::StartGame() {
 
 	AskGameType(); //demande le type de jeu
 	AskPlayersName();
-	Player winner = PlayGame(); //fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
+	Player winner = PlayRound(); //fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
 	
 	system("cls");
-	DisplayPlate();
+	Player::DisplayPlayersPuissance4(GetPlayer1(), GetPlayer2());
+	gameGridMorpion.DisplayGridMorpion();
 	if (CheckWin(winner)) { cout << "Le joueur " << winner.GetName() << " a gagne" << endl; }
 	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
@@ -216,12 +162,12 @@ void Morpion::StartGame() {
 bool Morpion::CheckEquality() const {
 	int line = 0;
 	int column = 0;
-
-	for (line = 0; line < gameGrid.size(); line++)
+	
+	for (line = 0; line < gameGridMorpion.GetGameGrid().size(); line++)
 	{
-		for (column = 0; column < gameGrid[0].size(); column++)
+		for (column = 0; column < gameGridMorpion.GetGameGrid()[0].size(); column++)
 		{
-			if (gameGrid[line][column].GetOwner() == 0)
+			if (gameGridMorpion.GetGameGrid()[line][column].GetOwner() == 0)
 			{
 				return false;
 			}
@@ -246,11 +192,11 @@ bool Morpion::CheckWinByLine(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (line = 0; line < gameGrid.size(); line++) {
+	for (line = 0; line < gameGridMorpion.GetGameGrid().size(); line++) {
 
-		for (column = 0; column < gameGrid[0].size(); column++) {
+		for (column = 0; column < gameGridMorpion.GetGameGrid()[0].size(); column++) {
 
-			if (gameGrid[line][column].GetOwner() == player.GetId()) {
+			if (gameGridMorpion.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
 				count++;
 			}
 		}
@@ -268,11 +214,11 @@ bool Morpion::CheckWinByColumn(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (column = 0; column < gameGrid[0].size(); column++) {
+	for (column = 0; column < gameGridMorpion.GetGameGrid()[0].size(); column++) {
 
-		for (line = 0; line < gameGrid.size(); line++) {
+		for (line = 0; line < gameGridMorpion.GetGameGrid().size(); line++) {
 
-			if (gameGrid[line][column].GetOwner() == player.GetId()) {
+			if (gameGridMorpion.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
 				count++;
 			}
 		}
@@ -293,10 +239,10 @@ bool Morpion::CheckWinByDiagonal(const Player& player) const {
 
 	for (line = 0; line < 3; line++) {
 
-		if (gameGrid[line][line].GetOwner() == player.GetId()) {
+		if (gameGridMorpion.GetGameGrid()[line][line].GetOwner() == player.GetId()) {
 			count++;
 		}
-		if (gameGrid[line][2 - line].GetOwner() == player.GetId()) {
+		if (gameGridMorpion.GetGameGrid()[line][2 - line].GetOwner() == player.GetId()) {
 			countBis++;
 		}
 	}

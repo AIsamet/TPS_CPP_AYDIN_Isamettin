@@ -17,6 +17,9 @@ public:
 	inline int GetIsBot() const { return isBot; }
 	inline void SetName(const string& NewName) { name = NewName; }
 	inline void SetIsBot(const int& NewSetting) { isBot = NewSetting; }
+	
+	static void DisplayPlayersMorpion(Player player1, Player player2);
+	static void DisplayPlayersPuissance4(Player player1, Player player2);
 
 private:
 	int id;

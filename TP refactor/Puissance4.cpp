@@ -1,57 +1,15 @@
 #include "Puissance4.h"
 
 Puissance4::Puissance4() {
-	InitGrid(4, 7);
+	gameGridPuissance4 = Grid(4, 7);
 	player1 = Player(1, "A");
 	player2 = Player(2, "B");
 }
 
 Puissance4::Puissance4(string player1Name, string player2Name) {
-	InitGrid(4, 7);
+	gameGridPuissance4 = Grid(4, 7);
 	player1 = Player(1, player1Name);
 	player2 = Player(2, player2Name);
-}
-
-//génére une grille de jeu
-void Puissance4::InitGrid(const int& line, const int& column) {
-	gameGrid.resize(line);
-
-	for (int k = 0; k < line; k++) {
-		gameGrid[k].resize(column);
-	}
-	Cell::SetIdStatic(1);
-}
-
-//affiche la grille de jeu
-void Puissance4::DisplayPlate() const {
-	system("cls");
-
-	cout << "\033[1;31mJoueur " << player1.GetName() << "\033[0m  -  \033[1;32mJoueur " << player2.GetName() << "\033[0m" << endl << endl;
-	cout << endl;
-
-	cout << "|  " << "1" << "  |  " << "2" << "  |  " << "3" << "  |  " << "4" << "  |  " << "5" << "  |  " << "6" << "  |  " << "7" << "  |  " << endl;
-
-
-	cout << " _________________________________________" << endl;
-	cout << "|     |     |     |     |     |     |     |" << endl;
-	cout << "|  " << gameGrid[3][0].DisplayCellPuissance4() << "  |  " << gameGrid[3][1].DisplayCellPuissance4() << "  |  " << gameGrid[3][2].DisplayCellPuissance4() << "  |  " << gameGrid[3][3].DisplayCellPuissance4() << "  |  " << gameGrid[3][4].DisplayCellPuissance4() << "  |  " << gameGrid[3][5].DisplayCellPuissance4() << "  |  " << gameGrid[3][6].DisplayCellPuissance4() << "  |  " << endl;
-
-	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
-	cout << "|     |     |     |     |     |     |     |" << endl;
-
-	cout << "|  " << gameGrid[2][0].DisplayCellPuissance4() << "  |  " << gameGrid[2][1].DisplayCellPuissance4() << "  |  " << gameGrid[2][2].DisplayCellPuissance4() << "  |  " << gameGrid[2][3].DisplayCellPuissance4() << "  |  " << gameGrid[2][4].DisplayCellPuissance4() << "  |  " << gameGrid[2][5].DisplayCellPuissance4() << "  |  " << gameGrid[2][6].DisplayCellPuissance4() << "  |  " << endl;
-
-	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
-	cout << "|     |     |     |     |     |     |     |" << endl;
-
-	cout << "|  " << gameGrid[1][0].DisplayCellPuissance4() << "  |  " << gameGrid[1][1].DisplayCellPuissance4() << "  |  " << gameGrid[1][2].DisplayCellPuissance4() << "  |  " << gameGrid[1][3].DisplayCellPuissance4() << "  |  " << gameGrid[1][4].DisplayCellPuissance4() << "  |  " << gameGrid[1][5].DisplayCellPuissance4() << "  |  " << gameGrid[1][6].DisplayCellPuissance4() << "  |  " << endl;
-
-	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
-	cout << "|     |     |     |     |     |     |     |" << endl;
-
-	cout << "|  " << gameGrid[0][0].DisplayCellPuissance4() << "  |  " << gameGrid[0][1].DisplayCellPuissance4() << "  |  " << gameGrid[0][2].DisplayCellPuissance4() << "  |  " << gameGrid[0][3].DisplayCellPuissance4() << "  |  " << gameGrid[0][4].DisplayCellPuissance4() << "  |  " << gameGrid[0][5].DisplayCellPuissance4() << "  |  " << gameGrid[0][6].DisplayCellPuissance4() << "  |  " << endl;
-	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl << endl;
-
 }
 
 //demande une entrée au joueur
@@ -73,14 +31,14 @@ void Puissance4::InputPlayer(Player player) {
 		//verifie si l'entrée est valide
 		if (input < 8 && input > 0) {
 
-			for (int ligne = 0; ligne < gameGrid.size(); ligne++) {
+			for (int ligne = 0; ligne < gameGridPuissance4.GetGameGrid().size(); ligne++) {
 
-				if (gameGrid[ligne][input - 1].GetOwner() == 0) {
-
-					gameGrid[ligne][input - 1].SetOwner(player.GetId());
+				if (gameGridPuissance4.GetGameGrid()[ligne][input - 1].GetOwner() == 0) {
+					
+					gameGridPuissance4.GetGameGridByReference()[ligne][input - 1].SetOwner(player.GetId());
 					break;
 				}
-				else if (ligne == gameGrid.size() - 1) {
+				else if (ligne == gameGridPuissance4.GetGameGrid().size() - 1) {
 					cout << "La colonne est pleine, veuillez choisir une autre colonne" << endl;
 					InputPlayer(player);
 				}
@@ -93,11 +51,11 @@ void Puissance4::InputPlayer(Player player) {
 	}
 
 	else {
-		for (int ligne = 0; ligne < gameGrid.size(); ligne++) {
+		for (int ligne = 0; ligne < gameGridPuissance4.GetGameGrid().size(); ligne++) {
 
-			if (gameGrid[ligne][BotRandomInputGenerator()].GetOwner() == 0) {
+			if (gameGridPuissance4.GetGameGrid()[ligne][BotRandomInputGenerator()].GetOwner() == 0) {
 
-				gameGrid[ligne][BotRandomInputGenerator()].SetOwner(player.GetId());
+				gameGridPuissance4.GetGameGridByReference()[ligne][BotRandomInputGenerator()].SetOwner(player.GetId());
 				break;
 			}
 		}
@@ -112,9 +70,9 @@ int Puissance4::BotRandomInputGenerator() {
 	while (true) {
 		
 		randomPlay = rand() % 7;
-		for (int ligne = 0; ligne < gameGrid.size(); ligne++) {
+		for (int ligne = 0; ligne < gameGridPuissance4.GetGameGrid().size(); ligne++) {
 
-			if (gameGrid[ligne][randomPlay].GetOwner() == 0) {
+			if (gameGridPuissance4.GetGameGrid()[ligne][randomPlay].GetOwner() == 0) {
 				return randomPlay;
 			}
 		}
@@ -169,13 +127,15 @@ void Puissance4::AskPlayersName() {
 }
 
 //fait jouer les tours des joueurs jusqu'a ce qu'il y ait un gagnant ou égalité
-Player Puissance4::PlayGame() {
+Player Puissance4::PlayRound() {
 	int i = 0;
 	Player currentPlayer = player1;
 
 	while (!CheckWin(currentPlayer) && !CheckEquality())
 	{
-		DisplayPlate();
+		system("cls");
+		Player::DisplayPlayersPuissance4(GetPlayer1(),GetPlayer2());
+		gameGridPuissance4.DisplayGridPuissance4();
 
 		if (i % 2 == 0) {
 			currentPlayer = player1;
@@ -205,9 +165,11 @@ void Puissance4::StartGame() {
 	
 	AskGameType(); //demande le type de jeu
 	AskPlayersName();
-	Player winner = PlayGame(); //fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
+	Player winner = PlayRound(); //fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
 	
-	DisplayPlate();
+	system("cls");
+	Player::DisplayPlayersPuissance4(GetPlayer1(), GetPlayer2());
+	gameGridPuissance4.DisplayGridPuissance4();
 	if (CheckWin(winner)) { cout << "Le joueur " << winner.GetName() << " a gagne" << endl; }
 	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
@@ -217,11 +179,11 @@ bool Puissance4::CheckEquality() const {
 	int line = 0;
 	int column = 0;
 
-	for (line = 0; line < gameGrid.size(); line++)
+	for (line = 0; line < gameGridPuissance4.GetGameGrid().size(); line++)
 	{
-		for (column = 0; column < gameGrid[0].size(); column++)
+		for (column = 0; column < gameGridPuissance4.GetGameGrid()[0].size(); column++)
 		{
-			if (gameGrid[line][column].GetOwner() == 0)
+			if (gameGridPuissance4.GetGameGrid()[line][column].GetOwner() == 0)
 			{
 				return false;
 			}
@@ -246,11 +208,11 @@ bool Puissance4::CheckWinByLine(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (line = 0; line < gameGrid.size(); line++) {
+	for (line = 0; line < gameGridPuissance4.GetGameGrid().size(); line++) {
 
-		for (column = 0; column < gameGrid[0].size(); column++) {
+		for (column = 0; column < gameGridPuissance4.GetGameGrid()[0].size(); column++) {
 
-			if (gameGrid[line][column].GetOwner() == player.GetId()) {
+			if (gameGridPuissance4.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
 				count++;
 
 				if (count == 4) {
@@ -272,11 +234,11 @@ bool Puissance4::CheckWinByColumn(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (column = 0; column < gameGrid[0].size(); column++) {
+	for (column = 0; column < gameGridPuissance4.GetGameGrid()[0].size(); column++) {
 
-		for (line = 0; line < gameGrid.size(); line++) {
+		for (line = 0; line < gameGridPuissance4.GetGameGrid().size(); line++) {
 
-			if (gameGrid[line][column].GetOwner() == player.GetId()) {
+			if (gameGridPuissance4.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
 				count++;
 
 				if (count == 4) {
@@ -294,7 +256,7 @@ bool Puissance4::CheckWinByColumn(const Player& player) const {
 
 //verifie s'il y a un gagnant par diagonal
 bool Puissance4::CheckWinByDiagonal(const Player& player) const {
-	const int gridColumnNumber = gameGrid[0].size() - 1;
+	const int gridColumnNumber = gameGridPuissance4.GetGameGrid()[0].size() - 1;
 	int line = 0;
 	int column = 0;
 	int totalCount = 0;
@@ -302,11 +264,11 @@ bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 
 	for (column = 0; column < 4; column++) {
 
-		if (gameGrid[line][column].GetOwner() == player.GetId()) {
+		if (gameGridPuissance4.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
 
 			for (countDiagonal = 0; countDiagonal < 4; countDiagonal++) {
 
-				if (gameGrid[line + countDiagonal][column + countDiagonal].GetOwner() == player.GetId()) {
+				if (gameGridPuissance4.GetGameGrid()[line + countDiagonal][column + countDiagonal].GetOwner() == player.GetId()) {
 					totalCount++;
 				}
 				else {
@@ -322,7 +284,7 @@ bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 
 			for (countDiagonal = 0; countDiagonal < 4; countDiagonal++) {
 
-				if (gameGrid[line + countDiagonal][gridColumnNumber - column - countDiagonal].GetOwner() == player.GetId()) {
+				if (gameGridPuissance4.GetGameGrid()[line + countDiagonal][gridColumnNumber - column - countDiagonal].GetOwner() == player.GetId()) {
 					totalCount++;
 				}
 				else {
