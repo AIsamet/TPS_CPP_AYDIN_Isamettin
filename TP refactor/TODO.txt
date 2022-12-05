@@ -2,9 +2,10 @@ S : Single Responsibility Principle (SRP)
 
 	"Une classe ne doit avoir qu'une seule et unique responsabilité"	
 
-	- Nouvelle classe Grid avec :
-		- InitGrid deplacé de puissance 4 et morpion
-		- DisplayGrid (ex DisplayPlate de puissance 4 et morpion)
+FAIT	- Nouvelle classe Grid avec :
+FAIT		- InitGrid deplacé de puissance 4 et morpion
+FAIT		- DisplayGrid (ex DisplayPlate de puissance 4 et morpion)
+FAIT		- deplacer la methode GetCellPositionFromId depuis Morpion
 
 	- Nouvelle classe Input avec :
 		- InputPlayer (a renomer, deplacé de puissance 4 et morpion)
@@ -15,10 +16,7 @@ S : Single Responsibility Principle (SRP)
 
 	- Classe Game avec :
 		- remonter ce qui n'est pas override depuis Morpion et Puissance 4 dans Game
-		- renommer PlayGame en PlayRound
-	
-	- Classe Cell avec :
-		- deplacer la methode GetCellPositionFromId depuis morpion vers Cell
+FAIT		- renommer PlayGame en PlayRound
 
 	- Créer une classe Checks ?
 
