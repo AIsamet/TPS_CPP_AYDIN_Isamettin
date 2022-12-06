@@ -7,27 +7,27 @@ FAIT		- InitGrid deplacé de puissance 4 et morpion
 FAIT		- DisplayGrid (ex DisplayPlate de puissance 4 et morpion)
 FAIT		- deplacer la methode GetCellPositionFromId depuis Morpion
 
-	- Nouvelle classe Input avec :
-		- InputPlayer (a renomer, deplacé de puissance 4 et morpion)
-		- BotRandomInputGenerator (deplacé puissance 4 et morpion)
-		- input pour AskGame dans Launcher.cpp
-		- input pour AskGameType dans Puissance 4 et Morpion
-		- input pour AskPlayersName dans Puissance 4 et Morpion)
+FAIT	- Nouvelle classe Input avec :
+FAIT		- InputPlayer (a renomer, deplacé de puissance 4 et morpion)
+FAIT		- BotRandomInputGenerator (a renomer, deplacé de puissance 4 et morpion)
+A VOIR	- input pour AskGame dans Launcher.cpp
+FAIT		- input pour AskGameType dans Puissance 4 et Morpion
+FAIT		- input pour AskPlayersName dans Puissance 4 et Morpion)
 
-	- Classe Game avec :
-		- remonter ce qui n'est pas override depuis Morpion et Puissance 4 dans Game
+FAIT	- Classe Game avec :
+FAIT		- remonter ce qui n'est pas override depuis Morpion et Puissance 4 dans Game
 FAIT		- renommer PlayGame en PlayRound
 
-	- Créer une classe Checks ?
+?	- Créer une classe Checks ?
 
 
 O : Open/Closed Principle
 
 	"Les entités doivent être ouvertes à l'extension et fermées à la modification"
 
-	- Classe Input (ex fonctions Input de morpion et puissance 4) :
-		- Scinder la fonction InputPlayer en 2 fonctions (penser a renomer) : 
-			- 1 InputBot, 1 InputPlayer
+FAIT	- Classe Input (ex fonctions Input de morpion et puissance 4) :
+FAIT		- Scinder la fonction InputPlayer en 2 fonctions (penser a renomer) : 
+FAIT			- 1 InputBot, 1 InputPlayer
 
 
 
@@ -37,12 +37,12 @@ L : Liskov’s Substitution Principle (LSP)
 	L’idée du principe est que les enfants ne peuvent pas faire plus ou moins que leur parent.
 
 	4 conditions :
-		- La signature des fonctions (paramètres et retour) doit être identique entre l’enfant et le parent.
-		- Les paramètres de la fonction de l’enfant ne peuvent pas être plus nombreux que ceux du parent.
-		- Le retour de la fonction doit retourner le même type que le parent.
-		- Les exceptions retournées doivent être les mêmes.
+OK		- La signature des fonctions (paramètres et retour) doit être identique entre l’enfant et le parent.
+OK		- Les paramètres de la fonction de l’enfant ne peuvent pas être plus nombreux que ceux du parent.
+OK		- Le retour de la fonction doit retourner le même type que le parent.
+OK		- Les exceptions retournées doivent être les mêmes.
 
-	- Principe respecté pour les heritages de Game; rien a faire
+OK	- Principe respecté pour les heritages de Game; rien a faire
 	(RQ : sauf pour GetCellPositionFromId dans Morpion; Mais le cas n'est plus a traiter suite aux modifications SRP)
 
 
@@ -54,7 +54,7 @@ I : Interface Segregation Principle (ISP)
 	Equivalent des interfaces en c++ : classes abstraites virtuelles pures 
 		C'est le cas de la classe Game
 
-	- Nos classes filles utilisent toutes les methodes de la classe mère; principe respecté rien a faire
+OK	- Nos classes filles utilisent toutes les methodes de la classe mère; principe respecté rien a faire
 
 
 D : Dependency Inversion Principle (DIP)
@@ -70,6 +70,6 @@ D : Dependency Inversion Principle (DIP)
 	   		- bool CheckWinByDiagonal(const Player& player) const override;
 			- void InputPlayer(Player player) override;
 
-	- Il faut deplacer les attributs player dans la classe mere Game qui nous sert d'interface
+FAIT	- Il faut deplacer les attributs player dans la classe mere Game qui nous sert d'interface
 	  ainsi nous serrons certain qu'un heritier de Game contient l'attribut player et cela nous 
 	  evitera les bugs lors des appel des methodes ci-dessus

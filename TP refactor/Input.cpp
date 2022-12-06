@@ -4,6 +4,17 @@ Input::Input()
 {
 }
 
+
+void Input::InputMorpion(Grid& grid, Player player) {
+	if (player.GetIsBot() == 1) { Input::InputBotPlayerMorpion(grid, player); }
+	else if (player.GetIsBot() == 0) { Input::InputPlayerMorpion(grid, player); }
+}
+
+void Input::InputPuissance4(Grid& grid, Player player) {
+	if (player.GetIsBot() == 1) { Input::InputBotPlayerMPuissance4(grid, player); }
+	else if (player.GetIsBot() == 0) { Input::InputPlayerPuissance4(grid, player); }
+}
+
 void Input::InputPlayerMorpion(Grid& grid, Player player)
 {
 	int input = 0;
@@ -81,22 +92,12 @@ void Input::InputBotPlayerMPuissance4(Grid& grid, Player player)
 {
 	for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
 
-		if (grid.GetGameGrid()[ligne][BotRandomInputGeneratorPuissance4(grid,player)].GetOwner() == 0) {
+		if (grid.GetGameGrid()[ligne][BotRandomInputGeneratorPuissance4(grid, player)].GetOwner() == 0) {
 
-			grid.GetGameGrid()[ligne][BotRandomInputGeneratorPuissance4(grid, player)].SetOwner(player.GetId());
+			grid.GetGameGridByReference()[ligne][BotRandomInputGeneratorPuissance4(grid, player)].SetOwner(player.GetId());
 			break;
 		}
 	}
-}
-
-int Input::InputGameType()
-{
-	return 0;
-}
-
-string Input::InputPlayersName()
-{
-	return "";
 }
 
 //genere une case vide a jouer aléatoirement par le bot
@@ -119,11 +120,48 @@ int Input::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
 //genere une case vide a jouer aléatoirement par le bot
 int Input::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
 	srand(time(NULL));
-	int randomPlay = rand() % 10;
+	int randomPlay = rand() % 9;
 
 	while (grid.GetCellPositionFromId(randomPlay).GetOwner() != 0) {
-		randomPlay = rand() % 10;
+		randomPlay = rand() % 9;
 	}
 
 	return randomPlay;
 }
+
+int Input::InputGameType()
+{
+	int input = 0;
+
+	cout << "\nA quelle mode de jeu voulez vous jouer ? " << endl;
+	cout << "1 - Joueur contre Joueur" << endl;
+	cout << "2 - Joueur contre IA" << endl << endl;
+	cout << "Choix : ";
+	cin >> input;
+
+	//verifie si l'entrée est un int
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "\nVeuillez entrer un chiffre" << endl;
+		cout << "Choix : ";
+		cin >> input;
+	}
+	if (input < 3 && input > 0) {
+		return input;
+	}
+	else {
+		system("cls");
+		cout << "Veuillez saisir un choix valide" << endl;
+		InputGameType();
+	}
+}
+
+string Input::InputPlayersName()
+{
+	string namePlayer;
+	cin >> namePlayer;	
+	return namePlayer;
+}
+

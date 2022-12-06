@@ -12,11 +12,16 @@ class Game
 
 public:
 	Game();
+
+	inline Grid GetGameGrid() const { return gameGrid; }
+	inline Grid& GetGameGridByReference() { return gameGrid; }
+	inline Player GetPlayer1() const { return player1; }
+	inline Player GetPlayer2() const { return player2; }
+	inline int GetGameMode() const { return gameMode; }
+	inline void SetGameMode(const int& NewSetting) { gameMode = NewSetting; }
 	
-	virtual void InputPlayer(Player player) = 0; //demande une entrée au joueur
-	virtual int BotRandomInputGenerator() = 0; //genere une case vide a jouer aléatoirement par le bot
-	virtual void AskGameType() = 0; //fonction qui demande au joueur le type de jeu a lancer
-	virtual void AskPlayersName() = 0; //fonction qui demande aux joueurs leur pseudonyme
+	virtual void AskGameMode(); //fonction qui demande au joueur le type de jeu a lancer
+	virtual void AskPlayersName(); //fonction qui demande aux joueurs leur pseudonyme
 	
 	virtual Player PlayRound() = 0; //fait jouer les tours des joueurs jusqu'a ce qu'il y ait un gagnant ou égalité
 	virtual void StartGame() = 0; //lance la partie
@@ -27,8 +32,12 @@ public:
 	virtual bool CheckWinByColumn(const Player& player) const = 0; //verifie s'il y a un gagnant par colonne
 	virtual bool CheckWinByDiagonal(const Player& player) const = 0; //verifie s'il y a un gagnant par diagonal
 	
-private:
-
+protected:
+	Grid gameGrid;
+	Player player1;
+	Player player2;
+	int gameMode; //0 = multijoueur, 1 = joueur vs ordinateur
 };
 
+#include "Input.h"
 #endif
