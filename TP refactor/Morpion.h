@@ -2,6 +2,7 @@
 #define Morpion_h
 
 #include "Game.h"
+#include "Input.h"
 
 class Morpion : public Game
 {
@@ -11,6 +12,7 @@ public:
 	Morpion(string player1Name, string player2Name);
 	
 	inline Grid GetGameGridMorpion() const { return gameGridMorpion; }
+	inline Grid& GetGameGridMorpionByReference() { return gameGridMorpion; }
 	inline Player GetPlayer1() const { return player1; }
 	inline Player GetPlayer2() const { return player2; }
 	inline int GetGameMode() const { return gameMode; }

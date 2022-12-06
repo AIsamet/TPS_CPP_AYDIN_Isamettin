@@ -2,6 +2,7 @@
 #define Puissance4_h
 
 #include "Game.h"
+#include "Input.h"
 
 class Puissance4 : public Game
 {
@@ -10,7 +11,8 @@ public:
 	Puissance4();
 	Puissance4(string player1Name, string player2Name);
 
-	inline Grid GetGridPuissance4() const { return gameGridPuissance4; }
+	inline Grid GetGameGridPuissance4() const { return gameGridPuissance4; }
+	inline Grid& GetGameGridPuissance4ByReference()  { return gameGridPuissance4; }
 	inline Player GetPlayer1() const { return player1; }
 	inline Player GetPlayer2() const { return player2; }
 	inline int GetGameMode() const { return gameMode; }

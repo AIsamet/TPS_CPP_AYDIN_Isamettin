@@ -14,41 +14,8 @@ Morpion::Morpion(string player1Name, string player2Name) {
 
 //demande une entrée au joueur
 void Morpion::InputPlayer(Player player) {
-
-	if (player.GetIsBot() == 0) {
-		int input = 0;
-		cin >> input;
-
-		//verifie si l'entrée est un int
-		while (!std::cin.good())
-		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			cout << "Veuillez entrer un chiffre valide" << endl;
-			cin >> input;
-		}
-
-		//verifie si l'entrée est valide
-		if (input < 10 && input > 0) {
-
-			if (gameGridMorpion.GetCellPositionFromId(input - 1).GetOwner() == 0) {
-
-				gameGridMorpion.GetCellPositionFromId(input - 1).SetOwner(player.GetId());
-			}
-			else {
-				
-				cout << "Case deja prise" << endl; InputPlayer(player);
-			}
-		}
-		else {
-			cout << "Veuillez saisir un chiffre entre 1 et 9" << endl;
-			InputPlayer(player);
-		}
-	}
-
-	else {
-		gameGridMorpion.GetCellPositionFromId(BotRandomInputGenerator()).SetOwner(player.GetId());
-	}
+	if(player.GetIsBot() == 1) { Input::InputBotPlayerMorpion(GetGameGridMorpionByReference(), player); }
+	else if (player.GetIsBot() == 0) { Input::InputPlayerMorpion(GetGameGridMorpionByReference(), player); }
 }
 
 //genere une case vide a jouer aléatoirement par le bot
