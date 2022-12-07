@@ -40,7 +40,7 @@ Player Morpion::PlayRound() {
 			}
 		}
 
-		Input::InputMorpion(grid, currentPlayer);
+		Inputs::InputMorpion(grid, currentPlayer);
 		i++;
 	}
 	return currentPlayer;

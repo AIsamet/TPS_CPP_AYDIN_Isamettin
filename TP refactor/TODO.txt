@@ -10,7 +10,7 @@ FAIT		- deplacer la methode GetCellPositionFromId depuis Morpion
 FAIT	- Nouvelle classe Input avec :
 FAIT		- InputPlayer (a renomer, deplacé de puissance 4 et morpion)
 FAIT		- BotRandomInputGenerator (a renomer, deplacé de puissance 4 et morpion)
-A VOIR	- input pour AskGame dans Launcher.cpp
+FAIT		- input pour AskGame dans Launcher.cpp
 FAIT		- input pour AskGameType dans Puissance 4 et Morpion
 FAIT		- input pour AskPlayersName dans Puissance 4 et Morpion)
 

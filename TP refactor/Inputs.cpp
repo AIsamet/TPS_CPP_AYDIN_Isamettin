@@ -1,21 +1,21 @@
 #include "Inputs.h"
 
-Input::Input()
+Inputs::Inputs()
 {
 }
 
 
-void Input::InputMorpion(Grid& grid, Player player) {
-	if (player.GetIsBot() == 1) { Input::InputBotPlayerMorpion(grid, player); }
-	else if (player.GetIsBot() == 0) { Input::InputPlayerMorpion(grid, player); }
+void Inputs::InputMorpion(Grid& grid, Player player) {
+	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMorpion(grid, player); }
+	else if (player.GetIsBot() == 0) { Inputs::InputPlayerMorpion(grid, player); }
 }
 
-void Input::InputPuissance4(Grid& grid, Player player) {
-	if (player.GetIsBot() == 1) { Input::InputBotPlayerMPuissance4(grid, player); }
-	else if (player.GetIsBot() == 0) { Input::InputPlayerPuissance4(grid, player); }
+void Inputs::InputPuissance4(Grid& grid, Player player) {
+	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMPuissance4(grid, player); }
+	else if (player.GetIsBot() == 0) { Inputs::InputPlayerPuissance4(grid, player); }
 }
 
-void Input::InputPlayerMorpion(Grid& grid, Player player)
+void Inputs::InputPlayerMorpion(Grid& grid, Player player)
 {
 	int input = 0;
 	cin >> input;
@@ -47,7 +47,7 @@ void Input::InputPlayerMorpion(Grid& grid, Player player)
 	}
 }
 
-void Input::InputPlayerPuissance4(Grid& grid, Player player)
+void Inputs::InputPlayerPuissance4(Grid& grid, Player player)
 {
 	int input = 0;
 	cin >> input;
@@ -83,12 +83,12 @@ void Input::InputPlayerPuissance4(Grid& grid, Player player)
 	}
 }
 
-void Input::InputBotPlayerMorpion(Grid& grid, Player player)
+void Inputs::InputBotPlayerMorpion(Grid& grid, Player player)
 {
 	grid.GetCellPositionFromId(BotRandomInputGeneratorMorpion(grid, player)).SetOwner(player.GetId());
 }
 
-void Input::InputBotPlayerMPuissance4(Grid& grid, Player player)
+void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player player)
 {
 	for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
 
@@ -101,7 +101,7 @@ void Input::InputBotPlayerMPuissance4(Grid& grid, Player player)
 }
 
 //genere une case vide a jouer aléatoirement par le bot
-int Input::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
+int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
 	srand(time(NULL));
 	int randomPlay;
 
@@ -118,7 +118,7 @@ int Input::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
 }
 
 //genere une case vide a jouer aléatoirement par le bot
-int Input::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
+int Inputs::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
 	srand(time(NULL));
 	int randomPlay = rand() % 9;
 
@@ -129,7 +129,18 @@ int Input::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
 	return randomPlay;
 }
 
-int Input::InputGameMode()
+string Inputs::InputGameChoice()
+{
+	string choice;
+	cout << "1. Puissance 4" << endl;
+	cout << "2. Morpion" << endl;
+	cout << "3. Quitter" << endl << endl;
+	cout << "Choix : ";
+	cin >> choice;
+	return choice;
+}
+
+int Inputs::InputGameMode()
 {
 	int input = 0;
 
@@ -158,7 +169,7 @@ int Input::InputGameMode()
 	}
 }
 
-string Input::InputPlayersNames()
+string Inputs::InputPlayersNames()
 {
 	string namePlayer;
 	cin >> namePlayer;	

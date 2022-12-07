@@ -40,7 +40,7 @@ Player Puissance4::PlayRound() {
 			}
 		}
 
-		Input::InputPuissance4(grid,currentPlayer);
+		Inputs::InputPuissance4(grid,currentPlayer);
 		i++;
 	}
 	return currentPlayer;

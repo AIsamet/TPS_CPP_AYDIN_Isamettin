@@ -3,11 +3,11 @@
 
 #include "Game.h"
 
-class Input
+class Inputs
 {
 
 public:
-	Input();
+	Inputs();
 
 	static void InputMorpion(Grid& grid, Player player);
 	static void InputPuissance4(Grid& grid, Player player);
@@ -18,6 +18,7 @@ public:
 	static int BotRandomInputGeneratorMorpion(Grid& grid, Player player);
 	static int BotRandomInputGeneratorPuissance4(Grid& grid, Player player);
 	
+	static string InputGameChoice();
 	static int InputGameMode();
 	static string InputPlayersNames();
 	
