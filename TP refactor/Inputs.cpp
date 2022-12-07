@@ -1,4 +1,4 @@
-#include "Input.h"
+#include "Inputs.h"
 
 Input::Input()
 {
@@ -129,7 +129,7 @@ int Input::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
 	return randomPlay;
 }
 
-int Input::InputGameType()
+int Input::InputGameMode()
 {
 	int input = 0;
 
@@ -154,11 +154,11 @@ int Input::InputGameType()
 	else {
 		system("cls");
 		cout << "Veuillez saisir un choix valide" << endl;
-		InputGameType();
+		InputGameMode();
 	}
 }
 
-string Input::InputPlayersName()
+string Input::InputPlayersNames()
 {
 	string namePlayer;
 	cin >> namePlayer;	

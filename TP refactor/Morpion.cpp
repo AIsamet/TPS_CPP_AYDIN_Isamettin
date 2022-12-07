@@ -1,13 +1,13 @@
 #include "Morpion.h"
 
 Morpion::Morpion() {
-	gameGrid = Grid(3, 3);
+	grid = Grid(3, 3);
 	player1 = Player(1, "A");
 	player2 = Player(2, "B");
 }
 
 Morpion::Morpion(string player1Name, string player2Name) {
-	gameGrid = Grid(3, 3);
+	grid = Grid(3, 3);
 	player1 = Player(1, "A");
 	player2 = Player(2, "B");
 }
@@ -21,7 +21,7 @@ Player Morpion::PlayRound() {
 	{
 		system("cls");
 		Player::DisplayPlayersPuissance4(GetPlayer1(), GetPlayer2());
-		gameGrid.DisplayGridMorpion();
+		grid.DisplayGridMorpion();
 
 		if (i % 2 == 0) {
 			currentPlayer = player1;
@@ -40,7 +40,7 @@ Player Morpion::PlayRound() {
 			}
 		}
 
-		Input::InputMorpion(gameGrid, currentPlayer);
+		Input::InputMorpion(grid, currentPlayer);
 		i++;
 	}
 	return currentPlayer;
@@ -50,12 +50,12 @@ Player Morpion::PlayRound() {
 void Morpion::StartGame() {
 
 	AskGameMode(); //demande le type de jeu
-	AskPlayersName();
+	AskPlayersNames();
 	Player winner = PlayRound(); //fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
 	
 	system("cls");
 	Player::DisplayPlayersMorpion(GetPlayer1(), GetPlayer2());
-	gameGrid.DisplayGridMorpion();
+	grid.DisplayGridMorpion();
 	if (CheckWin(winner)) { cout << "Le joueur " << winner.GetName() << " a gagne" << endl; }
 	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
@@ -65,11 +65,11 @@ bool Morpion::CheckEquality() const {
 	int line = 0;
 	int column = 0;
 	
-	for (line = 0; line < gameGrid.GetGameGrid().size(); line++)
+	for (line = 0; line < grid.GetGameGrid().size(); line++)
 	{
-		for (column = 0; column < gameGrid.GetGameGrid()[0].size(); column++)
+		for (column = 0; column < grid.GetGameGrid()[0].size(); column++)
 		{
-			if (gameGrid.GetGameGrid()[line][column].GetOwner() == 0)
+			if (grid.GetGameGrid()[line][column].GetOwner() == 0)
 			{
 				return false;
 			}
@@ -94,11 +94,11 @@ bool Morpion::CheckWinByLine(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (line = 0; line < gameGrid.GetGameGrid().size(); line++) {
+	for (line = 0; line < grid.GetGameGrid().size(); line++) {
 
-		for (column = 0; column < gameGrid.GetGameGrid()[0].size(); column++) {
+		for (column = 0; column < grid.GetGameGrid()[0].size(); column++) {
 
-			if (gameGrid.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
+			if (grid.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
 				count++;
 			}
 		}
@@ -116,11 +116,11 @@ bool Morpion::CheckWinByColumn(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (column = 0; column < gameGrid.GetGameGrid()[0].size(); column++) {
+	for (column = 0; column < grid.GetGameGrid()[0].size(); column++) {
 
-		for (line = 0; line < gameGrid.GetGameGrid().size(); line++) {
+		for (line = 0; line < grid.GetGameGrid().size(); line++) {
 
-			if (gameGrid.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
+			if (grid.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
 				count++;
 			}
 		}
@@ -141,10 +141,10 @@ bool Morpion::CheckWinByDiagonal(const Player& player) const {
 
 	for (line = 0; line < 3; line++) {
 
-		if (gameGrid.GetGameGrid()[line][line].GetOwner() == player.GetId()) {
+		if (grid.GetGameGrid()[line][line].GetOwner() == player.GetId()) {
 			count++;
 		}
-		if (gameGrid.GetGameGrid()[line][2 - line].GetOwner() == player.GetId()) {
+		if (grid.GetGameGrid()[line][2 - line].GetOwner() == player.GetId()) {
 			countBis++;
 		}
 	}

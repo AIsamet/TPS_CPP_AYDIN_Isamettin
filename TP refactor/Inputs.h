@@ -1,5 +1,5 @@
-#ifndef Input_h
-#define Input_h
+#ifndef Inputs_h
+#define Inputs_h
 
 #include "Game.h"
 
@@ -18,8 +18,8 @@ public:
 	static int BotRandomInputGeneratorMorpion(Grid& grid, Player player);
 	static int BotRandomInputGeneratorPuissance4(Grid& grid, Player player);
 	
-	static int InputGameType();
-	static string InputPlayersName();
+	static int InputGameMode();
+	static string InputPlayersNames();
 	
 private:
 	

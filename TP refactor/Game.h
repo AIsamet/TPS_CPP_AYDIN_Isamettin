@@ -13,15 +13,15 @@ class Game
 public:
 	Game();
 
-	inline Grid GetGameGrid() const { return gameGrid; }
-	inline Grid& GetGameGridByReference() { return gameGrid; }
+	inline Grid GetGrid() const { return grid; }
+	inline Grid& GetGridByReference() { return grid; }
 	inline Player GetPlayer1() const { return player1; }
 	inline Player GetPlayer2() const { return player2; }
 	inline int GetGameMode() const { return gameMode; }
 	inline void SetGameMode(const int& NewSetting) { gameMode = NewSetting; }
 	
 	virtual void AskGameMode(); //fonction qui demande au joueur le type de jeu a lancer
-	virtual void AskPlayersName(); //fonction qui demande aux joueurs leur pseudonyme
+	virtual void AskPlayersNames(); //fonction qui demande aux joueurs leur pseudonyme
 	
 	virtual Player PlayRound() = 0; //fait jouer les tours des joueurs jusqu'a ce qu'il y ait un gagnant ou égalité
 	virtual void StartGame() = 0; //lance la partie
@@ -33,11 +33,11 @@ public:
 	virtual bool CheckWinByDiagonal(const Player& player) const = 0; //verifie s'il y a un gagnant par diagonal
 	
 protected:
-	Grid gameGrid;
+	Grid grid;
 	Player player1;
 	Player player2;
 	int gameMode; //0 = multijoueur, 1 = joueur vs ordinateur
 };
 
-#include "Input.h"
+#include "Inputs.h"
 #endif
