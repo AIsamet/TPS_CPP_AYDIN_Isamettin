@@ -95,12 +95,7 @@ bool Puissance4::CheckEquality() const {
  * @return  true si le joueur a gagne, false sinon
 **/
 bool Puissance4::CheckWin(const Player& player) const {
-	if (CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player)) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player);
 }
 
 /**
