@@ -3,41 +3,56 @@
 
 #include "Player.h"
 #include "Grid.h"
+#include "Inputs.h"
 #include <chrono>
 #include <thread>
 
-//classe abstraite dont vont heriter les differents jeux
+// Classe mère des différents jeux
 class Game
 {
-
 public:
+	/**
+	 * Constructeur
+	**/
 	Game();
 
+	/**
+	 * Getters
+	**/
 	inline Grid GetGrid() const { return grid; }
 	inline Grid& GetGridByReference() { return grid; }
 	inline Player GetPlayer1() const { return player1; }
 	inline Player GetPlayer2() const { return player2; }
 	inline int GetGameMode() const { return gameMode; }
+
+	/**
+	 * Setters
+	**/
 	inline void SetGameMode(const int& NewSetting) { gameMode = NewSetting; }
 	
-	virtual void AskGameMode(); //fonction qui demande au joueur le type de jeu a lancer
-	virtual void AskPlayersNames(); //fonction qui demande aux joueurs leur pseudonyme
+	/**
+	 * Methodes
+	**/
+	virtual void AskGameMode();
+	virtual void AskPlayersNames();
 	
-	virtual Player PlayRound() = 0; //fait jouer les tours des joueurs jusqu'a ce qu'il y ait un gagnant ou égalité
-	virtual void StartGame() = 0; //lance la partie
+	virtual Player PlayRound() = 0;
+	virtual void StartGame() = 0;
 	
-	virtual bool CheckEquality() const = 0; //verifie le cas d'une égalité
-	virtual bool CheckWin(const Player& player) const = 0; //verifie s'il y a un gagnant
-	virtual bool CheckWinByLine(const Player& player) const = 0; //verifie s'il y a un gagnant par ligne
-	virtual bool CheckWinByColumn(const Player& player) const = 0; //verifie s'il y a un gagnant par colonne
-	virtual bool CheckWinByDiagonal(const Player& player) const = 0; //verifie s'il y a un gagnant par diagonal
+	virtual bool CheckEquality() const = 0;
+	virtual bool CheckWin(const Player& player) const = 0;
+	virtual bool CheckWinByLine(const Player& player) const = 0;
+	virtual bool CheckWinByColumn(const Player& player) const = 0;
+	virtual bool CheckWinByDiagonal(const Player& player) const = 0;
 	
 protected:
+	/**
+	 * Attributs
+	**/
 	Grid grid;
 	Player player1;
 	Player player2;
-	int gameMode; //0 = multijoueur, 1 = joueur vs ordinateur
+	int gameMode; // 0 = multijoueur, 1 = joueur vs IA
 };
 
-#include "Inputs.h"
 #endif

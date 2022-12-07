@@ -3,13 +3,19 @@
 
 #include "Game.h"
 
+// Classe du jeu de puissance 4
 class Puissance4 : public Game
 {
-
 public:
+	/**
+	 * Constructeur
+	**/
 	Puissance4();
 	Puissance4(string player1Name, string player2Name);
 		
+	/**
+	 * Methodes
+	**/
 	Player PlayRound() override;
 	void StartGame() override;
 	

@@ -2,8 +2,7 @@
 #include "Morpion.h"
 #include "Puissance4.h"
 
-//classe qui va servir de point d'entrée pour le programme
-
+// Classe qui va servir de point d'entrée pour le programme
 void Start() {
 
 	string choice = Inputs::InputGameChoice();

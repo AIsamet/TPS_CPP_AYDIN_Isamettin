@@ -1,17 +1,26 @@
 #include "Game.h"
 
+/**
+ * @brief   Construit un nouveau jeu
+**/
 Game::Game() {
 
 }
 
-//fonction qui demande au joueur le type de jeu a lancer
+/**
+ * @brief   Demande aux joueurs le type de jeu a lancer
+ * @return  void
+**/
 void Game::AskGameMode() {
 	int input = Inputs::InputGameMode();
 	if (input == 1) { SetGameMode(0); }
 	else if (input == 2) { SetGameMode(1); player2.SetName("IA"); player2.SetIsBot(1); }
 }
 
-//fonction qui demande aux joueurs leur pseudonyme
+/**
+ * @brief   Demande aux joueurs leurs noms
+ * @return  void
+**/
 void Game::AskPlayersNames() {
 	system("cls");
 	string namePlayer;

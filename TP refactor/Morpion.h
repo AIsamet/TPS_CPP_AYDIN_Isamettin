@@ -3,13 +3,19 @@
 
 #include "Game.h"
 
+// Classe du jeu de morpion
 class Morpion : public Game
 {
-
 public:
+	/**
+	 * Constructeur
+	**/
 	Morpion();
 	Morpion(string player1Name, string player2Name);
 		
+	/**
+	 * Methodes
+	**/
 	Player PlayRound() override;
 	void StartGame() override;
 	

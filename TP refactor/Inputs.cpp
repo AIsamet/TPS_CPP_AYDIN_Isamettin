@@ -1,26 +1,43 @@
 #include "Inputs.h"
 
+/**
+ * @brief   Construit un nouveau input
+**/
 Inputs::Inputs()
 {
 }
 
-
+/**
+ * @brief   Appelle les methodes appropriees en fonction du type de joueur (morpion)
+ * @params  grid : grille de jeu, player : joueur actuel
+ * @return  void
+**/
 void Inputs::InputMorpion(Grid& grid, Player player) {
 	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMorpion(grid, player); }
 	else if (player.GetIsBot() == 0) { Inputs::InputPlayerMorpion(grid, player); }
 }
 
+/**
+ * @brief   Appelle les methodes appropriees en fonction du type de joueur (puissance 4)
+ * @params  grid : grille de jeu, player : joueur actuel
+ * @return  void
+**/
 void Inputs::InputPuissance4(Grid& grid, Player player) {
 	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMPuissance4(grid, player); }
 	else if (player.GetIsBot() == 0) { Inputs::InputPlayerPuissance4(grid, player); }
 }
 
+/**
+ * @brief   Traite la saisie du joueur (morpion)
+ * @params  grid : grille de jeu, player : joueur actuel
+ * @return  void
+**/
 void Inputs::InputPlayerMorpion(Grid& grid, Player player)
 {
 	int input = 0;
 	cin >> input;
 
-	//verifie si l'entrée est un int
+	// verifie si l'entree est un int
 	while (!std::cin.good())
 	{
 		std::cin.clear();
@@ -29,7 +46,7 @@ void Inputs::InputPlayerMorpion(Grid& grid, Player player)
 		cin >> input;
 	}
 
-	//verifie si l'entrée est valide
+	// verifie si l'entree est valide
 	if (input < 10 && input > 0) {
 
 		if (grid.GetCellPositionFromId(input - 1).GetOwner() == 0) {
@@ -47,12 +64,17 @@ void Inputs::InputPlayerMorpion(Grid& grid, Player player)
 	}
 }
 
+/**
+ * @brief   Traite la saisie du joueur (puissance 4)
+ * @params  grid : grille de jeu, player : joueur actuel
+ * @return  void
+**/
 void Inputs::InputPlayerPuissance4(Grid& grid, Player player)
 {
 	int input = 0;
 	cin >> input;
 
-	//verifie si l'entrée est un int
+	// verifie si l'entrée est un int
 	while (!std::cin.good())
 	{
 		std::cin.clear();
@@ -61,7 +83,7 @@ void Inputs::InputPlayerPuissance4(Grid& grid, Player player)
 		cin >> input;
 	}
 
-	//verifie si l'entrée est valide
+	// verifie si l'entrée est valide
 	if (input < 8 && input > 0) {
 
 		for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
@@ -83,11 +105,21 @@ void Inputs::InputPlayerPuissance4(Grid& grid, Player player)
 	}
 }
 
+/**
+ * @brief   Attribue la propriete d'une case a un bot (morpion)
+ * @params  grid : grille de jeu, player : bot
+ * @return  void
+**/
 void Inputs::InputBotPlayerMorpion(Grid& grid, Player player)
 {
 	grid.GetCellPositionFromId(BotRandomInputGeneratorMorpion(grid, player)).SetOwner(player.GetId());
 }
 
+/**
+ * @brief   Attribue la propriete d'une case a un bot (puissance 4)
+ * @params  grid : grille de jeu, player : bot
+ * @return  void
+**/
 void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player player)
 {
 	for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
@@ -100,7 +132,11 @@ void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player player)
 	}
 }
 
-//genere une case vide a jouer aléatoirement par le bot
+/**
+ * @brief   Genere aleatoirement une case libre a jouer par le bot (puissance 4)
+ * @params  grid : grille de jeu, player : bot
+ * @return  void
+**/
 int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
 	srand(time(NULL));
 	int randomPlay;
@@ -117,7 +153,11 @@ int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
 	}
 }
 
-//genere une case vide a jouer aléatoirement par le bot
+/**
+ * @brief   Genere aleatoirement une case libre a jouer par le bot (morpion)
+ * @params  grid : grille de jeu, player : bot
+ * @return  void
+**/
 int Inputs::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
 	srand(time(NULL));
 	int randomPlay = rand() % 9;
@@ -129,6 +169,10 @@ int Inputs::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
 	return randomPlay;
 }
 
+/**
+ * @brief   Traite la saisie pour le choix de jeu
+ * @return  choix du jeu
+**/
 string Inputs::InputGameChoice()
 {
 	string choice;
@@ -140,6 +184,10 @@ string Inputs::InputGameChoice()
 	return choice;
 }
 
+/**
+ * @brief   Traite la saisie pour le mode de jeu
+ * @return  mode de jeu
+**/
 int Inputs::InputGameMode()
 {
 	int input = 0;
@@ -169,6 +217,10 @@ int Inputs::InputGameMode()
 	}
 }
 
+/**
+ * @brief   Traite la saisie pour les noms des joueurs
+ * @return  nom du joueur actuel
+**/
 string Inputs::InputPlayersNames()
 {
 	string namePlayer;

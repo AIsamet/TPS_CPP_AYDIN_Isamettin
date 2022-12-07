@@ -1,9 +1,12 @@
 #include "Grid.h"
 
+/**
+ * @brief   Construit une nouvelle grille
+ * @params  line : nombre de lignes, column : nombre de colonnes
+**/
 Grid::Grid()
 {
 }
-
 Grid::Grid(int line, int column) {
 
 	gameGrid.resize(line);
@@ -14,7 +17,11 @@ Grid::Grid(int line, int column) {
 	Cell::SetIdStatic(1);
 }
 
-//permet de retourner un Cell a partir de son id
+/**
+ * @brief   Retourne une case a partir de son id
+ * @params  idCell : id de la case
+ * @return  la case si elle est trouvée, une case vide sinon
+**/
 Cell& Grid::GetCellPositionFromId(const int& idCell) {
 	switch (idCell) {
 	case 0:
@@ -35,10 +42,16 @@ Cell& Grid::GetCellPositionFromId(const int& idCell) {
 		return gameGrid[2][1];
 	case 8:
 		return gameGrid[2][2];
+	default:
+		Cell emptyCell;
+		return emptyCell;
 	}
 }
 
-//affiche la grille de jeu
+/**
+ * @brief   Affiche la grille de jeu (morpion)
+ * @return  void
+**/
 void Grid::DisplayGridMorpion() const {
 	cout << endl;
 
@@ -58,7 +71,10 @@ void Grid::DisplayGridMorpion() const {
 	cout << "     |     |     " << endl << endl;
 }
 
-//affiche la grille de jeu
+/**
+ * @brief   Affiche la grille de jeu (puissance 4)
+ * @return  void
+**/
 void Grid::DisplayGridPuissance4() const {
 	cout << endl;
 

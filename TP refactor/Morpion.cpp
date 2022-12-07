@@ -1,18 +1,24 @@
 #include "Morpion.h"
 
+/**
+ * @brief   Construit un nouveau jeu de morpion
+ * @params  player1Name : nom du joueur 1, player2Name : nom du joueur 2 ou IA
+**/
 Morpion::Morpion() {
 	grid = Grid(3, 3);
 	player1 = Player(1, "A");
 	player2 = Player(2, "B");
 }
-
 Morpion::Morpion(string player1Name, string player2Name) {
 	grid = Grid(3, 3);
 	player1 = Player(1, "A");
 	player2 = Player(2, "B");
 }
 
-//fait jouer les tours des joueurs jusqu'a ce qu'il y ait un gagnant ou égalité
+/**
+ * @brief   Lance un tour jusqu'a ce qu'il y ait victoire ou egalite
+ * @return  joueur actuel
+**/
 Player Morpion::PlayRound() {
 	int i = 0;
 	Player currentPlayer = player1;
@@ -46,12 +52,15 @@ Player Morpion::PlayRound() {
 	return currentPlayer;
 }
 
-//lance la partie
+/**
+ * @brief   Lance une partie
+ * @return  void
+**/
 void Morpion::StartGame() {
 
-	AskGameMode(); //demande le type de jeu
+	AskGameMode(); // demande le type de jeu
 	AskPlayersNames();
-	Player winner = PlayRound(); //fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
+	Player winner = PlayRound(); // fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
 	
 	system("cls");
 	Player::DisplayPlayersMorpion(GetPlayer1(), GetPlayer2());
@@ -60,7 +69,10 @@ void Morpion::StartGame() {
 	else if (CheckEquality()) { cout << "Egalite" << endl; }
 }
 
-//verifie le cas d'une égalité
+/**
+ * @brief   Verifie s'il y a egalite
+ * @return  true s'il y a egalite, false sinon
+**/
 bool Morpion::CheckEquality() const {
 	int line = 0;
 	int column = 0;
@@ -78,17 +90,20 @@ bool Morpion::CheckEquality() const {
 	return true;
 }
 
-//verifie s'il y a un gagnant
+/**
+ * @brief   Verifie si un joueur a gagne
+ * @param   player : joueur
+ * @return  true si le joueur a gagne, false sinon
+**/
 bool Morpion::CheckWin(const Player& player) const {
-	if (CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player)) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player);
 }
 
-//verifie s'il y a un gagnant par ligne
+/**
+ * @brief   Verifie si un joueur a gagne en ligne
+ * @param   player : joueur
+ * @return  true si le joueur a gagne en ligne, false sinon
+**/
 bool Morpion::CheckWinByLine(const Player& player) const {
 	int line = 0;
 	int column = 0;
@@ -110,7 +125,11 @@ bool Morpion::CheckWinByLine(const Player& player) const {
 	return false;
 }
 
-//verifie s'il y a un gagnant par colonne
+/**
+ * @brief   Verifie si un joueur a gagne en colonne
+ * @param   player : joueur
+ * @return  true si le joueur a gagne en colonne, false sinon
+**/
 bool Morpion::CheckWinByColumn(const Player& player) const {
 	int line = 0;
 	int column = 0;
@@ -132,7 +151,11 @@ bool Morpion::CheckWinByColumn(const Player& player) const {
 	return false;
 }
 
-//verifie s'il y a un gagnant par diagonal
+/**
+ * @brief   Verifie si un joueur a gagne en diagonale
+ * @param   player : joueur
+ * @return  true si le joueur a gagne en diagonale, false sinon
+**/
 bool Morpion::CheckWinByDiagonal(const Player& player) const {
 	int line = 0;
 	int column = 0;
