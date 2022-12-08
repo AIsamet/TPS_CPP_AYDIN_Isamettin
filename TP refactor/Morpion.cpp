@@ -26,7 +26,7 @@ Player Morpion::PlayRound() {
 	while (!CheckWin(currentPlayer) && !CheckEquality())
 	{
 		system("cls");
-		Player::DisplayPlayersPuissance4(GetPlayer1(), GetPlayer2());
+		Player::DisplayPlayersMorpion(GetPlayer1(), GetPlayer2());
 		grid.DisplayGridMorpion();
 
 		if (i % 2 == 0) {

@@ -1,0 +1,29 @@
+A faire :
+
+	- Classe Cell : 
+		- modifier gestion IdStatic (deplacer vers Grid)
+		- supprimer GetCellPositionFromId
+		- constantes pour l'affichage des cells
+
+
+	- Classe Grid :
+		- modifier dimmension grid : mettre a plat avec x,y
+		- gestion IdStatic cell par nouvelle struture de Grid
+		- deplacer les affichages dans la nouvelle classe Output
+		- revoir le type des retour des fonctions = ajouter un wrapper de struct
+
+	- Globalement :
+		- reduire taille des methodes
+		- revoir loi de demetter et single level abstraction :
+			- créer de nouvelles methodes (ex : classe Morpion avec checks, 
+			  remplacer "grid.GetGameGrid()[line][2 - line].GetOwner() == player.GetId()" par grid.CellOwnerIs(ligne, colonne, player)
+
+	- Morpion & Puissance 4 :
+		- simplifications grace aux nouvelles classes
+
+	- Création de classes:
+		- Output :
+			- simplifier les display
+		- Console
+		- Pion
+		- Checks

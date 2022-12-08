@@ -42,9 +42,6 @@ Cell& Grid::GetCellPositionFromId(const int& idCell) {
 		return gameGrid[2][1];
 	case 8:
 		return gameGrid[2][2];
-	default:
-		Cell emptyCell;
-		return emptyCell;
 	}
 }
 
