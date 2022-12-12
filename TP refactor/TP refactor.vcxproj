@@ -128,20 +128,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="Checks.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Inputs.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="Morpion.cpp" />
+    <ClCompile Include="Outputs.cpp" />
+    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Puissance4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="Checks.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Inputs.h" />
     <ClInclude Include="Morpion.h" />
+    <ClInclude Include="Outputs.h" />
+    <ClInclude Include="Pawn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Puissance4.h" />
   </ItemGroup>

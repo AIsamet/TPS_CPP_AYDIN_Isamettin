@@ -1,14 +1,15 @@
 A faire :
 
 	- Classe Cell : 
-		- modifier gestion IdStatic (deplacer vers Grid)
-		- supprimer GetCellPositionFromId
-		- constantes pour l'affichage des cells
+FAIT		- modifier gestion IdStatic (deplacer vers Grid)
+FAIT		- supprimer GetCellPositionFromId
+FAIT		- constantes pour l'affichage des cells
+		- Simplifier affichage des Cell avec nouvelle classe Pion
 
 
 	- Classe Grid :
-		- modifier dimmension grid : mettre a plat avec x,y
-		- gestion IdStatic cell par nouvelle struture de Grid
+FAIT		- modifier dimmension grid : mettre a plat avec x,y
+FAIT		- gestion IdStatic cell par nouvelle struture de Grid
 		- deplacer les affichages dans la nouvelle classe Output
 		- revoir le type des retour des fonctions = ajouter un wrapper de struct
 
@@ -19,11 +20,12 @@ A faire :
 			  remplacer "grid.GetGameGrid()[line][2 - line].GetOwner() == player.GetId()" par grid.CellOwnerIs(ligne, colonne, player)
 
 	- Morpion & Puissance 4 :
-		- simplifications grace aux nouvelles classes
+En cours	- simplifications grace aux nouvelles classes
 
 	- Création de classes:
-		- Output :
-			- simplifier les display
-		- Console
-		- Pion
-		- Checks
+Créée		- Output :
+			- Simplifier les display
+			- Remettre le noms des joueurs selon round en couleur apres implementation de toutes les methodes dans Outputs
+		- Console (Voir si differenciation avec Output)
+Créée		- Pawn (Pion)
+Créée		- Checks
