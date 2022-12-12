@@ -12,11 +12,6 @@ class Game
 {
 public:
 	/**
-	 * Constructeur
-	**/
-	Game();
-
-	/**
 	 * Getters
 	**/
 	inline Grid GetGrid() const { return grid; }
@@ -29,22 +24,22 @@ public:
 	 * Setters
 	**/
 	inline void SetGameMode(const int& NewSetting) { gameMode = NewSetting; }
-	
+
 	/**
 	 * Methodes
 	**/
 	virtual void AskGameMode();
 	virtual void AskPlayersNames();
-	
+
 	virtual Player PlayRound() = 0;
 	virtual void StartGame() = 0;
-	
+
 	virtual bool CheckEquality() const = 0;
 	virtual bool CheckWin(const Player& player) const = 0;
 	virtual bool CheckWinByLine(const Player& player) const = 0;
 	virtual bool CheckWinByColumn(const Player& player) const = 0;
 	virtual bool CheckWinByDiagonal(const Player& player) const = 0;
-	
+
 protected:
 	/**
 	 * Attributs

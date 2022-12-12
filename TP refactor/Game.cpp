@@ -1,13 +1,6 @@
 #include "Game.h"
 
 /**
- * @brief   Construit un nouveau jeu
-**/
-Game::Game() {
-
-}
-
-/**
  * @brief   Demande aux joueurs le type de jeu a lancer
  * @return  void
 **/

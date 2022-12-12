@@ -7,42 +7,59 @@
 Grid::Grid()
 {
 }
-Grid::Grid(int line, int column) {
 
-	gameGrid.resize(line);
-
-	for (int k = 0; k < line; k++) {
-		gameGrid[k].resize(column);
-	}
-	Cell::SetIdStatic(1);
+Grid::Grid(const int& line, const int& column) {
+	InitializeSizeGrid(line, column);
+	InitializeGameGrid(line, column);
 }
 
 /**
  * @brief   Retourne une case a partir de son id
  * @params  idCell : id de la case
- * @return  la case si elle est trouvée, une case vide sinon
+ * @return  la case si elle est trouvée
 **/
-Cell& Grid::GetCellPositionFromId(const int& idCell) {
-	switch (idCell) {
-	case 0:
-		return gameGrid[0][0];
-	case 1:
-		return gameGrid[0][1];
-	case 2:
-		return gameGrid[0][2];
-	case 3:
-		return gameGrid[1][0];
-	case 4:
-		return gameGrid[1][1];
-	case 5:
-		return gameGrid[1][2];
-	case 6:
-		return gameGrid[2][0];
-	case 7:
-		return gameGrid[2][1];
-	case 8:
-		return gameGrid[2][2];
+Cell& Grid::GetCell(const int& idCell) {
+	return gameGrid[idCell];
+}
+
+Cell Grid::GetCell(const int& idCell) const {
+	return gameGrid[idCell];
+}
+
+/**
+ * @brief   Retourne une case a partir d'une ligne et une colonne
+ * @params  line : ligne de la case, column : colonne de la case
+ * @return  la case si elle est trouvée
+**/
+Cell& Grid::GetCell(const int& line, const int& column) {
+	int index = line * GetColumn() + column;
+	return gameGrid[index];
+
+}
+
+Cell Grid::GetCell(const int& line, const int& column) const {
+	int index = line * GetColumn() + column;
+	return gameGrid[index];
+
+}
+
+/**
+ * @brief   Initialise la grille de jeu
+ * @params  line : nombre de lignes, column : nombre de colonnes
+**/
+void Grid::InitializeGameGrid(const int& line, const int& column) {
+	for (int i = 1; i <= line * column; i++) {
+		gameGrid.push_back(Cell(i));
 	}
+}
+
+/**
+ * @brief   Initialise le pair qui contient la taille de la grille
+ * @params  line : nombre de lignes, column : nombre de colonnes
+**/
+void Grid::InitializeSizeGrid(const int& line, const int& column) {
+	sizeGrid.first = line;
+	sizeGrid.second = column;
 }
 
 /**
@@ -53,17 +70,17 @@ void Grid::DisplayGridMorpion() const {
 	cout << endl;
 
 	cout << "     |     |     " << endl;
-	cout << "  " << gameGrid[0][0].DisplayCellMorpion() << "  |  " << gameGrid[0][1].DisplayCellMorpion() << "  |  " << gameGrid[0][2].DisplayCellMorpion() << endl;
+	cout << "  " << gameGrid[0].DisplayCellMorpion() << "  |  " << gameGrid[1].DisplayCellMorpion() << "  |  " << gameGrid[2].DisplayCellMorpion() << endl;
 
 	cout << "_____|_____|_____" << endl;
 	cout << "     |     |     " << endl;
 
-	cout << "  " << gameGrid[1][0].DisplayCellMorpion() << "  |  " << gameGrid[1][1].DisplayCellMorpion() << "  |  " << gameGrid[1][2].DisplayCellMorpion() << endl;
+	cout << "  " << gameGrid[3].DisplayCellMorpion() << "  |  " << gameGrid[4].DisplayCellMorpion() << "  |  " << gameGrid[5].DisplayCellMorpion() << endl;
 
 	cout << "_____|_____|_____" << endl;
 	cout << "     |     |     " << endl;
 
-	cout << "  " << gameGrid[2][0].DisplayCellMorpion() << "  |  " << gameGrid[2][1].DisplayCellMorpion() << "  |  " << gameGrid[2][2].DisplayCellMorpion() << endl;
+	cout << "  " << gameGrid[6].DisplayCellMorpion() << "  |  " << gameGrid[7].DisplayCellMorpion() << "  |  " << gameGrid[8].DisplayCellMorpion() << endl;
 
 	cout << "     |     |     " << endl << endl;
 }
@@ -80,22 +97,22 @@ void Grid::DisplayGridPuissance4() const {
 
 	cout << " _________________________________________" << endl;
 	cout << "|     |     |     |     |     |     |     |" << endl;
-	cout << "|  " << gameGrid[3][0].DisplayCellPuissance4() << "  |  " << gameGrid[3][1].DisplayCellPuissance4() << "  |  " << gameGrid[3][2].DisplayCellPuissance4() << "  |  " << gameGrid[3][3].DisplayCellPuissance4() << "  |  " << gameGrid[3][4].DisplayCellPuissance4() << "  |  " << gameGrid[3][5].DisplayCellPuissance4() << "  |  " << gameGrid[3][6].DisplayCellPuissance4() << "  |  " << endl;
+	cout << "|  " << gameGrid[21].DisplayCellPuissance4() << "  |  " << gameGrid[22].DisplayCellPuissance4() << "  |  " << gameGrid[23].DisplayCellPuissance4() << "  |  " << gameGrid[24].DisplayCellPuissance4() << "  |  " << gameGrid[25].DisplayCellPuissance4() << "  |  " << gameGrid[26].DisplayCellPuissance4() << "  |  " << gameGrid[27].DisplayCellPuissance4() << "  |  " << endl;
 
 	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
 	cout << "|     |     |     |     |     |     |     |" << endl;
 
-	cout << "|  " << gameGrid[2][0].DisplayCellPuissance4() << "  |  " << gameGrid[2][1].DisplayCellPuissance4() << "  |  " << gameGrid[2][2].DisplayCellPuissance4() << "  |  " << gameGrid[2][3].DisplayCellPuissance4() << "  |  " << gameGrid[2][4].DisplayCellPuissance4() << "  |  " << gameGrid[2][5].DisplayCellPuissance4() << "  |  " << gameGrid[2][6].DisplayCellPuissance4() << "  |  " << endl;
+	cout << "|  " << gameGrid[14].DisplayCellPuissance4() << "  |  " << gameGrid[15].DisplayCellPuissance4() << "  |  " << gameGrid[16].DisplayCellPuissance4() << "  |  " << gameGrid[17].DisplayCellPuissance4() << "  |  " << gameGrid[18].DisplayCellPuissance4() << "  |  " << gameGrid[19].DisplayCellPuissance4() << "  |  " << gameGrid[20].DisplayCellPuissance4() << "  |  " << endl;
 
 	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
 	cout << "|     |     |     |     |     |     |     |" << endl;
 
-	cout << "|  " << gameGrid[1][0].DisplayCellPuissance4() << "  |  " << gameGrid[1][1].DisplayCellPuissance4() << "  |  " << gameGrid[1][2].DisplayCellPuissance4() << "  |  " << gameGrid[1][3].DisplayCellPuissance4() << "  |  " << gameGrid[1][4].DisplayCellPuissance4() << "  |  " << gameGrid[1][5].DisplayCellPuissance4() << "  |  " << gameGrid[1][6].DisplayCellPuissance4() << "  |  " << endl;
+	cout << "|  " << gameGrid[7].DisplayCellPuissance4() << "  |  " << gameGrid[8].DisplayCellPuissance4() << "  |  " << gameGrid[9].DisplayCellPuissance4() << "  |  " << gameGrid[10].DisplayCellPuissance4() << "  |  " << gameGrid[11].DisplayCellPuissance4() << "  |  " << gameGrid[12].DisplayCellPuissance4() << "  |  " << gameGrid[13].DisplayCellPuissance4() << "  |  " << endl;
 
 	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
 	cout << "|     |     |     |     |     |     |     |" << endl;
 
-	cout << "|  " << gameGrid[0][0].DisplayCellPuissance4() << "  |  " << gameGrid[0][1].DisplayCellPuissance4() << "  |  " << gameGrid[0][2].DisplayCellPuissance4() << "  |  " << gameGrid[0][3].DisplayCellPuissance4() << "  |  " << gameGrid[0][4].DisplayCellPuissance4() << "  |  " << gameGrid[0][5].DisplayCellPuissance4() << "  |  " << gameGrid[0][6].DisplayCellPuissance4() << "  |  " << endl;
+	cout << "|  " << gameGrid[0].DisplayCellPuissance4() << "  |  " << gameGrid[1].DisplayCellPuissance4() << "  |  " << gameGrid[2].DisplayCellPuissance4() << "  |  " << gameGrid[3].DisplayCellPuissance4() << "  |  " << gameGrid[4].DisplayCellPuissance4() << "  |  " << gameGrid[5].DisplayCellPuissance4() << "  |  " << gameGrid[6].DisplayCellPuissance4() << "  |  " << endl;
 	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl << endl;
 
 }

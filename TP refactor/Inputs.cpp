@@ -1,18 +1,11 @@
 #include "Inputs.h"
 
 /**
- * @brief   Construit un nouveau input
-**/
-Inputs::Inputs()
-{
-}
-
-/**
  * @brief   Appelle les methodes appropriees en fonction du type de joueur (morpion)
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputMorpion(Grid& grid, Player player) {
+void Inputs::InputMorpion(Grid& grid, Player& player) {
 	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMorpion(grid, player); }
 	else if (player.GetIsBot() == 0) { Inputs::InputPlayerMorpion(grid, player); }
 }
@@ -22,7 +15,7 @@ void Inputs::InputMorpion(Grid& grid, Player player) {
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputPuissance4(Grid& grid, Player player) {
+void Inputs::InputPuissance4(Grid& grid, Player& player) {
 	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMPuissance4(grid, player); }
 	else if (player.GetIsBot() == 0) { Inputs::InputPlayerPuissance4(grid, player); }
 }
@@ -32,7 +25,7 @@ void Inputs::InputPuissance4(Grid& grid, Player player) {
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputPlayerMorpion(Grid& grid, Player player)
+void Inputs::InputPlayerMorpion(Grid& grid, Player& player)
 {
 	int input = 0;
 	cin >> input;
@@ -49,9 +42,9 @@ void Inputs::InputPlayerMorpion(Grid& grid, Player player)
 	// verifie si l'entree est valide
 	if (input < 10 && input > 0) {
 
-		if (grid.GetCellPositionFromId(input - 1).GetOwner() == 0) {
+		if (grid.GetCell(input - 1).GetOwner() == 0) {
 
-			grid.GetCellPositionFromId(input - 1).SetOwner(player.GetId());
+			grid.GetCell(input - 1).SetOwner(player.GetId());
 		}
 		else {
 
@@ -69,7 +62,7 @@ void Inputs::InputPlayerMorpion(Grid& grid, Player player)
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputPlayerPuissance4(Grid& grid, Player player)
+void Inputs::InputPlayerPuissance4(Grid& grid, Player& player)
 {
 	int input = 0;
 	cin >> input;
@@ -86,11 +79,11 @@ void Inputs::InputPlayerPuissance4(Grid& grid, Player player)
 	// verifie si l'entrée est valide
 	if (input < 8 && input > 0) {
 
-		for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
+		for (int ligne = 0; ligne < grid.GetLine(); ligne++) {
 
-			if (grid.GetGameGrid()[ligne][input - 1].GetOwner() == 0) {
+			if (grid.GetCell(ligne, input - 1).GetOwner() == 0) {
 
-				grid.GetGameGridByReference()[ligne][input - 1].SetOwner(player.GetId());
+				grid.GetCell(ligne, input - 1).SetOwner(player.GetId());
 				break;
 			}
 			else if (ligne == grid.GetGameGrid().size() - 1) {
@@ -110,9 +103,9 @@ void Inputs::InputPlayerPuissance4(Grid& grid, Player player)
  * @params  grid : grille de jeu, player : bot
  * @return  void
 **/
-void Inputs::InputBotPlayerMorpion(Grid& grid, Player player)
+void Inputs::InputBotPlayerMorpion(Grid& grid, Player& player)
 {
-	grid.GetCellPositionFromId(BotRandomInputGeneratorMorpion(grid, player)).SetOwner(player.GetId());
+	grid.GetCell(BotRandomInputGeneratorMorpion(grid)).SetOwner(player.GetId());
 }
 
 /**
@@ -120,13 +113,13 @@ void Inputs::InputBotPlayerMorpion(Grid& grid, Player player)
  * @params  grid : grille de jeu, player : bot
  * @return  void
 **/
-void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player player)
+void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player& player)
 {
 	for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
 
-		if (grid.GetGameGrid()[ligne][BotRandomInputGeneratorPuissance4(grid, player)].GetOwner() == 0) {
+		if (grid.GetCell(ligne, BotRandomInputGeneratorPuissance4(grid)).GetOwner() == 0) {
 
-			grid.GetGameGridByReference()[ligne][BotRandomInputGeneratorPuissance4(grid, player)].SetOwner(player.GetId());
+			grid.GetCell(ligne, BotRandomInputGeneratorPuissance4(grid)).SetOwner(player.GetId());
 			break;
 		}
 	}
@@ -137,7 +130,7 @@ void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player player)
  * @params  grid : grille de jeu, player : bot
  * @return  void
 **/
-int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
+int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid) {
 	srand(time(NULL));
 	int randomPlay;
 
@@ -146,7 +139,7 @@ int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
 		randomPlay = rand() % 7;
 		for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
 
-			if (grid.GetGameGrid()[ligne][randomPlay].GetOwner() == 0) {
+			if (grid.GetCell(ligne, randomPlay).GetOwner() == 0) {
 				return randomPlay;
 			}
 		}
@@ -158,11 +151,11 @@ int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
  * @params  grid : grille de jeu, player : bot
  * @return  void
 **/
-int Inputs::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
+int Inputs::BotRandomInputGeneratorMorpion(Grid& grid) {
 	srand(time(NULL));
 	int randomPlay = rand() % 9;
 
-	while (grid.GetCellPositionFromId(randomPlay).GetOwner() != 0) {
+	while (grid.GetCell(randomPlay).GetOwner() != 0) {
 		randomPlay = rand() % 9;
 	}
 
@@ -224,7 +217,7 @@ int Inputs::InputGameMode()
 string Inputs::InputPlayersNames()
 {
 	string namePlayer;
-	cin >> namePlayer;	
+	cin >> namePlayer;
 	return namePlayer;
 }
 

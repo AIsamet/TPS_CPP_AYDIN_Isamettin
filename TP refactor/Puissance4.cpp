@@ -2,17 +2,11 @@
 
 /**
  * @brief   Construit un nouveau jeu de puissance 4
- * @params  player1Name : nom du joueur 1, player2Name : nom du joueur 2 ou IA
 **/
 Puissance4::Puissance4() {
 	grid = Grid(4, 7);
 	player1 = Player(1, "A");
 	player2 = Player(2, "B");
-}
-Puissance4::Puissance4(string player1Name, string player2Name) {
-	grid = Grid(4, 7);
-	player1 = Player(1, player1Name);
-	player2 = Player(2, player2Name);
 }
 
 /**
@@ -46,7 +40,7 @@ Player Puissance4::PlayRound() {
 			}
 		}
 
-		Inputs::InputPuissance4(grid,currentPlayer);
+		Inputs::InputPuissance4(grid, currentPlayer);
 		i++;
 	}
 	return currentPlayer;
@@ -73,17 +67,13 @@ void Puissance4::StartGame() {
  * @return  true s'il y a egalite, false sinon
 **/
 bool Puissance4::CheckEquality() const {
-	int line = 0;
-	int column = 0;
+	int cellPosition = 0;
 
-	for (line = 0; line < grid.GetGameGrid().size(); line++)
+	for (cellPosition = 0; cellPosition < grid.GetGameGrid().size(); cellPosition++)
 	{
-		for (column = 0; column < grid.GetGameGrid()[0].size(); column++)
+		if (grid.GetGameGrid()[cellPosition].GetOwner() == 0)
 		{
-			if (grid.GetGameGrid()[line][column].GetOwner() == 0)
-			{
-				return false;
-			}
+			return false;
 		}
 	}
 	return true;
@@ -108,11 +98,11 @@ bool Puissance4::CheckWinByLine(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (line = 0; line < grid.GetGameGrid().size(); line++) {
+	for (line = 0; line < grid.GetLine(); line++) {
 
-		for (column = 0; column < grid.GetGameGrid()[0].size(); column++) {
+		for (column = 0; column < grid.GetColumn(); column++) {
 
-			if (grid.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
+			if (grid.GetCell(line, column).GetOwner() == player.GetId()) {
 				count++;
 
 				if (count == 4) {
@@ -138,11 +128,11 @@ bool Puissance4::CheckWinByColumn(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (column = 0; column < grid.GetGameGrid()[0].size(); column++) {
+	for (column = 0; column < grid.GetColumn(); column++) {
 
-		for (line = 0; line < grid.GetGameGrid().size(); line++) {
+		for (line = 0; line < grid.GetLine(); line++) {
 
-			if (grid.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
+			if (grid.GetCell(line, column).GetOwner() == player.GetId()) {
 				count++;
 
 				if (count == 4) {
@@ -164,7 +154,7 @@ bool Puissance4::CheckWinByColumn(const Player& player) const {
  * @return  true si le joueur a gagne en diagonale, false sinon
 **/
 bool Puissance4::CheckWinByDiagonal(const Player& player) const {
-	const int gridColumnNumber = grid.GetGameGrid()[0].size() - 1;
+	const int gridColumnNumber = grid.GetColumn() - 1;
 	int line = 0;
 	int column = 0;
 	int totalCount = 0;
@@ -172,11 +162,11 @@ bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 
 	for (column = 0; column < 4; column++) {
 
-		if (grid.GetGameGrid()[line][column].GetOwner() == player.GetId()) {
+		if (grid.GetCell(line, column).GetOwner() == player.GetId()) {
 
 			for (countDiagonal = 0; countDiagonal < 4; countDiagonal++) {
 
-				if (grid.GetGameGrid()[line + countDiagonal][column + countDiagonal].GetOwner() == player.GetId()) {
+				if (grid.GetCell(line + countDiagonal, column + countDiagonal).GetOwner() == player.GetId()) {
 					totalCount++;
 				}
 				else {
@@ -192,7 +182,7 @@ bool Puissance4::CheckWinByDiagonal(const Player& player) const {
 
 			for (countDiagonal = 0; countDiagonal < 4; countDiagonal++) {
 
-				if (grid.GetGameGrid()[line + countDiagonal][gridColumnNumber - column - countDiagonal].GetOwner() == player.GetId()) {
+				if (grid.GetCell(line + countDiagonal, gridColumnNumber - column - countDiagonal).GetOwner() == player.GetId()) {
 					totalCount++;
 				}
 				else {

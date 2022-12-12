@@ -6,7 +6,7 @@
 void Start() {
 
 	string choice = Inputs::InputGameChoice();
-	
+
 	if (choice == "1") {
 		Puissance4 game;
 		game.StartGame();

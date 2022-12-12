@@ -6,7 +6,8 @@
 **/
 Player::Player() {
 }
-Player::Player(int id, string name) {
+
+Player::Player(const int& id, const string& name) {
 	this->id = id;
 	this->name = name;
 	this->isBot = 0;
@@ -17,7 +18,7 @@ Player::Player(int id, string name) {
  * @params  player1 : joueur 1, player2 : joueur 2 ou IA
  * @return  void
 **/
-void Player::DisplayPlayersMorpion(Player player1, Player player2)
+void Player::DisplayPlayersMorpion(const Player& player1, const Player& player2)
 {
 	cout << "\033[1;31mJoueur " << player1.GetName() << " (X)\033[0m  -  \033[1;32mJoueur " << player2.GetName() << " (O)\033[0m" << endl << endl;
 
@@ -28,7 +29,7 @@ void Player::DisplayPlayersMorpion(Player player1, Player player2)
  * @params  player1 : joueur 1, player2 : joueur 2 ou IA
  * @return  void
 **/
-void Player::DisplayPlayersPuissance4(Player player1, Player player2)
+void Player::DisplayPlayersPuissance4(const Player& player1, const Player& player2)
 {
 	cout << "\033[1;31mJoueur " << player1.GetName() << "\033[0m  -  \033[1;32mJoueur " << player2.GetName() << "\033[0m" << endl << endl;
 

@@ -14,7 +14,7 @@ public:
 	/**
 	 * Constructeur
 	**/
-	Cell();
+	Cell(const int& IdCell);
 
 	/**
 	 * Getters
@@ -25,20 +25,21 @@ public:
 	/**
 	 * Setters
 	**/
+	inline void SetIdCell(const int& NewIdCell) { idCell = NewIdCell; }
 	inline void SetOwner(const int& NewOwner) { owner = NewOwner; }
-	inline void static SetIdStatic(const int& NewIdStatic) { idStatic = NewIdStatic; }
 
 	/**
 	 * Methodes
 	**/
+	string GetRedText(const string& text) const;
+	string GetGreenText(const string& text) const;
 	string DisplayCellMorpion() const;
 	string DisplayCellPuissance4() const;
-	
+
 private:
 	/**
 	 * Attributs
 	**/
-	static int idStatic; // auto incrémenté pour générer un idCell
 	int idCell;
 	int owner; // 0 = case libre; 1 = player 1; 2 = player 2
 };
