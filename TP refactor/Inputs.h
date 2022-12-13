@@ -28,7 +28,6 @@ public:
 	static bool IsInputValidMorpion(int input);
 	static bool IsInputValidPuissance4(int input);
 
-
 	static string InputGameChoice();
 	static int InputGameMode();
 	static string InputPlayersNames();
