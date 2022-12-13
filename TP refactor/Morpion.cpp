@@ -15,34 +15,15 @@ Morpion::Morpion() {
  * @return  joueur actuel
 **/
 Player Morpion::PlayRound() {
-	int i = 0;
-	Player currentPlayer = player1;
+	int round = 0;
+	Player currentPlayer;
 
 	while (!CheckWin(currentPlayer) && !CheckEquality())
 	{
-		system("cls");
-		Player::DisplayPlayersMorpion(GetPlayer1(), GetPlayer2());
-		grid.DisplayGridMorpion();
-
-		if (i % 2 == 0) {
-			currentPlayer = player1;
-			cout << "Tour \033[1;31mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle case voulez - vous jouer ? " << endl;
-		}
-
-		else {
-			currentPlayer = player2;
-
-			if (currentPlayer.GetIsBot() == 0) {
-				cout << "Tour \033[1;32mjoueur " << currentPlayer.GetName() << "\033[0m, dans quelle case voulez - vous jouer ? " << endl;
-			}
-			else {
-				cout << "Le \033[1;32mjoueur " << currentPlayer.GetName() << "\033[0m joue son tour" << endl;
-				this_thread::sleep_for(chrono::milliseconds(500));
-			}
-		}
-
+		currentPlayer = RoundGenerator(round);
+		Outputs::DisplayGameMorpion(GetGrid(), GetPlayer1(), GetPlayer2(), currentPlayer);
 		Inputs::InputMorpion(grid, currentPlayer);
-		i++;
+		round++;
 	}
 	return currentPlayer;
 }
@@ -52,16 +33,23 @@ Player Morpion::PlayRound() {
  * @return  void
 **/
 void Morpion::StartGame() {
-
 	AskGameMode(); // demande le type de jeu
 	AskPlayersNames();
-	Player winner = PlayRound(); // fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
+	Player potentialWinner = PlayRound(); // fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
+	EndGame(potentialWinner);
+}
 
-	system("cls");
-	Player::DisplayPlayersMorpion(GetPlayer1(), GetPlayer2());
-	grid.DisplayGridMorpion();
-	if (CheckWin(winner)) { cout << "Le joueur " << winner.GetName() << " a gagne" << endl; }
-	else if (CheckEquality()) { cout << "Egalite" << endl; }
+/**
+ * @brief   Termine une partie en affichant le resultat
+ * @return  void
+**/
+void Morpion::EndGame(const Player& PotentialWinner) {
+	if (CheckWin(PotentialWinner)) {
+		Outputs::DisplayGameResultWinnerMorpion(GetGrid(), GetPlayer1(), GetPlayer2(), PotentialWinner);
+	}
+	else if (CheckEquality()) {
+		Outputs::DisplayGameResultEqualityMorpion(GetGrid(), GetPlayer1(), GetPlayer2());
+	}
 }
 
 /**
@@ -70,7 +58,7 @@ void Morpion::StartGame() {
 **/
 bool Morpion::CheckEquality() const {
 	int cellPosition = 0;
-	
+
 	for (cellPosition = 0; cellPosition < grid.GetGameGrid().size(); cellPosition++)
 	{
 		if (grid.GetCell(cellPosition).GetOwner() == 0)

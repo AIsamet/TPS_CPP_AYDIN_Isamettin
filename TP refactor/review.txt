@@ -10,7 +10,7 @@ FAIT		- constantes pour l'affichage des cells
 	- Classe Grid :
 FAIT		- modifier dimmension grid : mettre a plat avec x,y
 FAIT		- gestion IdStatic cell par nouvelle struture de Grid
-		- deplacer les affichages dans la nouvelle classe Output
+FAIT		- deplacer les affichages dans la nouvelle classe Output
 		- revoir le type des retour des fonctions = ajouter un wrapper de struct
 
 	- Globalement :
@@ -23,9 +23,8 @@ FAIT		- gestion IdStatic cell par nouvelle struture de Grid
 En cours	- simplifications grace aux nouvelles classes
 
 	- Création de classes:
-Créée		- Output :
+FAIT	- Output :
 			- Simplifier les display
 			- Remettre le noms des joueurs selon round en couleur apres implementation de toutes les methodes dans Outputs
-		- Console (Voir si differenciation avec Output)
 Créée		- Pawn (Pion)
 Créée		- Checks

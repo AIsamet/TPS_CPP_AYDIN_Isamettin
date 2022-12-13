@@ -28,13 +28,17 @@ public:
 	Cell& GetCell(const int& line, const int& column);
 	Cell GetCell(const int& line, const int& column) const;
 
+	int GetCellOwner(const int& idCell);
+	int GetCellOwner(const int& idCell) const;
+
+	int GetCellOwner(const int& line, const int& column);
+	int GetCellOwner(const int& line, const int& column) const;
+
 	/**
 	 * Methodes
 	**/
 	void InitializeGameGrid(const int& line, const int& column);
 	void InitializeSizeGrid(const int& line, const int& column);
-	void DisplayGridMorpion() const;
-	void DisplayGridPuissance4() const;
 
 private:
 	/**

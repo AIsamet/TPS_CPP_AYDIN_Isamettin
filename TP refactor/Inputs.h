@@ -22,6 +22,13 @@ public:
 	static int BotRandomInputGeneratorMorpion(Grid& grid);
 	static int BotRandomInputGeneratorPuissance4(Grid& grid);
 
+	static bool IsNumericInput(int input);
+	static int GetNumericInput();
+
+	static bool IsInputValidMorpion(int input);
+	static bool IsInputValidPuissance4(int input);
+
+
 	static string InputGameChoice();
 	static int InputGameMode();
 	static string InputPlayersNames();

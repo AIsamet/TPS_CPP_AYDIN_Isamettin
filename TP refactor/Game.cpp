@@ -30,3 +30,12 @@ void Game::AskPlayersNames() {
 		player2.SetName(namePlayer);
 	}
 }
+
+Player Game::RoundGenerator(int round) {
+	if (round % 2 == 0) {
+		return player1;
+	}
+	else {
+		return player2;
+	}
+}

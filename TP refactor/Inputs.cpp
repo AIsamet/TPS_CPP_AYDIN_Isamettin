@@ -20,6 +20,47 @@ void Inputs::InputPuissance4(Grid& grid, Player& player) {
 	else if (player.GetIsBot() == 0) { Inputs::InputPlayerPuissance4(grid, player); }
 }
 
+// verifie si une entrée est un chiffre
+bool Inputs::IsNumericInput(int input)
+{
+	if (!std::cin.good())
+	{
+		return false;
+	}
+	return true;
+}
+
+// fait saisir un chiffre
+int Inputs::GetNumericInput()
+{
+	int input = 0;
+	cin >> input;
+	while (!IsNumericInput(input))
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Veuillez entrer un chiffre valide" << endl;
+		cin >> input;
+	}
+	return input;
+}
+
+bool Inputs::IsInputValidMorpion(int input)
+{
+	if (input < 10 && input > 0) {
+		return true;
+	}
+	return false;
+}
+
+bool Inputs::IsInputValidPuissance4(int input)
+{
+	if (input < 8 && input > 0) {
+		return true;
+	}
+	return false;
+}
+
 /**
  * @brief   Traite la saisie du joueur (morpion)
  * @params  grid : grille de jeu, player : joueur actuel
@@ -27,28 +68,18 @@ void Inputs::InputPuissance4(Grid& grid, Player& player) {
 **/
 void Inputs::InputPlayerMorpion(Grid& grid, Player& player)
 {
-	int input = 0;
-	cin >> input;
-
-	// verifie si l'entree est un int
-	while (!std::cin.good())
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		cout << "Veuillez entrer un chiffre valide" << endl;
-		cin >> input;
-	}
+	int input = Inputs::GetNumericInput();
 
 	// verifie si l'entree est valide
-	if (input < 10 && input > 0) {
+	if (Inputs::IsInputValidMorpion(input)) {
 
 		if (grid.GetCell(input - 1).GetOwner() == 0) {
 
 			grid.GetCell(input - 1).SetOwner(player.GetId());
 		}
 		else {
-
-			cout << "Case deja prise" << endl; InputPlayerMorpion(grid, player);
+			cout << "Case deja prise" << endl;
+			InputPlayerMorpion(grid, player);
 		}
 	}
 	else {
@@ -64,20 +95,11 @@ void Inputs::InputPlayerMorpion(Grid& grid, Player& player)
 **/
 void Inputs::InputPlayerPuissance4(Grid& grid, Player& player)
 {
-	int input = 0;
-	cin >> input;
-
-	// verifie si l'entrée est un int
-	while (!std::cin.good())
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		cout << "Veuillez entrer un chiffre valide" << endl;
-		cin >> input;
-	}
+	// fait saisir un chiffre
+	int input = Inputs::GetNumericInput();
 
 	// verifie si l'entrée est valide
-	if (input < 8 && input > 0) {
+	if (Inputs::IsInputValidPuissance4(input)) {
 
 		for (int ligne = 0; ligne < grid.GetLine(); ligne++) {
 
@@ -86,7 +108,7 @@ void Inputs::InputPlayerPuissance4(Grid& grid, Player& player)
 				grid.GetCell(ligne, input - 1).SetOwner(player.GetId());
 				break;
 			}
-			else if (ligne == grid.GetGameGrid().size() - 1) {
+			else if (ligne == grid.GetLine() - 1) {
 				cout << "La colonne est pleine, veuillez choisir une autre colonne" << endl;
 				InputPlayerPuissance4(grid, player);
 			}

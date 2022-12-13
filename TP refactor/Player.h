@@ -29,12 +29,6 @@ public:
 	inline void SetName(const string& NewName) { name = NewName; }
 	inline void SetIsBot(const int& NewSetting) { isBot = NewSetting; }
 
-	/**
-	 * Methodes
-	**/
-	static void DisplayPlayersMorpion(const Player& player1, const Player& player2);
-	static void DisplayPlayersPuissance4(const Player& player1, const Player& player2);
-
 private:
 	/**
 	 * Attributs

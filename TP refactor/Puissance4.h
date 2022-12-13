@@ -17,6 +17,7 @@ public:
 	**/
 	Player PlayRound() override;
 	void StartGame() override;
+	void EndGame(const Player& PotentialWinner);
 
 	bool CheckEquality() const override;
 	bool CheckWin(const Player& player) const override;

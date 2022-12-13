@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Grid.h"
 #include "Inputs.h"
+#include "Outputs.h"
 #include <chrono>
 #include <thread>
 
@@ -31,8 +32,10 @@ public:
 	virtual void AskGameMode();
 	virtual void AskPlayersNames();
 
-	virtual Player PlayRound() = 0;
 	virtual void StartGame() = 0;
+	virtual Player PlayRound() = 0;
+	Player RoundGenerator(int round);
+	virtual void EndGame(const Player& PotentialWinner) = 0;
 
 	virtual bool CheckEquality() const = 0;
 	virtual bool CheckWin(const Player& player) const = 0;

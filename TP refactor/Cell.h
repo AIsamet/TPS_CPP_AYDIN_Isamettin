@@ -28,14 +28,6 @@ public:
 	inline void SetIdCell(const int& NewIdCell) { idCell = NewIdCell; }
 	inline void SetOwner(const int& NewOwner) { owner = NewOwner; }
 
-	/**
-	 * Methodes
-	**/
-	string GetRedText(const string& text) const;
-	string GetGreenText(const string& text) const;
-	string DisplayCellMorpion() const;
-	string DisplayCellPuissance4() const;
-
 private:
 	/**
 	 * Attributs
