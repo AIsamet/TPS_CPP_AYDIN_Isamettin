@@ -77,3 +77,35 @@ void Grid::InitializeSizeGrid(const int& line, const int& column) {
 	sizeGrid.first = line;
 	sizeGrid.second = column;
 }
+
+bool Grid::IsCellFree(const int& idCell) const {
+	if (GetCellOwner(idCell) == 0) {
+		return true;
+	}
+	else
+		return false;
+}
+
+bool Grid::IsCellFree(const int& line, const int& column) const {
+	if (GetCellOwner(line, column) == 0) {
+		return true;
+	}
+	else
+		return false;
+}
+
+bool Grid::SetCellOwnerIfEmpty(const int& idCelll, const int& value) {
+	if (IsCellFree(idCelll)) {
+		GetCell(idCelll).SetOwner(value);
+		return true;
+	}
+	return false;
+}
+
+bool Grid::SetCellOwnerIfEmpty(const int& line, const int& column, const int& value) {
+	if (IsCellFree(line, column)) {
+		GetCell(line, column).SetOwner(value);
+		return true;
+	}
+	return false;
+}

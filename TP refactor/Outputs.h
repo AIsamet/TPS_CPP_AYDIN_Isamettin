@@ -10,20 +10,11 @@ public:
 	/**
 	 * Methodes
 	**/
-	static string GetRedText(const string& text);
-	static string GetGreenText(const string& text);
-
-	static void DisplayGamePuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer);
 	static void DisplayGameMorpion(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer);
+	static void DisplayGamePuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer);
 
-	static void DisplayGameResultWinnerPuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& winner);
-	static void DisplayGameResultWinnerMorpion(const Grid& grid, const Player& player1, const Player& player2, const Player& winner);
-
-	static void DisplayGameResultEqualityPuissance4(const Grid& grid, const Player& player1, const Player& player2);
-	static void DisplayGameResultEqualityMorpion(const Grid& grid, const Player& player1, const Player& player2);
-
-	static void DisplayWinMessage(const Player& Winner);
-	static void DisplayEqualityMessage();
+	static void DisplayPlayersMorpion(const Player& player1, const Player& player2);
+	static void DisplayPlayersPuissance4(const Player& player1, const Player& player2);
 
 	static void DisplayGridMorpion(const Grid& grid);
 	static void DisplayGridPuissance4(const Grid& grid);
@@ -31,12 +22,34 @@ public:
 	static string DisplayCellMorpion(const Cell& cell);
 	static string DisplayCellPuissance4(const Cell& cell);
 
-	static void DisplayPlayersMorpion(const Player& player1, const Player& player2);
-	static void DisplayPlayersPuissance4(const Player& player1, const Player& player2);
+	static string GetRedText(const string& text);
+	static string GetGreenText(const string& text);
 
-	static void DisplayInputMessagePuissance4(const Player& currentPlayer);
 	static void DisplayInputMessageMorpion(const Player& currentPlayer);
+	static void DisplayInputMessagePuissance4(const Player& currentPlayer);
 
+	static void DisplayGameResultWinMorpion(const Grid& grid, const Player& player1, const Player& player2, const Player& winner);
+	static void DisplayGameResultWinPuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& winner);
+	static void DisplayWinMessage(const Player& winner);
+	static string GetPlayerNameColored(const Player& player);
+
+	static void DisplayGameResultEqualityMorpion(const Grid& grid, const Player& player1, const Player& player2);
+	static void DisplayGameResultEqualityPuissance4(const Grid& grid, const Player& player1, const Player& player2);
+	static void DisplayEqualityMessage();
+
+	static void DisplayInputMessagePlayer1Name();
+	static void DisplayInputMessagePlayer2Name();
+
+
+	static void DisplayGameChoices();
+	static void DisplayGameModes();
+
+	static void DisplayCellIsNotEmptyErrorMessageMorpion();
+	static void DisplayInputIsNotValidErrorMessageMorpion();
+	static void DisplayColumnIsFullErrorMessagePuissance4();
+	static void DisplayInputIsNotValidErrorMessagePuissance4();
+	static void DisplayInputIsNotValidErrorMessageGameModes();
+	static void DisplayInputIsNotNumericErrorMessage();
 
 private:
 

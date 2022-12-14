@@ -10,27 +10,6 @@ void Game::AskGameMode() {
 	else if (input == 2) { SetGameMode(1); player2.SetName("IA"); player2.SetIsBot(1); }
 }
 
-/**
- * @brief   Demande aux joueurs leurs noms
- * @return  void
-**/
-void Game::AskPlayersNames() {
-	system("cls");
-	string namePlayer;
-
-	cout << "Entrez le nom du joueur 1" << endl;
-	cout << "-> ";
-	namePlayer = Inputs::InputPlayersNames();
-	player1.SetName(namePlayer);
-
-	if (!player2.GetIsBot()) {
-		cout << "\nEntrez le nom du joueur 2" << endl;
-		cout << "-> ";
-		namePlayer = Inputs::InputPlayersNames();
-		player2.SetName(namePlayer);
-	}
-}
-
 Player Game::RoundGenerator(int round) {
 	if (round % 2 == 0) {
 		return player1;

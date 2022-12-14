@@ -1,51 +1,45 @@
 #include "Outputs.h"
 
 /**
- * @brief   Permet de retourner du texte en rouge
- * @params  text : texte que l'on souhaite colorer
- * @return  le texte dans la bonne couleur
+ * @brief   Affiche le jeu en cours (morpion)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA, currentPlayer : joueur qui doit jouer
+ * @return  void
 **/
-string Outputs::GetRedText(const string& text) {
-	return "\033[1;31m" + text + "\033[0m";
+void Outputs::DisplayGameMorpion(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer) {
+	system("cls");
+	Outputs::DisplayPlayersMorpion(player1, player2);
+	Outputs::DisplayGridMorpion(grid);
+	Outputs::DisplayInputMessageMorpion(currentPlayer);
 }
 
 /**
- * @brief   Permet de retourner du texte en vert
- * @params  text : texte que l'on souhaite colorer
- * @return  le texte dans la bonne couleur
+ * @brief   Affiche le jeu en cours (puissance 4)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA, currentPlayer : joueur qui doit jouer
+ * @return  void
 **/
-string Outputs::GetGreenText(const string& text) {
-	return "\033[1;32m" + text + "\033[0m";
+void Outputs::DisplayGamePuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer) {
+	system("cls");
+	Outputs::DisplayPlayersPuissance4(player1, player2);
+	Outputs::DisplayGridPuissance4(grid);
+	Outputs::DisplayInputMessagePuissance4(currentPlayer);
 }
 
 /**
- * @brief   Genere l'affichage d'une case pour le jeu de morpion
- * @return  idCell par defaut sinon X pour le joueur 1, O pour le joueur 2
+ * @brief   Affiche les joueurs (morpion)
+ * @params  player1 : joueur 1, player2 : joueur 2 ou IA
+ * @return  void
 **/
-string Outputs::DisplayCellMorpion(const Cell& cell) {
-	string str = to_string(cell.GetIdCell());
-	if (cell.GetOwner() == 1) {
-		str = GetRedText("X");
-	}
-	else if (cell.GetOwner() == 2) {
-		str = GetGreenText("O");
-	}
-	return str;
+void Outputs::DisplayPlayersMorpion(const Player& player1, const Player& player2) {
+	cout << GetRedText("Joueur " + player1.GetName() + " (X)") << "  -  " << GetGreenText("Joueur " + player2.GetName() + " (O)") << endl << endl;
 }
 
 /**
- * @brief   Genere l'affichage d'une case pour le jeu de puissance 4
- * @return  chaîne vide par defaut sinon O rouge pour le joueur 1, O vert pour le joueur 2
+ * @brief   Affiche les joueurs (puissance 4)
+ * @params  player1 : joueur 1, player2 : joueur 2 ou IA
+ * @return  void
 **/
-string Outputs::DisplayCellPuissance4(const Cell& cell) {
-	string str = " ";
-	if (cell.GetOwner() == 1) {
-		str = GetRedText("O");
-	}
-	else if (cell.GetOwner() == 2) {
-		str = GetGreenText("O");
-	}
-	return str;
+void Outputs::DisplayPlayersPuissance4(const Player& player1, const Player& player2) {
+	cout << GetRedText("Joueur " + player1.GetName()) << "  -  " << GetGreenText("Joueur " + player2.GetName()) << endl << endl;
 }
 
 /**
@@ -100,49 +94,62 @@ void Outputs::DisplayGridPuissance4(const Grid& grid) {
 
 	cout << "|  " << DisplayCellPuissance4(grid.GetCell(0)) << "  |  " << DisplayCellPuissance4(grid.GetCell(1)) << "  |  " << DisplayCellPuissance4(grid.GetCell(2)) << "  |  " << DisplayCellPuissance4(grid.GetCell(3)) << "  |  " << DisplayCellPuissance4(grid.GetCell(4)) << "  |  " << DisplayCellPuissance4(grid.GetCell(5)) << "  |  " << DisplayCellPuissance4(grid.GetCell(6)) << "  |  " << endl;
 	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl << endl;
-
-}
-
-
-/**
- * @brief   Affiche les joueurs (morpion)
- * @params  player1 : joueur 1, player2 : joueur 2 ou IA
- * @return  void
-**/
-void Outputs::DisplayPlayersMorpion(const Player& player1, const Player& player2)
-{
-	cout << "\033[1;31mJoueur " << player1.GetName() << " (X)\033[0m  -  \033[1;32mJoueur " << player2.GetName() << " (O)\033[0m" << endl << endl;
 }
 
 /**
- * @brief   Affiche les joueurs (puissance 4)
- * @params  player1 : joueur 1, player2 : joueur 2 ou IA
+ * @brief   Genere l'affichage d'une case pour le jeu de morpion
+ * @return  idCell par defaut sinon X pour le joueur 1, O pour le joueur 2
+**/
+string Outputs::DisplayCellMorpion(const Cell& cell) {
+	string str = to_string(cell.GetIdCell());
+	if (cell.GetOwner() == 1) {
+		str = GetRedText("X");
+	}
+	else if (cell.GetOwner() == 2) {
+		str = GetGreenText("O");
+	}
+	return str;
+}
+
+/**
+ * @brief   Genere l'affichage d'une case pour le jeu de puissance 4
+ * @return  chaîne vide par defaut sinon O rouge pour le joueur 1, O vert pour le joueur 2
+**/
+string Outputs::DisplayCellPuissance4(const Cell& cell) {
+	string str = " ";
+	if (cell.GetOwner() == 1) {
+		str = GetRedText("O");
+	}
+	else if (cell.GetOwner() == 2) {
+		str = GetGreenText("O");
+	}
+	return str;
+}
+
+/**
+ * @brief   Permet de retourner du texte en rouge
+ * @params  text : texte que l'on souhaite colorer
+ * @return  le texte dans la bonne couleur
+**/
+string Outputs::GetRedText(const string& text) {
+	return "\033[1;31m" + text + "\033[0m";
+}
+
+/**
+ * @brief   Permet de retourner du texte en vert
+ * @params  text : texte que l'on souhaite colorer
+ * @return  le texte dans la bonne couleur
+**/
+string Outputs::GetGreenText(const string& text) {
+	return "\033[1;32m" + text + "\033[0m";
+}
+
+/**
+ * @brief   Affiche le message de demande d'entrée Morpion (puissance 4)
+ * @params  player : joueur qui doit jouer
  * @return  void
 **/
-void Outputs::DisplayPlayersPuissance4(const Player& player1, const Player& player2)
-{
-	cout << GetRedText("Joueur " + player1.GetName()) << "  -  " << GetGreenText("Joueur " + player2.GetName()) << endl << endl;
-}
-
-
-void Outputs::DisplayInputMessagePuissance4(const Player& player)
-{
-	if (player.GetId() == 1) {
-		cout << "Tour " << GetRedText("joueur " + player.GetName()) << ", dans quelle colonne voulez - vous jouer ? " << endl;
-	}
-	else {
-		if (player.GetIsBot() == 0) {
-			cout << "Tour " << GetGreenText("joueur " + player.GetName()) << ", dans quelle colonne voulez - vous jouer ? " << endl;
-		}
-		else {
-			cout << "Le " << GetGreenText("joueur " + player.GetName()) << " joue son tour" << endl;
-			this_thread::sleep_for(chrono::milliseconds(500));
-		}
-	}
-}
-
-void Outputs::DisplayInputMessageMorpion(const Player& player)
-{
+void Outputs::DisplayInputMessageMorpion(const Player& player) {
 	if (player.GetId() == 1) {
 		cout << "Tour " << GetRedText("joueur" + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 	}
@@ -157,26 +164,44 @@ void Outputs::DisplayInputMessageMorpion(const Player& player)
 	}
 }
 
-
-void Outputs::DisplayGamePuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer)
-{
-	system("cls");
-	Outputs::DisplayPlayersPuissance4(player1, player2);
-	Outputs::DisplayGridPuissance4(grid);
-	Outputs::DisplayInputMessagePuissance4(currentPlayer);
+/**
+ * @brief   Affiche le message de demande d'entrée joueur (puissance 4)
+ * @params  player : joueur qui doit jouer
+ * @return  void
+**/
+void Outputs::DisplayInputMessagePuissance4(const Player& player) {
+	if (player.GetId() == 1) {
+		cout << "Tour " << GetRedText("joueur " + player.GetName()) << ", dans quelle colonne voulez - vous jouer ? " << endl;
+	}
+	else {
+		if (player.GetIsBot() == 0) {
+			cout << "Tour " << GetGreenText("joueur " + player.GetName()) << ", dans quelle colonne voulez - vous jouer ? " << endl;
+		}
+		else {
+			cout << "Le " << GetGreenText("joueur " + player.GetName()) << " joue son tour" << endl;
+			this_thread::sleep_for(chrono::milliseconds(500));
+		}
+	}
 }
 
-void Outputs::DisplayGameMorpion(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer)
-{
+/**
+ * @brief   Affiche le resultat du jeu en cas de victoire (mropion)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA, winner : le gagnant
+ * @return  void
+**/
+void Outputs::DisplayGameResultWinMorpion(const Grid& grid, const Player& player1, const Player& player2, const Player& winner) {
 	system("cls");
 	Outputs::DisplayPlayersMorpion(player1, player2);
 	Outputs::DisplayGridMorpion(grid);
-	Outputs::DisplayInputMessageMorpion(currentPlayer);
+	Outputs::DisplayWinMessage(winner);
 }
 
-
-void Outputs::DisplayGameResultWinnerPuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& winner)
-{
+/**
+ * @brief   Affiche le resultat du jeu en cas de victoire (puissance 4)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA, winner : le gagnant
+ * @return  void
+**/
+void Outputs::DisplayGameResultWinPuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& winner) {
 	system("cls");
 	Outputs::DisplayPlayersPuissance4(player1, player2);
 	Outputs::DisplayGridPuissance4(grid);
@@ -184,39 +209,113 @@ void Outputs::DisplayGameResultWinnerPuissance4(const Grid& grid, const Player& 
 
 }
 
-void Outputs::DisplayGameResultWinnerMorpion(const Grid& grid, const Player& player1, const Player& player2, const Player& winner)
-{
+/**
+ * @brief   Affiche un message en cas de victoire
+ * @params  winner : le gagnant
+ * @return  void
+**/
+void Outputs::DisplayWinMessage(const Player& Winner) {
+	cout << "Le joueur " << GetPlayerNameColored(Winner) << " a gagne" << endl;
+}
+
+string Outputs::GetPlayerNameColored(const Player& player) {
+	if (player.GetId() == 1)
+	{
+		return Outputs::GetRedText(player.GetName());
+	}
+	else
+	{
+		return Outputs::GetGreenText(player.GetName());
+	}
+}
+
+/**
+ * @brief   Affiche le resultat du jeu en cas d'égalité (morpion)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA
+ * @return  void
+**/
+void Outputs::DisplayGameResultEqualityMorpion(const Grid& grid, const Player& player1, const Player& player2) {
 	system("cls");
 	Outputs::DisplayPlayersMorpion(player1, player2);
 	Outputs::DisplayGridMorpion(grid);
-	Outputs::DisplayWinMessage(winner);
-
+	DisplayEqualityMessage();
 }
 
-
-void Outputs::DisplayGameResultEqualityPuissance4(const Grid& grid, const Player& player1, const Player& player2)
-{
+/**
+ * @brief   Affiche le resultat du jeu en cas d'égalité (puissance 4)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA
+ * @return  void
+**/
+void Outputs::DisplayGameResultEqualityPuissance4(const Grid& grid, const Player& player1, const Player& player2) {
 	system("cls");
 	Outputs::DisplayPlayersPuissance4(player1, player2);
 	Outputs::DisplayGridPuissance4(grid);
 	DisplayEqualityMessage();
 }
 
-void Outputs::DisplayGameResultEqualityMorpion(const Grid& grid, const Player& player1, const Player& player2)
-{
-	system("cls");
-	Outputs::DisplayPlayersMorpion(player1, player2);
-	Outputs::DisplayGridMorpion(grid);
-	DisplayEqualityMessage();
-}
-
-
-void Outputs::DisplayWinMessage(const Player& Winner)
-{
-	cout << "Le joueur " << Winner.GetName() << " a gagne" << endl;
-}
-
-void Outputs::DisplayEqualityMessage()
-{
+/**
+ * @brief   Affiche un message en cas d'égalité
+ * @return  void
+**/
+void Outputs::DisplayEqualityMessage() {
 	cout << "Le jeu se termine sur une egalite" << endl;
 }
+
+/**
+ * @brief   Affiche un message d'entrée pour les noms de joueurs
+ * @return  void
+**/
+void Outputs::DisplayInputMessagePlayer1Name() {
+	system("cls");
+	cout << "Entrez le nom du joueur 1" << endl;
+	cout << "-> ";
+}
+
+void Outputs::DisplayInputMessagePlayer2Name() {
+	cout << "\nEntrez le nom du joueur 2" << endl;
+	cout << "-> ";
+}
+
+void Outputs::DisplayGameChoices() {
+	cout << "1. Puissance 4" << endl;
+	cout << "2. Morpion" << endl;
+	cout << "3. Quitter" << endl << endl;
+	cout << "Choix : ";
+}
+
+void Outputs::DisplayGameModes() {
+	cout << "\nA quelle mode de jeu voulez vous jouer ? " << endl;
+	cout << "1 - Joueur contre Joueur" << endl;
+	cout << "2 - Joueur contre IA" << endl << endl;
+	cout << "Choix : ";
+}
+
+/**
+ * @brief   Diffrerents messages d'erreur
+ * @return  void
+**/
+void Outputs::DisplayCellIsNotEmptyErrorMessageMorpion() {
+	cout << "La case est deja occupee" << endl;
+}
+
+void Outputs::DisplayInputIsNotValidErrorMessageMorpion() {
+	cout << "Veuillez saisir un chiffre entre 1 et 9" << endl;
+}
+
+void Outputs::DisplayColumnIsFullErrorMessagePuissance4() {
+	cout << "La colonne est pleine, veuillez choisir une autre colonne" << endl;
+}
+
+void Outputs::DisplayInputIsNotValidErrorMessagePuissance4() {
+	cout << "Veuillez saisir un chiffre entre 1 et 7" << endl;
+}
+
+void Outputs::DisplayInputIsNotValidErrorMessageGameModes() {
+	system("cls");
+	cout << "Veuillez saisir un choix valide" << endl;
+}
+
+void Outputs::DisplayInputIsNotNumericErrorMessage() {
+	cout << "Veuillez entrer un chiffre" << endl;
+}
+

@@ -33,7 +33,7 @@ Player Puissance4::PlayRound() {
 **/
 void Puissance4::StartGame() {
 	AskGameMode(); // demande le type de jeu
-	AskPlayersNames();
+	Inputs::InputPlayersNames(player1, player2);
 	Player potentialWinner = PlayRound(); // fait jouer les joueurs jusqu'a avoir un gagnant ou égalité
 	EndGame(potentialWinner);
 }
@@ -44,7 +44,7 @@ void Puissance4::StartGame() {
 **/
 void Puissance4::EndGame(const Player& PotentialWinner) {
 	if (CheckWin(PotentialWinner)) {
-		Outputs::DisplayGameResultWinnerPuissance4(GetGrid(), GetPlayer1(), GetPlayer2(), PotentialWinner);
+		Outputs::DisplayGameResultWinPuissance4(GetGrid(), GetPlayer1(), GetPlayer2(), PotentialWinner);
 	}
 	else if (CheckEquality()) {
 		Outputs::DisplayGameResultEqualityPuissance4(GetGrid(), GetPlayer1(), GetPlayer2());
@@ -58,7 +58,7 @@ void Puissance4::EndGame(const Player& PotentialWinner) {
 bool Puissance4::CheckEquality() const {
 	int cellPosition = 0;
 
-	for (cellPosition = 0; cellPosition < grid.GetGameGrid().size(); cellPosition++)
+	for (cellPosition = 0; cellPosition < grid.GetSize(); cellPosition++)
 	{
 		if (grid.GetGameGrid()[cellPosition].GetOwner() == 0)
 		{

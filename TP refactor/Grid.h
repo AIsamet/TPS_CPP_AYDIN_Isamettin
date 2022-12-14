@@ -21,6 +21,7 @@ public:
 
 	inline int GetLine() const { return sizeGrid.first; }
 	inline int GetColumn() const { return sizeGrid.second; }
+	inline int GetSize() const { return GetLine() * GetColumn(); }
 
 	Cell& GetCell(const int& idCell);
 	Cell GetCell(const int& idCell) const;
@@ -33,6 +34,12 @@ public:
 
 	int GetCellOwner(const int& line, const int& column);
 	int GetCellOwner(const int& line, const int& column) const;
+
+	bool IsCellFree(const int& idCell) const;
+	bool IsCellFree(const int& line, const int& column) const;
+
+	bool SetCellOwnerIfEmpty(const int& idCell, const int& value);
+	bool SetCellOwnerIfEmpty(const int& line, const int& column, const int& value);
 
 	/**
 	 * Methodes

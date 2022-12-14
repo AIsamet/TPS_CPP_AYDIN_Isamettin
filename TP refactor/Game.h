@@ -30,7 +30,6 @@ public:
 	 * Methodes
 	**/
 	virtual void AskGameMode();
-	virtual void AskPlayersNames();
 
 	virtual void StartGame() = 0;
 	virtual Player PlayRound() = 0;
