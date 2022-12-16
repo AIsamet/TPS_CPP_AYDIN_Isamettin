@@ -11,11 +11,11 @@ FAIT		- constantes pour l'affichage des cells
 FAIT		- modifier dimmension grid : mettre a plat avec x,y
 FAIT		- gestion IdStatic cell par nouvelle struture de Grid
 FAIT		- deplacer les affichages dans la nouvelle classe Output
-		- revoir le type des retour des fonctions = ajouter un wrapper de struct
+?		- revoir le type des retour des fonctions = ajouter un wrapper de struct
 
 	- Globalement :
 		- reduire taille des methodes
-		- revoir loi de demetter et single level abstraction :
+En cours	- revoir loi de demetter et single level abstraction :
 			- créer de nouvelles methodes (ex : classe Morpion avec checks, 
 			  remplacer "grid.GetGameGrid()[line][2 - line].GetOwner() == player.GetId()" par grid.CellOwnerIs(ligne, colonne, player)
 
@@ -24,7 +24,8 @@ En cours	- simplifications grace aux nouvelles classes
 
 	- Création de classes:
 FAIT	- Output :
-			- Simplifier les display
-			- Remettre le noms des joueurs selon round en couleur apres implementation de toutes les methodes dans Outputs
+FAIT			- Simplifier les display
+FAIT			- Remettre le noms des joueurs selon round en couleur apres implementation de toutes les methodes dans Outputs
+Urgent			- Simplifier la classe si possible (trop de methodes, voir si bonne chose ou pas)
 Créée		- Pawn (Pion)
 Créée		- Checks
