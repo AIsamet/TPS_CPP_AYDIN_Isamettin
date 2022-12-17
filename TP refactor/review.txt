@@ -14,7 +14,7 @@ FAIT		- deplacer les affichages dans la nouvelle classe Output
 ?		- revoir le type des retour des fonctions = ajouter un wrapper de struct
 
 	- Globalement :
-		- reduire taille des methodes
+En cours	- reduire taille des methodes
 En cours	- revoir loi de demetter et single level abstraction :
 			- créer de nouvelles methodes (ex : classe Morpion avec checks, 
 			  remplacer "grid.GetGameGrid()[line][2 - line].GetOwner() == player.GetId()" par grid.CellOwnerIs(ligne, colonne, player)
@@ -22,18 +22,23 @@ En cours	- revoir loi de demetter et single level abstraction :
 	- Morpion & Puissance 4 :
 En cours	- simplifications grace aux nouvelles classes
 
+	Input : 
+		- refactorer les methodes pour les mettre en conformité avec les nouvelles classes InputByCell et InputByColumn
+
 	- Création de classes:
 FAIT	- Output :
 FAIT			- Simplifier les display
 FAIT			- Remettre le noms des joueurs selon round en couleur apres implementation de toutes les methodes dans Outputs
-Urgent			- Simplifier la classe si possible (trop de methodes, voir si bonne chose ou pas)
+Attente de retour	- Simplifier la classe si possible (trop de methodes, voir si bonne chose ou pas)
 Créée		- Pawn (Pion)
 Créée		- Checks
 
 ***************** Othello *****************
 
 	- Classe Othello
-		- création de classe et des premières méthodes en partant de PlayRound() (la logique du jeu n'a pas encore été implémenté, pour l'instant c'est juste de l'affichage)
+		- création de classe et des premières méthodes en partant de PlayRound() (la logique du jeu n'a pas encore été implémenté, pour l'instant 		  c'est juste de l'affichage)
 		- Younes => je me suis arrêté à la méthode InputOthello() dans la classe Inputs, j'ai mis le corps de la fonction en commentaire
 		parce qu'il faut coder InputBotPlayerOthello() et InputPlayerOthello() d'abord
 		- ajout du fichier OthelloChatGPT.cpp (s'inspirer du code pour la logique de Othello))
+		- Isamet => simplification des methodes inputs afin de les rendre réutilisables dans Othello : toute la partie Input et Display est OK
+		reste a implenter une meilleure UI pour les affichages et entrés + logique du jeu
