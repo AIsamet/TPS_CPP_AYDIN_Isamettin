@@ -21,7 +21,7 @@ Player Puissance4::PlayRound() {
 	{
 		currentPlayer = RoundGenerator(round);
 		Outputs::DisplayGamePuissance4(GetGrid(), GetPlayer1(), GetPlayer2(), currentPlayer);
-		Inputs::InputPuissance4(grid, currentPlayer);
+		Inputs::InputByColumn(grid, currentPlayer, grid.GetColumn());
 		round++;
 	}
 	return currentPlayer;

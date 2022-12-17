@@ -5,9 +5,9 @@
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputMorpion(Grid& grid, Player& player) {
+void Inputs::InputByCell(Grid& grid, Player& player, const int& maxInput) {
 	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMorpion(grid, player); }
-	else if (player.GetIsBot() == 0) { Inputs::InputPlayerMorpion(grid, player); }
+	else if (player.GetIsBot() == 0) { Inputs::InputByCellPlayer(grid, player, maxInput); }
 }
 
 /**
@@ -15,21 +15,9 @@ void Inputs::InputMorpion(Grid& grid, Player& player) {
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputPuissance4(Grid& grid, Player& player) {
+void Inputs::InputByColumn(Grid& grid, Player& player, const int& maxInput) {
 	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMPuissance4(grid, player); }
-	else if (player.GetIsBot() == 0) { Inputs::InputPlayerPuissance4(grid, player); }
-}
-
-/**
- * @brief   Appelle les methodes appropriees en fonction du type de joueur (othello)
- * @params  grid : grille de jeu, player : joueur actuel
- * @return  void
-**/
-void Inputs::InputOthello(Grid& grid, Player& player) {
-	/*
-	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerOthello(grid, player); }
-	else if (player.GetIsBot() == 0) { Inputs::InputPlayerOthello(grid, player); }
-	*/
+	else if (player.GetIsBot() == 0) { Inputs::InputByColumnPlayer(grid, player, maxInput); }
 }
 
 /**
@@ -72,8 +60,8 @@ string Inputs::GetStringInput() {
  * @params  input : l'entrée a vérifier
  * @return  bool
 **/
-bool Inputs::IsInputValidMorpion(const int& input) {
-	if (input < 10 && input > 0) {
+bool Inputs::IsInputByCellValid(const int& input, const int& maxInput) {
+	if (input <= maxInput && input > 0) {
 		return true;
 	}
 	return false;
@@ -84,8 +72,8 @@ bool Inputs::IsInputValidMorpion(const int& input) {
  * @params  input : l'entrée a vérifier
  * @return  bool
 **/
-bool Inputs::IsInputValidPuissance4(const int& input) {
-	if (input < 8 && input > 0) {
+bool Inputs::IsInputByColumnValid(const int& input, const int& maxInput) {
+	if (input <= maxInput && input > 0) {
 		return true;
 	}
 	return false;
@@ -103,9 +91,9 @@ bool Inputs::IsInputValidGameModes(const int& input) {
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputPlayerMorpion(Grid& grid, Player& player) {
+void Inputs::InputByCellPlayer(Grid& grid, Player& player, const int& maxInput) {
 	int input = Inputs::GetNumericInput();
-	Inputs::SetInputMorpion(grid, player, input);
+	Inputs::SetInputByCell(grid, player, input, maxInput);
 }
 
 /**
@@ -113,14 +101,13 @@ void Inputs::InputPlayerMorpion(Grid& grid, Player& player) {
  * @params  grid : grille de jeu, player : joueur actuel, input : l'entrée du joueur
  * @return  void
 **/
-void Inputs::SetInputMorpion(Grid& grid, Player& player, const int& input) {
-	if (Inputs::IsInputValidMorpion(input)) {
-
-		Inputs::SetInputCellMorpion(grid, player, input);
+void Inputs::SetInputByCell(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	if (Inputs::IsInputByCellValid(input, maxInput)) {
+		Inputs::SetInputtedCell(grid, player, input, maxInput);
 	}
 	else {
-		Outputs::DisplayInputIsNotValidErrorMessageMorpion();
-		InputPlayerMorpion(grid, player);
+		Outputs::DisplayInputtedCellIsNotValid(maxInput);
+		InputByCellPlayer(grid, player, maxInput);
 	}
 }
 
@@ -129,10 +116,10 @@ void Inputs::SetInputMorpion(Grid& grid, Player& player, const int& input) {
  * @params  grid : grille de jeu, player : joueur actuel, input : l'entrée du joueur
  * @return  void
 **/
-void Inputs::SetInputCellMorpion(Grid& grid, Player& player, const int& input) {
+void Inputs::SetInputtedCell(Grid& grid, Player& player, const int& input, const int& maxInput) {
 	if (!grid.SetCellOwnerIfEmpty(input - 1, player.GetId())) {
 		Outputs::DisplayCellIsNotEmptyErrorMessageMorpion();
-		InputPlayerMorpion(grid, player);
+		InputByCellPlayer(grid, player, maxInput);
 	}
 }
 
@@ -141,9 +128,9 @@ void Inputs::SetInputCellMorpion(Grid& grid, Player& player, const int& input) {
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputPlayerPuissance4(Grid& grid, Player& player) {
+void Inputs::InputByColumnPlayer(Grid& grid, Player& player, const int& maxInput) {
 	int input = Inputs::GetNumericInput();
-	Inputs::SetInputPuissance4(grid, player, input);
+	Inputs::SetInputByColumn(grid, player, input, maxInput);
 }
 
 /**
@@ -151,13 +138,13 @@ void Inputs::InputPlayerPuissance4(Grid& grid, Player& player) {
  * @params  grid : grille de jeu, player : joueur actuel, input : l'entrée du joueur
  * @return  void
 **/
-void Inputs::SetInputPuissance4(Grid& grid, Player& player, const int& input) {
-	if (Inputs::IsInputValidPuissance4(input)) {
-		Inputs::SetInputCellPuissance4(grid, player, input);
+void Inputs::SetInputByColumn(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	if (Inputs::IsInputByColumnValid(input, maxInput)) {
+		Inputs::SetInputtedColumn(grid, player, input, maxInput);
 	}
 	else {
-		Outputs::DisplayInputIsNotValidErrorMessagePuissance4();
-		InputPlayerPuissance4(grid, player);
+		Outputs::DisplayInputtedCellIsNotValid(maxInput);
+		InputByColumnPlayer(grid, player, maxInput);
 	}
 }
 
@@ -166,7 +153,7 @@ void Inputs::SetInputPuissance4(Grid& grid, Player& player, const int& input) {
  * @params  grid : grille de jeu, player : joueur actuel, input : l'entrée du joueur
  * @return  void
 **/
-void Inputs::SetInputCellPuissance4(Grid& grid, Player& player, const int& input) {
+void Inputs::SetInputtedColumn(Grid& grid, Player& player, const int& input, const int& maxInput) {
 	for (int ligne = 0; ligne < grid.GetLine(); ligne++) {
 		if (grid.IsCellFree(ligne, input - 1)) {
 			grid.SetCellOwnerIfEmpty(ligne, input - 1, player.GetId());
@@ -174,7 +161,7 @@ void Inputs::SetInputCellPuissance4(Grid& grid, Player& player, const int& input
 		}
 		else if (ligne == grid.GetLine() - 1) {
 			Outputs::DisplayColumnIsFullErrorMessagePuissance4();
-			InputPlayerPuissance4(grid, player);
+			InputByColumnPlayer(grid, player, maxInput);
 		}
 	}
 }

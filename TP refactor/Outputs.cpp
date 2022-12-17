@@ -389,19 +389,15 @@ void Outputs::DisplayGameModes() {
  * @return  void
 **/
 void Outputs::DisplayCellIsNotEmptyErrorMessageMorpion() {
-	cout << "La case est deja occupee" << endl;
+	cout << "La case est deja occupee, veuillez choisir une autre case" << endl;
 }
 
-void Outputs::DisplayInputIsNotValidErrorMessageMorpion() {
-	cout << "Veuillez saisir un chiffre entre 1 et 9" << endl;
+void Outputs::DisplayInputtedCellIsNotValid(const int& maxInput) {
+	cout << "Veuillez saisir un chiffre entre 1 et " << maxInput << endl;
 }
 
 void Outputs::DisplayColumnIsFullErrorMessagePuissance4() {
 	cout << "La colonne est pleine, veuillez choisir une autre colonne" << endl;
-}
-
-void Outputs::DisplayInputIsNotValidErrorMessagePuissance4() {
-	cout << "Veuillez saisir un chiffre entre 1 et 7" << endl;
 }
 
 void Outputs::DisplayInputIsNotValidErrorMessageGameModes() {

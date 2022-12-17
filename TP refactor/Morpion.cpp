@@ -22,7 +22,7 @@ Player Morpion::PlayRound() {
 	{
 		currentPlayer = RoundGenerator(round);
 		Outputs::DisplayGameMorpion(GetGrid(), GetPlayer1(), GetPlayer2(), currentPlayer);
-		Inputs::InputMorpion(grid, currentPlayer);
+		Inputs::InputByCell(grid, currentPlayer, grid.GetSize());
 		round++;
 	}
 	return currentPlayer;

@@ -50,9 +50,8 @@ public:
 	static void DisplayGameModes();
 
 	static void DisplayCellIsNotEmptyErrorMessageMorpion();
-	static void DisplayInputIsNotValidErrorMessageMorpion();
+	static void DisplayInputtedCellIsNotValid(const int& maxInput);
 	static void DisplayColumnIsFullErrorMessagePuissance4();
-	static void DisplayInputIsNotValidErrorMessagePuissance4();
 	static void DisplayInputIsNotValidErrorMessageGameModes();
 	static void DisplayInputIsNotNumericErrorMessage();
 
