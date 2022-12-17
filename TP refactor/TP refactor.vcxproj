@@ -134,6 +134,7 @@
     <ClCompile Include="Inputs.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="Morpion.cpp" />
+    <ClCompile Include="Othello.cpp" />
     <ClCompile Include="Outputs.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Inputs.h" />
     <ClInclude Include="Morpion.h" />
+    <ClInclude Include="Othello.h" />
     <ClInclude Include="Outputs.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Player.h" />

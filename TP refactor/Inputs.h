@@ -12,6 +12,7 @@ public:
 	**/
 	static void InputMorpion(Grid& grid, Player& player);
 	static void InputPuissance4(Grid& grid, Player& player);
+	static void InputOthello(Grid& grid, Player& player);
 
 	static void InputPlayerMorpion(Grid& grid, Player& player);
 	static void SetInputMorpion(Grid& grid, Player& player, const int& input);
@@ -21,8 +22,13 @@ public:
 	static void SetInputPuissance4(Grid& grid, Player& player, const int& input);
 	static void SetInputCellPuissance4(Grid& grid, Player& player, const int& input);
 
+	static void InputPlayerOthello(Grid& grid, Player& player);
+	static void SetInputOthello(Grid& grid, Player& player, const int& input);
+	static void SetInputCellOthello(Grid& grid, Player& player, const int& input);
+
 	static void InputBotPlayerMorpion(Grid& grid, Player& player);
 	static void InputBotPlayerMPuissance4(Grid& grid, Player& player);
+	static void InputBotPlayerOthello(Grid& grid, Player& player);
 
 	static int BotRandomInputGeneratorMorpion(Grid& grid);
 	static int BotRandomInputGeneratorPuissance4(Grid& grid);

@@ -25,6 +25,18 @@ void Outputs::DisplayGamePuissance4(const Grid& grid, const Player& player1, con
 }
 
 /**
+ * @brief   Affiche le jeu en cours (othello)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA, currentPlayer : joueur qui doit jouer
+ * @return  void
+**/
+void Outputs::DisplayGameOthello(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer) {
+	system("cls");
+	Outputs::DisplayPlayersOthello(player1, player2);
+	Outputs::DisplayGridOthello(grid);
+	Outputs::DisplayInputMessageOthello(currentPlayer);
+}
+
+/**
  * @brief   Affiche les joueurs (morpion)
  * @params  player1 : joueur 1, player2 : joueur 2 ou IA
  * @return  void
@@ -39,6 +51,15 @@ void Outputs::DisplayPlayersMorpion(const Player& player1, const Player& player2
  * @return  void
 **/
 void Outputs::DisplayPlayersPuissance4(const Player& player1, const Player& player2) {
+	cout << GetRedText("Joueur " + player1.GetName()) << "  -  " << GetGreenText("Joueur " + player2.GetName()) << endl << endl;
+}
+
+/**
+ * @brief   Affiche les joueurs (othello)
+ * @params  player1 : joueur 1, player2 : joueur 2 ou IA
+ * @return  void
+**/
+void Outputs::DisplayPlayersOthello(const Player& player1, const Player& player2) {
 	cout << GetRedText("Joueur " + player1.GetName()) << "  -  " << GetGreenText("Joueur " + player2.GetName()) << endl << endl;
 }
 
@@ -97,8 +118,45 @@ void Outputs::DisplayGridPuissance4(const Grid& grid) {
 }
 
 /**
+ * @brief   Affiche la grille de jeu (othello)
+ * @return  void
+**/
+void Outputs::DisplayGridOthello(const Grid& grid) {
+	cout << endl;
+
+	cout << " _______________________________________________" << endl;
+	cout << "|     |     |     |     |     |     |     |     |" << endl;
+
+	string line;
+	int idCell = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		line = "";
+		for (int j = 0; j < 8; j++)
+		{
+			if (j == 0)
+			{
+				line += "|  ";
+			}
+			line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  ";
+			idCell++;
+		}
+		cout << line << endl;
+		if (i < 7)
+		{
+			cout << "|_____|_____|_____|_____|_____|_____|_____|_____|" << endl;
+			cout << "|     |     |     |     |     |     |     |     |" << endl;
+		}
+		else
+		{
+			cout << "|_____|_____|_____|_____|_____|_____|_____|_____|" << endl << endl;
+		}
+	}
+}
+
+/**
  * @brief   Genere l'affichage d'une case pour le jeu de morpion
- * @return  idCell par defaut sinon X pour le joueur 1, O pour le joueur 2
+ * @return  idCell par defaut sinon X rouge pour le joueur 1, O vert pour le joueur 2
 **/
 string Outputs::DisplayCellMorpion(const Cell& cell) {
 	string str = to_string(cell.GetIdCell());
@@ -116,6 +174,21 @@ string Outputs::DisplayCellMorpion(const Cell& cell) {
  * @return  chaîne vide par defaut sinon O rouge pour le joueur 1, O vert pour le joueur 2
 **/
 string Outputs::DisplayCellPuissance4(const Cell& cell) {
+	string str = " ";
+	if (cell.GetOwner() == 1) {
+		str = GetRedText("O");
+	}
+	else if (cell.GetOwner() == 2) {
+		str = GetGreenText("O");
+	}
+	return str;
+}
+
+/**
+ * @brief   Genere l'affichage d'une case pour le jeu d'othello
+ * @return  chaîne vide par defaut sinon O rouge pour le joueur 1, O vert pour le joueur 2
+**/
+string Outputs::DisplayCellOthello(const Cell& cell) {
 	string str = " ";
 	if (cell.GetOwner() == 1) {
 		str = GetRedText("O");
@@ -145,7 +218,7 @@ string Outputs::GetGreenText(const string& text) {
 }
 
 /**
- * @brief   Affiche le message de demande d'entrée Morpion (puissance 4)
+ * @brief   Affiche le message de demande d'entrée joueur (morpion)
  * @params  player : joueur qui doit jouer
  * @return  void
 **/
@@ -179,6 +252,26 @@ void Outputs::DisplayInputMessagePuissance4(const Player& player) {
 		}
 		else {
 			cout << "Le " << GetGreenText("joueur " + player.GetName()) << " joue son tour" << endl;
+			this_thread::sleep_for(chrono::milliseconds(500));
+		}
+	}
+}
+
+/**
+ * @brief   Affiche le message de demande d'entrée joueur (othello)
+ * @params  player : joueur qui doit jouer
+ * @return  void
+**/
+void Outputs::DisplayInputMessageOthello(const Player& player) {
+	if (player.GetId() == 1) {
+		cout << "Tour " << GetRedText("joueur" + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+	}
+	else {
+		if (player.GetIsBot() == 0) {
+			cout << "Tour " << GetGreenText("joueur" + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+		}
+		else {
+			cout << "Le " << GetGreenText("joueur" + player.GetName()) << " joue son tour" << endl;
 			this_thread::sleep_for(chrono::milliseconds(500));
 		}
 	}
@@ -279,7 +372,8 @@ void Outputs::DisplayInputMessagePlayer2Name() {
 void Outputs::DisplayGameChoices() {
 	cout << "1. Puissance 4" << endl;
 	cout << "2. Morpion" << endl;
-	cout << "3. Quitter" << endl << endl;
+	cout << "3. Othello" << endl;
+	cout << "4. Quitter" << endl << endl;
 	cout << "Choix : ";
 }
 

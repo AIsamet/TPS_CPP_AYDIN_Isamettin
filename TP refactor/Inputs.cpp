@@ -21,6 +21,18 @@ void Inputs::InputPuissance4(Grid& grid, Player& player) {
 }
 
 /**
+ * @brief   Appelle les methodes appropriees en fonction du type de joueur (othello)
+ * @params  grid : grille de jeu, player : joueur actuel
+ * @return  void
+**/
+void Inputs::InputOthello(Grid& grid, Player& player) {
+	/*
+	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerOthello(grid, player); }
+	else if (player.GetIsBot() == 0) { Inputs::InputPlayerOthello(grid, player); }
+	*/
+}
+
+/**
  * @brief   Verifie si une entrée est un nombre
  * @params  input : l'entrée a vérifier
  * @return  bool

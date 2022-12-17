@@ -1,4 +1,4 @@
-A faire :
+***************** Refactoring *****************
 
 	- Classe Cell : 
 FAIT		- modifier gestion IdStatic (deplacer vers Grid)
@@ -29,3 +29,11 @@ FAIT			- Remettre le noms des joueurs selon round en couleur apres implementatio
 Urgent			- Simplifier la classe si possible (trop de methodes, voir si bonne chose ou pas)
 Créée		- Pawn (Pion)
 Créée		- Checks
+
+***************** Othello *****************
+
+	- Classe Othello
+		- création de classe et des premières méthodes en partant de PlayRound() (la logique du jeu n'a pas encore été implémenté, pour l'instant c'est juste de l'affichage)
+		- Younes => je me suis arrêté à la méthode InputOthello() dans la classe Inputs, j'ai mis le corps de la fonction en commentaire
+		parce qu'il faut coder InputBotPlayerOthello() et InputPlayerOthello() d'abord
+		- ajout du fichier OthelloChatGPT.cpp (s'inspirer du code pour la logique de Othello))

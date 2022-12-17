@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Morpion.h"
 #include "Puissance4.h"
+#include "Othello.h"
 
 // Classe qui va servir de point d'entrée pour le programme
 void Start() {
@@ -16,6 +17,10 @@ void Start() {
 		game.StartGame();
 	}
 	else if (choice == "3") {
+		Othello game;
+		game.StartGame();
+	}
+	else if (choice == "4") {
 		cout << "A bientot !" << endl << endl;
 		exit(0);
 	}
