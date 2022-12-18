@@ -8,6 +8,12 @@ Othello::Othello() {
 	grid = Grid(8, 8);
 	player1 = Player(1, "A");
 	player2 = Player(2, "B");
+
+	// position de depart pour le jeu d'othello
+	grid.SetCellOwnerIfEmpty(27, 2);
+	grid.SetCellOwnerIfEmpty(28, 1);
+	grid.SetCellOwnerIfEmpty(35, 1);
+	grid.SetCellOwnerIfEmpty(36, 2);
 }
 
 /**
@@ -63,7 +69,7 @@ bool Othello::CheckEquality() const {
  * @return  true si le joueur a gagne, false sinon
 **/
 bool Othello::CheckWin(const Player& player) const {
-	return false;
+	return CheckWinByLine(player) || CheckWinByColumn(player) || CheckWinByDiagonal(player);
 }
 
 /**

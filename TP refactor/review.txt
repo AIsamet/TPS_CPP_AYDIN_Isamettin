@@ -35,10 +35,25 @@ Créée		- Checks
 
 ***************** Othello *****************
 
-	- Classe Othello
-		- création de classe et des premières méthodes en partant de PlayRound() (la logique du jeu n'a pas encore été implémenté, pour l'instant 		  c'est juste de l'affichage)
-		- Younes => je me suis arrêté à la méthode InputOthello() dans la classe Inputs, j'ai mis le corps de la fonction en commentaire
-		parce qu'il faut coder InputBotPlayerOthello() et InputPlayerOthello() d'abord
-		- ajout du fichier OthelloChatGPT.cpp (s'inspirer du code pour la logique de Othello))
-		- Isamet => simplification des methodes inputs afin de les rendre réutilisables dans Othello : toute la partie Input et Display est OK
-		reste a implenter une meilleure UI pour les affichages et entrés + logique du jeu
+	- Classe Othello :
+A FAIRE	- IsGameEnded : bool => determine si le jeu est terminee (grille est pleine OU cases vides non jouables pour les 2 joueurs OU tous les pions sont de la mm couleur apres un retournement)
+A FAIRE	- RoundisPlayable : bool => determine si un tour est jouable pour un joueur.
+A FAIRE	- AreEmptyCellsPlayable : bool => determine s'il y a des cases vides jouables par le joueur, c'est-à-dire que ces cases peuvent provoquer des retournements de pions).
+A FAIRE	- ArePawnsSameColor : bool => determine si tous les pions sont de la meme couleur 
+A FAIRE	- IsAdjacent : bool => determine si la case jouée est adjacente à un pion adverse
+A FAIRE	- isValidMove : bool => determine si le mouvement du joueur est valide (obligatoire de retourner au moins un pion adverse)
+A FAIRE	- CheckMovesByLine : bool => regarder en ligne (x2) s'il y a des pions adverses à retourner
+A FAIRE	- CheckMovesByColumn : bool => regarder en colonne (x2)  s'il y a des pions adverses à retourner
+A FAIRE	- CheckMovesByDiagonal : bool => regarder en diagonale (x4) s'il y a des pions adverses à retourner
+A FAIRE	- CountPawns : void => compte les pions des joueurs. Les cases vides sont données au vainqueur
+
+	- Classe Outputs :
+A FAIRE	- DisplayMessageSkipRound() : void => informe l'utilisateur que son tour saute dans le jeu d'Othello (la méthode est appelée quand RoundisPlayable() renvoie false)
+
+	- Classe Grid :
+A FAIRE	- IsFull : bool => determine si la grille est pleine pour le jeu d'Othello.
+
+	A voir :
+A FAIRE	- Il y a des méthodes identiques comme DisplayPlayersMorpion() / DisplayPlayersOthello(), ou DisplayInputMessageMorpion() / DisplayInputMessageMorpion(), on factorise ?
+A FAIRE	- Avertissement pour Othello : les pions retournés ne peuvent pas retourner d'autres pions. En d'autres termes, il n'y a pas de reaction en chaine.
+A FAIRE	- Mettre en evidence les cases ou l'on peut jouer dans Othello ?

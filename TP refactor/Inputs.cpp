@@ -80,14 +80,14 @@ bool Inputs::IsInputByColumnValid(const int& input, const int& maxInput) {
 }
 
 bool Inputs::IsInputValidGameModes(const int& input) {
-	if (input < 3 && input > 0) {
+	if (input < 4 && input > 0) {
 		return true;
 	}
 	return false;
 }
 
 /**
- * @brief   Traite la saisie du joueur en appellant SetInputMorpion (morpion)
+ * @brief   Traite la saisie du joueur en appellant SetInputByCell
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
@@ -124,7 +124,7 @@ void Inputs::SetInputtedCell(Grid& grid, Player& player, const int& input, const
 }
 
 /**
- * @brief   Traite la saisie du joueur en appellant SetInputPuissance4 (puissance 4)
+ * @brief   Traite la saisie du joueur en appellant SetInputByColumn (puissance 4)
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/

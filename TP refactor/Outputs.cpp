@@ -224,14 +224,14 @@ string Outputs::GetGreenText(const string& text) {
 **/
 void Outputs::DisplayInputMessageMorpion(const Player& player) {
 	if (player.GetId() == 1) {
-		cout << "Tour " << GetRedText("joueur" + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+		cout << "Tour " << GetRedText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 	}
 	else {
 		if (player.GetIsBot() == 0) {
-			cout << "Tour " << GetGreenText("joueur" + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+			cout << "Tour " << GetGreenText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 		}
 		else {
-			cout << "Le " << GetGreenText("joueur" + player.GetName()) << " joue son tour" << endl;
+			cout << "Le " << GetGreenText("joueur " + player.GetName()) << " joue son tour" << endl;
 			this_thread::sleep_for(chrono::milliseconds(500));
 		}
 	}
@@ -264,14 +264,14 @@ void Outputs::DisplayInputMessagePuissance4(const Player& player) {
 **/
 void Outputs::DisplayInputMessageOthello(const Player& player) {
 	if (player.GetId() == 1) {
-		cout << "Tour " << GetRedText("joueur" + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+		cout << "Tour " << GetRedText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 	}
 	else {
 		if (player.GetIsBot() == 0) {
-			cout << "Tour " << GetGreenText("joueur" + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+			cout << "Tour " << GetGreenText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 		}
 		else {
-			cout << "Le " << GetGreenText("joueur" + player.GetName()) << " joue son tour" << endl;
+			cout << "Le " << GetGreenText("joueur " + player.GetName()) << " joue son tour" << endl;
 			this_thread::sleep_for(chrono::milliseconds(500));
 		}
 	}
