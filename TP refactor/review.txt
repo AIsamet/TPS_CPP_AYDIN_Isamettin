@@ -37,11 +37,11 @@ Créée		- Checks
 
 	- Classe Othello :
 A FAIRE	- IsGameEnded : bool => determine si le jeu est terminee (grille est pleine OU cases vides non jouables pour les 2 joueurs OU tous les pions sont de la mm couleur apres un retournement)
-A FAIRE	- RoundisPlayable : bool => determine si un tour est jouable pour un joueur.
-A FAIRE	- AreEmptyCellsPlayable : bool => determine s'il y a des cases vides jouables par le joueur, c'est-à-dire que ces cases peuvent provoquer des retournements de pions).
+EN COURS- RoundisPlayable : bool => determine si un tour est jouable pour un joueur.
+EN COURS- AreEmptyCellsPlayable : bool => determine s'il y a des cases vides jouables par le joueur, c'est-à-dire que ces cases peuvent provoquer des retournements de pions).
 A FAIRE	- ArePawnsSameColor : bool => determine si tous les pions sont de la meme couleur 
-A FAIRE	- IsAdjacent : bool => determine si la case jouée est adjacente à un pion adverse
-A FAIRE	- isValidMove : bool => determine si le mouvement du joueur est valide (obligatoire de retourner au moins un pion adverse)
+FAIT	- IsAdjacent : bool => determine si la case jouée est adjacente à un pion adverse
+EN COURS- isValidMove : bool => determine si le mouvement du joueur est valide (obligatoire de retourner au moins un pion adverse)
 A FAIRE	- CheckMovesByLine : bool => regarder en ligne (x2) s'il y a des pions adverses à retourner
 A FAIRE	- CheckMovesByColumn : bool => regarder en colonne (x2)  s'il y a des pions adverses à retourner
 A FAIRE	- CheckMovesByDiagonal : bool => regarder en diagonale (x4) s'il y a des pions adverses à retourner
