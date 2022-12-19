@@ -5,6 +5,7 @@
 #include "Grid.h"
 #include "Inputs.h"
 #include "Outputs.h"
+#include "Checks.h"
 #include <chrono>
 #include <thread>
 

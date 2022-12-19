@@ -12,6 +12,7 @@ public:
 	**/
 	static void InputByCell(Grid& grid, Player& player, const int& maxInput);
 	static void InputByColumn(Grid& grid, Player& player, const int& maxInput);
+	static void InputOthello(Grid& grid, Player& player, const int& maxInput);
 
 	static void InputByCellPlayer(Grid& grid, Player& player, const int& maxInput);
 	static void SetInputByCell(Grid& grid, Player& player, const int& input, const int& maxInput);
@@ -21,19 +22,18 @@ public:
 	static void SetInputByColumn(Grid& grid, Player& player, const int& input, const int& maxInput);
 	static void SetInputtedColumn(Grid& grid, Player& player, const int& input, const int& maxInput);
 
+	static void InputOthelloPlayer(Grid& grid, Player& player, const int& maxInput);
+	static void SetInputOthello(Grid& grid, Player& player, const int& input, const int& maxInput);
+	static void SetInputtedCellOthello(Grid& grid, Player& player, const int& input, const int& maxInput);
+
 	static void InputBotPlayerMorpion(Grid& grid, Player& player);
 	static void InputBotPlayerMPuissance4(Grid& grid, Player& player);
 
 	static int BotRandomInputGeneratorMorpion(Grid& grid);
 	static int BotRandomInputGeneratorPuissance4(Grid& grid);
 
-	static bool IsNumericInput(const int& input);
 	static int GetNumericInput();
 	static string GetStringInput();
-
-	static bool IsInputByCellValid(const int& input, const int& maxInput);
-	static bool IsInputByColumnValid(const int& input, const int& maxInput);
-	static bool IsInputValidGameModes(const int& input);
 
 	static string InputGameChoice();
 	static int InputGameMode();

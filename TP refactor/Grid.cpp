@@ -43,14 +43,14 @@ Cell Grid::GetCell(const int& line, const int& column) const {
 
 }
 
-int Grid::GetCellXCoordinate(const int& idCell) const {
-	int coordinateX = idCell % GetColumn();
-	return coordinateX;
-}
-
-int Grid::GetCellYCoordinate(const int& idCell) const {
+int Grid::GetCellLineCoordinate(const int& idCell) const {
 	int coordinateY = idCell / GetColumn();
 	return coordinateY;
+}
+
+int Grid::GetCellColumnCoordinate(const int& idCell) const {
+	int coordinateX = idCell % GetColumn();
+	return coordinateX;
 }
 
 int Grid::GetCellOwner(const int& idCell) {
@@ -106,27 +106,29 @@ bool Grid::IsCellFree(const int& line, const int& column) const {
 
 vector<Cell> Grid::GetAdjacentCell(const int& idCell) const {
 	vector<Cell> adjacentCells;
-	int x = GetCellXCoordinate(idCell);
-	int y = GetCellYCoordinate(idCell);
+	int line = GetCellLineCoordinate(idCell);
+	int column = GetCellColumnCoordinate(idCell);
+	
+	//cout << "line : " << line << " column : " << column << endl;
 
 	//Verifications colonnes
-	if (!IsCellFree(x - 1, y) && IsPositionInRange(x - 1, y)) { adjacentCells.push_back(GetCell(x - 1, y)); }
-	if (!IsCellFree(x + 1, y) && IsPositionInRange(x + 1, y)) { adjacentCells.push_back(GetCell(x + 1, y)); }
+	if (IsPositionInRange(line - 1, column) && !IsCellFree(line - 1, column)) { adjacentCells.push_back(GetCell(line - 1, column)); }
+	if (IsPositionInRange(line + 1, column) && !IsCellFree(line + 1, column)) { adjacentCells.push_back(GetCell(line + 1, column)); }
 	//Verifications lignes
-	if (!IsCellFree(x, y - 1) && IsPositionInRange(x, y - 1)) { adjacentCells.push_back(GetCell(x, y - 1)); }
-	if (!IsCellFree(x, y + 1) && IsPositionInRange(x, y + 1)) { adjacentCells.push_back(GetCell(x, y + 1)); }
+	if (IsPositionInRange(line, column - 1) && !IsCellFree(line, column - 1)) { adjacentCells.push_back(GetCell(line, column - 1)); }
+	if (IsPositionInRange(line, column + 1) && !IsCellFree(line, column + 1)) { adjacentCells.push_back(GetCell(line, column + 1)); }
 	//Verfications diagonales top left/bottom right
-	if (!IsCellFree(x + 1, y + 1) && IsPositionInRange(x + 1, y + 1)) { adjacentCells.push_back(GetCell(x + 1, y + 1)); }
-	if (!IsCellFree(x - 1, y - 1) && IsPositionInRange(x - 1, y - 1)) { adjacentCells.push_back(GetCell(x - 1, y - 1)); }
+	if (IsPositionInRange(line + 1, column + 1) && !IsCellFree(line + 1, column + 1)) { adjacentCells.push_back(GetCell(line + 1, column + 1)); }
+	if (IsPositionInRange(line - 1, column - 1) && !IsCellFree(line - 1, column - 1)) { adjacentCells.push_back(GetCell(line - 1, column - 1)); }
 	//Verfications diagonales top right/bottom left
-	if (!IsCellFree(x + 1, y - 1) && IsPositionInRange(x + 1, y - 1)) { adjacentCells.push_back(GetCell(x + 1, y - 1)); }
-	if (!IsCellFree(x - 1, y + 1) && IsPositionInRange(x - 1, y + 1)) { adjacentCells.push_back(GetCell(x - 1, y + 1)); }
+	if (IsPositionInRange(line + 1, column - 1) && !IsCellFree(line + 1, column - 1)) { adjacentCells.push_back(GetCell(line + 1, column - 1)); }
+	if (IsPositionInRange(line - 1, column + 1) && !IsCellFree(line - 1, column + 1)) { adjacentCells.push_back(GetCell(line - 1, column + 1)); }
 
 	return adjacentCells;
 }
 
-bool Grid::IsPositionInRange(const int& positionX, const int& positionY) const {
-	if (positionX < 0 || positionX > GetLine() || positionY < 0 || positionY > GetColumn()) {
+bool Grid::IsPositionInRange(const int& positionLine, const int& positionColumn) const {
+	if (positionLine < 0 || positionLine >= GetColumn() || positionColumn < 0 || positionColumn >= GetLine()) {
 		return false;
 	} return true;
 }

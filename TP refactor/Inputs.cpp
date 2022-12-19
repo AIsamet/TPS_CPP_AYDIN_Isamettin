@@ -6,8 +6,8 @@
  * @return  void
 **/
 void Inputs::InputByCell(Grid& grid, Player& player, const int& maxInput) {
-	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMorpion(grid, player); }
-	else if (player.GetIsBot() == 0) { Inputs::InputByCellPlayer(grid, player, maxInput); }
+	if (Checks::IsPlayerBot(player)) { Inputs::InputBotPlayerMorpion(grid, player); }
+	else { Inputs::InputByCellPlayer(grid, player, maxInput); }
 }
 
 /**
@@ -16,20 +16,13 @@ void Inputs::InputByCell(Grid& grid, Player& player, const int& maxInput) {
  * @return  void
 **/
 void Inputs::InputByColumn(Grid& grid, Player& player, const int& maxInput) {
-	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMPuissance4(grid, player); }
-	else if (player.GetIsBot() == 0) { Inputs::InputByColumnPlayer(grid, player, maxInput); }
+	if (Checks::IsPlayerBot(player)) { Inputs::InputBotPlayerMPuissance4(grid, player); }
+	else { Inputs::InputByColumnPlayer(grid, player, maxInput); }
 }
 
-/**
- * @brief   Verifie si une entrée est un nombre
- * @params  input : l'entrée a vérifier
- * @return  bool
-**/
-bool Inputs::IsNumericInput(const int& input) {
-	if (!std::cin.good()) {
-		return false;
-	}
-	return true;
+void Inputs::InputOthello(Grid& grid, Player& player, const int& maxInput) {
+	if (Checks::IsPlayerBot(player)) { Inputs::InputBotPlayerMPuissance4(grid, player); }
+	else { Inputs::InputOthelloPlayer(grid, player, maxInput); }
 }
 
 /**
@@ -40,7 +33,7 @@ int Inputs::GetNumericInput() {
 	int input = 0;
 	cin >> input;
 
-	while (!IsNumericInput(input)) {
+	while (!Checks::IsNumericInput(input)) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		Outputs::DisplayInputIsNotNumericErrorMessage();
@@ -53,37 +46,6 @@ string Inputs::GetStringInput() {
 	string input;
 	cin >> input;
 	return input;
-}
-
-/**
- * @brief   Verifie si l'entrée est valide pour un jeu de morpion
- * @params  input : l'entrée a vérifier
- * @return  bool
-**/
-bool Inputs::IsInputByCellValid(const int& input, const int& maxInput) {
-	if (input <= maxInput && input > 0) {
-		return true;
-	}
-	return false;
-}
-
-/**
- * @brief   Verifie si l'entrée est valide pour un jeu de puissance 4
- * @params  input : l'entrée a vérifier
- * @return  bool
-**/
-bool Inputs::IsInputByColumnValid(const int& input, const int& maxInput) {
-	if (input <= maxInput && input > 0) {
-		return true;
-	}
-	return false;
-}
-
-bool Inputs::IsInputValidGameModes(const int& input) {
-	if (input < 3 && input > 0) {
-		return true;
-	}
-	return false;
 }
 
 /**
@@ -102,7 +64,7 @@ void Inputs::InputByCellPlayer(Grid& grid, Player& player, const int& maxInput) 
  * @return  void
 **/
 void Inputs::SetInputByCell(Grid& grid, Player& player, const int& input, const int& maxInput) {
-	if (Inputs::IsInputByCellValid(input, maxInput)) {
+	if (Checks::IsInputByCellValid(input, maxInput)) {
 		Inputs::SetInputtedCell(grid, player, input, maxInput);
 	}
 	else {
@@ -139,7 +101,7 @@ void Inputs::InputByColumnPlayer(Grid& grid, Player& player, const int& maxInput
  * @return  void
 **/
 void Inputs::SetInputByColumn(Grid& grid, Player& player, const int& input, const int& maxInput) {
-	if (Inputs::IsInputByColumnValid(input, maxInput)) {
+	if (Checks::IsInputByColumnValid(input, maxInput)) {
 		Inputs::SetInputtedColumn(grid, player, input, maxInput);
 	}
 	else {
@@ -164,6 +126,25 @@ void Inputs::SetInputtedColumn(Grid& grid, Player& player, const int& input, con
 			InputByColumnPlayer(grid, player, maxInput);
 		}
 	}
+}
+
+void Inputs::InputOthelloPlayer(Grid& grid, Player& player, const int& maxInput) {
+	int input = Inputs::GetNumericInput();
+	Inputs::SetInputOthello(grid, player, input, maxInput);
+}
+
+void Inputs::SetInputOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	if (Checks::IsInputByCellValid(input, maxInput) && Checks::IsOthelloCellPlayable(grid, player, input)) {
+		Inputs::SetInputtedCell(grid, player, input, maxInput);
+	}
+	else {
+		Outputs::DisplayInputtedCellIsNotValidOthello();
+		InputOthelloPlayer(grid, player, maxInput);
+	}
+}
+
+void Inputs::SetInputtedCellOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	grid.SetCellOwnerIfEmpty(input - 1, player.GetId());
 }
 
 /**
@@ -247,7 +228,7 @@ int Inputs::InputGameMode() {
 	Outputs::DisplayGameModes();
 	int input = Inputs::GetNumericInput();
 
-	if (!Inputs::IsInputValidGameModes(input)) {
+	if (!Checks::IsInputValidGameModes(input)) {
 		Outputs::DisplayInputIsNotValidErrorMessageGameModes();
 		InputGameMode();
 	}

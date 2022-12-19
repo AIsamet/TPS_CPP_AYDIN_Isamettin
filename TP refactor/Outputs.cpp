@@ -30,9 +30,9 @@ void Outputs::DisplayGamePuissance4(const Grid& grid, const Player& player1, con
  * @return  void
 **/
 void Outputs::DisplayGameOthello(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer) {
-	system("cls");
+	//system("cls");
 	Outputs::DisplayPlayersOthello(player1, player2);
-	Outputs::DisplayGridOthello(grid);
+	Outputs::DisplayGridOthello(grid, currentPlayer);
 	Outputs::DisplayInputMessageOthello(currentPlayer);
 }
 
@@ -121,7 +121,7 @@ void Outputs::DisplayGridPuissance4(const Grid& grid) {
  * @brief   Affiche la grille de jeu (othello)
  * @return  void
 **/
-void Outputs::DisplayGridOthello(const Grid& grid) {
+void Outputs::DisplayGridOthello(const Grid& grid, const Player& currentPlayer) {
 	cout << endl;
 
 	cout << " _______________________________________________" << endl;
@@ -138,10 +138,16 @@ void Outputs::DisplayGridOthello(const Grid& grid) {
 			{
 				line += "|  ";
 			}
-			if (idCell >= 9 && grid.IsCellFree(idCell)) {
+			if (idCell >= 9 && grid.IsCellFree(idCell) && Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell+1)) {
 				line += DisplayCellOthello(grid.GetCell(idCell)) + " |  ";
 			}
-			else { line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  "; }
+			else if (idCell < 9 && grid.IsCellFree(idCell) && Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell+1))
+			{
+				line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  ";
+			}
+			else if (!grid.IsCellFree(idCell)) { line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  "; }
+			else if (idCell >= 9) { line += "   |  "; }
+			else if (idCell < 9) { line += "   |  "; }
 			idCell++;
 		}
 		cout << line << endl;
@@ -405,6 +411,10 @@ void Outputs::DisplayCellIsNotEmptyErrorMessageMorpion() {
 
 void Outputs::DisplayInputtedCellIsNotValid(const int& maxInput) {
 	cout << "Veuillez saisir un chiffre entre 1 et " << maxInput << endl;
+}
+
+void Outputs::DisplayInputtedCellIsNotValidOthello() {
+	cout << "Veuillez saisir une case valide" << endl;
 }
 
 void Outputs::DisplayColumnIsFullErrorMessagePuissance4() {

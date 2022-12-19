@@ -28,7 +28,7 @@ Player Othello::PlayRound() {
 	{
 		currentPlayer = RoundGenerator(round);
 		Outputs::DisplayGameOthello(GetGrid(), GetPlayer1(), GetPlayer2(), currentPlayer);
-		Inputs::InputByCell(grid, currentPlayer, grid.GetSize());
+		Inputs::InputOthello(grid, currentPlayer, grid.GetSize());
 		round++;
 	}
 

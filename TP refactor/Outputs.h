@@ -20,7 +20,7 @@ public:
 
 	static void DisplayGridMorpion(const Grid& grid);
 	static void DisplayGridPuissance4(const Grid& grid);
-	static void DisplayGridOthello(const Grid& grid);
+	static void DisplayGridOthello(const Grid& grid, const Player& currentPlayer);
 
 	static string DisplayCellMorpion(const Cell& cell);
 	static string DisplayCellPuissance4(const Cell& cell);
@@ -52,6 +52,7 @@ public:
 
 	static void DisplayCellIsNotEmptyErrorMessageMorpion();
 	static void DisplayInputtedCellIsNotValid(const int& maxInput);
+	static void DisplayInputtedCellIsNotValidOthello();
 	static void DisplayColumnIsFullErrorMessagePuissance4();
 	static void DisplayInputIsNotValidErrorMessageGameModes();
 	static void DisplayInputIsNotNumericErrorMessage();
