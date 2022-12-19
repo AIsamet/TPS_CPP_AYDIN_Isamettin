@@ -80,7 +80,7 @@ bool Inputs::IsInputByColumnValid(const int& input, const int& maxInput) {
 }
 
 bool Inputs::IsInputValidGameModes(const int& input) {
-	if (input < 4 && input > 0) {
+	if (input < 3 && input > 0) {
 		return true;
 	}
 	return false;

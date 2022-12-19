@@ -60,7 +60,7 @@ void Outputs::DisplayPlayersPuissance4(const Player& player1, const Player& play
  * @return  void
 **/
 void Outputs::DisplayPlayersOthello(const Player& player1, const Player& player2) {
-	cout << GetRedText("Joueur " + player1.GetName()) << "  -  " << GetGreenText("Joueur " + player2.GetName()) << endl << endl;
+	cout << GetGreyText("Joueur " + player1.GetName()) << "  -  " << GetWhiteText("Joueur " + player2.GetName()) << endl << endl;
 }
 
 /**
@@ -138,7 +138,10 @@ void Outputs::DisplayGridOthello(const Grid& grid) {
 			{
 				line += "|  ";
 			}
-			line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  ";
+			if (idCell >= 9 && grid.IsCellFree(idCell)) {
+				line += DisplayCellOthello(grid.GetCell(idCell)) + " |  ";
+			}
+			else { line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  "; }
 			idCell++;
 		}
 		cout << line << endl;
@@ -189,12 +192,12 @@ string Outputs::DisplayCellPuissance4(const Cell& cell) {
  * @return  chaîne vide par defaut sinon O rouge pour le joueur 1, O vert pour le joueur 2
 **/
 string Outputs::DisplayCellOthello(const Cell& cell) {
-	string str = " ";
+	string str = to_string(cell.GetIdCell());
 	if (cell.GetOwner() == 1) {
-		str = GetRedText("O");
+		str = GetGreyText("O");
 	}
 	else if (cell.GetOwner() == 2) {
-		str = GetGreenText("O");
+		str = GetWhiteText("O");
 	}
 	return str;
 }
@@ -215,6 +218,14 @@ string Outputs::GetRedText(const string& text) {
 **/
 string Outputs::GetGreenText(const string& text) {
 	return "\033[1;32m" + text + "\033[0m";
+}
+
+string Outputs::GetGreyText(const string& text) {
+	return "\033[1;30m" + text + "\033[0m";
+}
+
+string Outputs::GetWhiteText(const string& text) {
+	return "\033[1;37m" + text + "\033[0m";
 }
 
 /**
@@ -264,14 +275,14 @@ void Outputs::DisplayInputMessagePuissance4(const Player& player) {
 **/
 void Outputs::DisplayInputMessageOthello(const Player& player) {
 	if (player.GetId() == 1) {
-		cout << "Tour " << GetRedText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+		cout << "Tour " << GetGreyText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 	}
 	else {
 		if (player.GetIsBot() == 0) {
-			cout << "Tour " << GetGreenText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+			cout << "Tour " << GetWhiteText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 		}
 		else {
-			cout << "Le " << GetGreenText("joueur " + player.GetName()) << " joue son tour" << endl;
+			cout << "Le " << GetWhiteText("joueur " + player.GetName()) << " joue son tour" << endl;
 			this_thread::sleep_for(chrono::milliseconds(500));
 		}
 	}

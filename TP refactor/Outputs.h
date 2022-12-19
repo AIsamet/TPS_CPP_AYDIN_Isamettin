@@ -28,6 +28,8 @@ public:
 
 	static string GetRedText(const string& text);
 	static string GetGreenText(const string& text);
+	static string GetGreyText(const string& text);
+	static string GetWhiteText(const string& text);
 
 	static void DisplayInputMessageMorpion(const Player& currentPlayer);
 	static void DisplayInputMessagePuissance4(const Player& currentPlayer);
@@ -44,7 +46,6 @@ public:
 
 	static void DisplayInputMessagePlayer1Name();
 	static void DisplayInputMessagePlayer2Name();
-
 
 	static void DisplayGameChoices();
 	static void DisplayGameModes();

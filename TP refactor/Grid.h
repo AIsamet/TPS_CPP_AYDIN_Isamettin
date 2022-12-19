@@ -29,6 +29,9 @@ public:
 	Cell& GetCell(const int& line, const int& column);
 	Cell GetCell(const int& line, const int& column) const;
 
+	int GetCellXCoordinate(const int& idCell) const;
+	int GetCellYCoordinate(const int& idCell) const;
+
 	int GetCellOwner(const int& idCell);
 	int GetCellOwner(const int& idCell) const;
 
@@ -37,6 +40,9 @@ public:
 
 	bool IsCellFree(const int& idCell) const;
 	bool IsCellFree(const int& line, const int& column) const;
+
+	vector<Cell> GetAdjacentCell(const int& idCell) const;
+	bool IsPositionInRange(const int& positionX, const int& positionY) const;
 
 	bool SetCellOwnerIfEmpty(const int& idCell, const int& value);
 	bool SetCellOwnerIfEmpty(const int& line, const int& column, const int& value);
