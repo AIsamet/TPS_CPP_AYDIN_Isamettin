@@ -11,7 +11,10 @@ public:
 	static bool IsNumericInput(const int& input);
 	static bool IsInputByCellValid(const int& input, const int& maxInput);
 	static bool IsInputByColumnValid(const int& input, const int& maxInput);
+
 	static bool IsOthelloCellPlayable(const Grid& grid, const Player& player, const int& input);
+	static bool IsOthelloCellFlipable(const Grid& grid, const Player& player, const int& input, const int& cellIdToCheck);
+
 	static bool IsInputValidGameModes(const int& input);
 	
 	//Players Checks

@@ -30,7 +30,7 @@ void Outputs::DisplayGamePuissance4(const Grid& grid, const Player& player1, con
  * @return  void
 **/
 void Outputs::DisplayGameOthello(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer) {
-	//system("cls");
+	system("cls");
 	Outputs::DisplayPlayersOthello(player1, player2);
 	Outputs::DisplayGridOthello(grid, currentPlayer);
 	Outputs::DisplayInputMessageOthello(currentPlayer);
