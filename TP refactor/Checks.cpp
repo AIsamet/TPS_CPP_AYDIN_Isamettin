@@ -55,6 +55,24 @@ bool Checks::IsOthelloCellPlayable(const Grid& grid, const Player& player, const
 }
 
 bool Checks::IsOthelloCellFlipable(const Grid& grid, const Player& player, const int& input, const int& cellIdToCheck){
+	int lineInput = grid.GetCellLineCoordinate(input);
+	int columnInput = grid.GetCellColumnCoordinate(input);
+
+	int lineCellIdToCheck = grid.GetCellLineCoordinate(cellIdToCheck);
+	int columnCellIdToCheck = grid.GetCellColumnCoordinate(cellIdToCheck);
+
+	int positions[8][2] = { {-1, -1}, {-1, 0}, {-1, 1},  // 3 positions above
+							{0, -1 },		   {0, 1 },   // 2 positions on same row
+							{1, -1,}, {1, 0 }, {1, 1 } }; // 3 positions below
+
+	int direction = grid.GetAdjacentCellPosition(input, cellIdToCheck);
+	int current_line = lineCellIdToCheck;
+	int current_column = columnCellIdToCheck;
+
+	while (grid.GetCellOwner(current_line, current_column) != grid.GetCellOwner(lineInput, columnInput)) {
+		current_line = positions[direction][0];
+		current_column = positions[direction][1];
+	}
 	return false;
 }
 

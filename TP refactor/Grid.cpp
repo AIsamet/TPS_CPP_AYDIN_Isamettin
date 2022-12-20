@@ -119,8 +119,30 @@ vector<Cell> Grid::GetAdjacentCells(const int& idCell) const {
 }
 
 
-int Grid::GetAdjacentCellPosition(const int& idCell) const {
-	return 0;
+int Grid::GetAdjacentCellPosition(const int& idCell, const int& cellIdToCheck) const {
+	int line = GetCellLineCoordinate(idCell);
+	int column = GetCellColumnCoordinate(idCell);
+	int lineCellIdToCheck = GetCellLineCoordinate(cellIdToCheck);
+	int columnCellIdToCheck = GetCellColumnCoordinate(cellIdToCheck);
+
+	int positions[8][2] = { {-1, -1}, {-1, 0}, {-1, 1}, // 3 positions above
+						    {0, -1},		   {0, 1}, // 2 positions on same row
+							{1, -1}, {1, 0}, {1, 1} }; // 3 positions below
+
+	for (int i = 0; i < sizeof(positions); i++) {
+		if (line + positions[i][0] == lineCellIdToCheck && column + positions[i][1] == columnCellIdToCheck) {
+			return i;
+		}
+	}
+
+	//1 = diagonal top left
+	//2 = haut
+	//3 = diagonal top right
+	//4 = left
+	//5 = right
+	//6 = diagonal bottom left
+	//7 = bottom
+	//8 = diagonal bottom right
 }
 
 bool Grid::IsPositionInRange(const int& positionLine, const int& positionColumn) const {

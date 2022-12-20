@@ -42,7 +42,7 @@ public:
 	bool IsCellFree(const int& line, const int& column) const;
 
 	vector<Cell> GetAdjacentCells(const int& idCell) const;
-	int GetAdjacentCellPosition(const int& idCell) const;
+	int GetAdjacentCellPosition(const int& idCell, const int& cellIdToCheck) const;
 	bool IsPositionInRange(const int& positionLine, const int& positionColumn) const;
 
 	bool SetCellOwnerIfEmpty(const int& idCell, const int& value);
