@@ -41,15 +41,14 @@ public:
 	bool IsCellFree(const int& idCell) const;
 	bool IsCellFree(const int& line, const int& column) const;
 
-	vector<Cell> GetAdjacentCells(const int& idCell) const;
+	vector<Cell> GetNotFreeAdjacentCells(const int& idCell) const;
 	int GetAdjacentCellPosition(const int& idCell, const int& cellIdToCheck) const;
 	bool IsPositionInRange(const int& positionLine, const int& positionColumn) const;
+	void FlipCell(const int& newOwner, const int& IdCellToFlip);
 
 	bool SetCellOwnerIfEmpty(const int& idCell, const int& value);
 	bool SetCellOwnerIfEmpty(const int& line, const int& column, const int& value);
-
-	void flip(const int& line, const int& column, const int& playerId);
-
+	
 	/**
 	 * Methodes
 	**/

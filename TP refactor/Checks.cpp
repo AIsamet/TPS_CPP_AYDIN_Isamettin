@@ -36,62 +36,51 @@ bool Checks::IsInputByColumnValid(const int& input, const int& maxInput) {
 	return false;
 }
 
-
-
-bool Checks::IsOthelloCellPlayable(const Grid& grid, const Player& player, const int& baseCell) {
-	//adjacent cell is the owned cell we want to compare with adjacent playables ()
-	vector<Cell> adjacentCells = grid.GetAdjacentCells(baseCell);
+bool Checks::IsOthelloCellPlayable(const Grid& grid, const Player& player, const int& input) {
+	//adjacent cell is the owned cell we want to compare with adjacent playables
+	vector<Cell> adjacentCells = grid.GetNotFreeAdjacentCells(input);
 
 	for (int i = 0; i < adjacentCells.size(); i++) {
-		if (adjacentCells[i].GetOwner() != player.GetId() && IsOthelloCellFlipable(grid, player, baseCell, adjacentCells[i].GetIdCell())) {
-			cout << "adj : " << adjacentCells[i].GetIdCell() << endl;
-			cout << "base cell : " << baseCell << endl;
+		if (adjacentCells[i].GetOwner() != player.GetId() && IsOthelloCellValid(grid, player, input, adjacentCells[i].GetIdCell())) {
 			return true;
 		}
 	}
 	return false;
 }
 
-bool Checks::IsOthelloCellFlipable(const Grid& grid, const Player& player, const int& baseCell, const int& adjacentCellIdToCheck){
-	int lineInput = grid.GetCellLineCoordinate(baseCell);
-	int columnInput = grid.GetCellColumnCoordinate(baseCell);
+//from input to adjacent cell
+bool Checks::IsOthelloCellValid(const Grid& grid, const Player& player, const int& input, const int& adjacentCellIdToCheck) {
 
-	int lineCellIdToCheck = grid.GetCellLineCoordinate(adjacentCellIdToCheck);
-	int columnCellIdToCheck = grid.GetCellColumnCoordinate(adjacentCellIdToCheck);
-
+	int lineAjacentCellIdToCheck = grid.GetCellLineCoordinate(adjacentCellIdToCheck);
+	int columnAjacentCellIdToCheck = grid.GetCellColumnCoordinate(adjacentCellIdToCheck);
 	int positions[8][2] = { {-1, -1}, {-1, 0}, {-1, 1},  // 3 positions above
 							{0, -1 },		   {0, 1 },   // 2 positions on same row
 							{1, -1,}, {1, 0 }, {1, 1 } }; // 3 positions below
+	int direction = grid.GetAdjacentCellPosition(input, adjacentCellIdToCheck);
+	int current_line = lineAjacentCellIdToCheck;
+	int current_column = columnAjacentCellIdToCheck;
 
-	int direction = grid.GetAdjacentCellPosition(baseCell, adjacentCellIdToCheck);
-	int current_line = lineCellIdToCheck;
-	int current_column = columnCellIdToCheck;
-	//cout << "base line : " << current_line << endl;
-	//cout << "base column : " << current_column << endl;
-	//cout << "to line : " << current_line << endl;
-	//cout << "to column : " << current_column << endl;
-	//cout << "current direction : " << direction << endl;
+	while (grid.IsPositionInRange(current_line + positions[direction][0], current_column + positions[direction][1])) {
 
-	while (grid.IsPositionInRange(current_line, current_column) && 
-		  (grid.GetCellOwner(current_line, current_column) != grid.GetCellOwner(lineInput, columnInput))) {
 		current_line += positions[direction][0];
 		current_column += positions[direction][1];
-		//cout << "current line : " << current_line << endl;
-		//cout << "current column : " << current_column << endl;
-	}
-	
+		int currentOwner = grid.GetCellOwner(current_line, current_column);
 
-	return true;
-}
-
-	bool Checks::IsInputValidGameModes(const int& input) {
-		if (input < 3 && input > 0) {
+		if (currentOwner == player.GetId()) {
 			return true;
 		}
-		return false;
 	}
+	return false;
+}
 
-	bool Checks::IsPlayerBot(const Player & player) {
-		if (player.GetIsBot() == 1) { return true; }
-		else if (player.GetIsBot() == 0) { return false; }
+bool Checks::IsInputValidGameModes(const int& input) {
+	if (input < 3 && input > 0) {
+		return true;
 	}
+	return false;
+}
+
+bool Checks::IsPlayerBot(const Player& player) {
+	if (player.GetIsBot() == 1) { return true; }
+	else if (player.GetIsBot() == 0) { return false; }
+}

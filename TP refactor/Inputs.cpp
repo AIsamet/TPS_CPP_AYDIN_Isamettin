@@ -134,7 +134,7 @@ void Inputs::InputOthelloPlayer(Grid& grid, Player& player, const int& maxInput)
 }
 
 void Inputs::SetInputOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
-	if (Checks::IsInputByCellValid(input, maxInput) && Checks::IsOthelloCellPlayable(grid, player, input)) {
+	if (Checks::IsInputByCellValid(input, maxInput) && Checks::IsOthelloCellPlayable(grid, player, input-1)) {
 		Inputs::SetInputtedCell(grid, player, input, maxInput);
 	}
 	else {
@@ -145,6 +145,7 @@ void Inputs::SetInputOthello(Grid& grid, Player& player, const int& input, const
 
 void Inputs::SetInputtedCellOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
 	grid.SetCellOwnerIfEmpty(input - 1, player.GetId());
+	//grid.FlipCell
 }
 
 /**

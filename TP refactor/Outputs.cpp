@@ -30,10 +30,11 @@ void Outputs::DisplayGamePuissance4(const Grid& grid, const Player& player1, con
  * @return  void
 **/
 void Outputs::DisplayGameOthello(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer) {
-	system("cls");
+	//system("cls");
 	Outputs::DisplayPlayersOthello(player1, player2);
 	Outputs::DisplayGridOthello(grid, currentPlayer);
 	Outputs::DisplayInputMessageOthello(currentPlayer);
+	//Checks::IsOthelloCellFlipable(grid, currentPlayer, 46-1, 37-1);
 }
 
 /**
@@ -60,7 +61,7 @@ void Outputs::DisplayPlayersPuissance4(const Player& player1, const Player& play
  * @return  void
 **/
 void Outputs::DisplayPlayersOthello(const Player& player1, const Player& player2) {
-	cout << GetGreyText("Joueur " + player1.GetName()) << "  -  " << GetWhiteText("Joueur " + player2.GetName()) << endl << endl;
+	cout << GetRedText("Joueur " + player1.GetName()) << "  -  " << GetGreenText("Joueur " + player2.GetName()) << endl << endl;
 }
 
 /**
@@ -71,7 +72,7 @@ void Outputs::DisplayGridMorpion(const Grid& grid) {
 	cout << endl;
 
 	cout << "     |     |     " << endl;
-	cout << "  " << DisplayCellMorpion(grid.GetCell(0)) << "  |  " << DisplayCellMorpion(grid.GetCell(1)) << "  |  " << DisplayCellMorpion(grid.GetCell(2)) << endl;
+	cout << "  " << DisplayCellMorpion(grid.GetCell(0)) << "  |  " << DisplayCellMorpion(grid.GetCell(128)) << "  |  " << DisplayCellMorpion(grid.GetCell(2)) << endl;
 
 	cout << "_____|_____|_____" << endl;
 	cout << "     |     |     " << endl;
@@ -138,10 +139,10 @@ void Outputs::DisplayGridOthello(const Grid& grid, const Player& currentPlayer) 
 			{
 				line += "|  ";
 			}
-			if ((grid.GetCell(idCell).GetIdCell() < 10) && (grid.IsCellFree(idCell)) && (Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell))) {
+			if ((grid.GetCell(idCell).GetIdCell() < 9) && (grid.IsCellFree(idCell)) && (Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell))) {
 				line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  ";
 			}
-			else if ((grid.GetCell(idCell).GetIdCell() > 9) && (grid.IsCellFree(idCell)) && (Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell))) {
+			else if ((grid.GetCell(idCell).GetIdCell() > 8) && (grid.IsCellFree(idCell)) && (Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell))) {
 				line += DisplayCellOthello(grid.GetCell(idCell)) + " |  ";
 			}
 			else if ((grid.GetCell(idCell).GetIdCell() < 10) && (grid.IsCellFree(idCell))){
@@ -173,7 +174,7 @@ void Outputs::DisplayGridOthello(const Grid& grid, const Player& currentPlayer) 
  * @return  idCell par defaut sinon X rouge pour le joueur 1, O vert pour le joueur 2
 **/
 string Outputs::DisplayCellMorpion(const Cell& cell) {
-	string str = to_string(cell.GetIdCell());
+	string str = to_string(cell.GetIdCell()+1);
 	if (cell.GetOwner() == 1) {
 		str = GetRedText("X");
 	}
@@ -203,12 +204,12 @@ string Outputs::DisplayCellPuissance4(const Cell& cell) {
  * @return  chaîne vide par defaut sinon O rouge pour le joueur 1, O vert pour le joueur 2
 **/
 string Outputs::DisplayCellOthello(const Cell& cell) {
-	string str = to_string(cell.GetIdCell());
+	string str = to_string(cell.GetIdCell()+1);
 	if (cell.GetOwner() == 1) {
-		str = GetGreyText("O");
+		str = GetRedText("O");
 	}
 	else if (cell.GetOwner() == 2) {
-		str = GetWhiteText("O");
+		str = GetGreenText("O");
 	}
 	return str;
 }
@@ -286,14 +287,14 @@ void Outputs::DisplayInputMessagePuissance4(const Player& player) {
 **/
 void Outputs::DisplayInputMessageOthello(const Player& player) {
 	if (player.GetId() == 1) {
-		cout << "Tour " << GetGreyText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+		cout << "Tour " << GetRedText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 	}
 	else {
 		if (player.GetIsBot() == 0) {
-			cout << "Tour " << GetWhiteText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
+			cout << "Tour " << GetGreenText("joueur " + player.GetName()) << ", dans quelle case voulez - vous jouer ? " << endl;
 		}
 		else {
-			cout << "Le " << GetWhiteText("joueur " + player.GetName()) << " joue son tour" << endl;
+			cout << "Le " << GetGreenText("joueur " + player.GetName()) << " joue son tour" << endl;
 			this_thread::sleep_for(chrono::milliseconds(500));
 		}
 	}

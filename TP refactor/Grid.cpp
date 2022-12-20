@@ -72,7 +72,7 @@ int Grid::GetCellOwner(const int& line, const int& column) const {
  * @params  line : nombre de lignes, column : nombre de colonnes
 **/
 void Grid::InitializeGameGrid(const int& line, const int& column) {
-	for (int i = 1; i <= line * column; i++) {
+	for (int i = 0; i <= line * column; i++) {
 		gameGrid.push_back(Cell(i));
 	}
 }
@@ -102,7 +102,7 @@ bool Grid::IsCellFree(const int& line, const int& column) const {
 		return false;
 }
 
-vector<Cell> Grid::GetAdjacentCells(const int& idCell) const {
+vector<Cell> Grid::GetNotFreeAdjacentCells(const int& idCell) const {
 	vector<Cell> adjacentCells;
 	int line = GetCellLineCoordinate(idCell);
 	int column = GetCellColumnCoordinate(idCell);
@@ -114,10 +114,8 @@ vector<Cell> Grid::GetAdjacentCells(const int& idCell) const {
 			}
 		}
 	}
-
 	return adjacentCells;
 }
-
 
 int Grid::GetAdjacentCellPosition(const int& idCell, const int& cellIdToCheck) const {
 	int line = GetCellLineCoordinate(idCell);
@@ -134,21 +132,16 @@ int Grid::GetAdjacentCellPosition(const int& idCell, const int& cellIdToCheck) c
 			return i;
 		}
 	}
-
-	//1 = diagonal top left
-	//2 = haut
-	//3 = diagonal top right
-	//4 = left
-	//5 = right
-	//6 = diagonal bottom left
-	//7 = bottom
-	//8 = diagonal bottom right
 }
 
 bool Grid::IsPositionInRange(const int& positionLine, const int& positionColumn) const {
 	if (positionLine < 0 || positionLine >= GetColumn() || positionColumn < 0 || positionColumn >= GetLine()) {
 		return false;
 	} return true;
+}
+
+void Grid::FlipCell(const int& newOwner, const int& IdCellToFlip) {
+	gameGrid[IdCellToFlip].SetOwner(newOwner);
 }
 
 bool Grid::SetCellOwnerIfEmpty(const int& idCelll, const int& value) {
