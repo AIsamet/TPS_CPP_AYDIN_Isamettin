@@ -10,9 +10,9 @@ Othello::Othello() {
 	player2 = Player(2, "B");
 
 	// position de depart pour le jeu d'othello
-	grid.SetCellOwnerIfEmpty(27, 2);
-	grid.SetCellOwnerIfEmpty(28, 1);
-	grid.SetCellOwnerIfEmpty(35, 1);
+	//grid.SetCellOwnerIfEmpty(27, 2);
+	//grid.SetCellOwnerIfEmpty(28, 1);
+	//grid.SetCellOwnerIfEmpty(35, 1);
 	grid.SetCellOwnerIfEmpty(36, 2);
 }
 

@@ -138,16 +138,21 @@ void Outputs::DisplayGridOthello(const Grid& grid, const Player& currentPlayer) 
 			{
 				line += "|  ";
 			}
-			if (idCell >= 9 && grid.IsCellFree(idCell) && Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell+1)) {
-				line += DisplayCellOthello(grid.GetCell(idCell)) + " |  ";
-			}
-			else if (idCell < 9 && grid.IsCellFree(idCell) && Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell+1))
-			{
+			if ((grid.GetCell(idCell).GetIdCell() < 10) && (grid.IsCellFree(idCell)) && (Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell))) {
 				line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  ";
 			}
-			else if (!grid.IsCellFree(idCell)) { line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  "; }
-			else if (idCell >= 9) { line += "   |  "; }
-			else if (idCell < 9) { line += "   |  "; }
+			else if ((grid.GetCell(idCell).GetIdCell() > 9) && (grid.IsCellFree(idCell)) && (Checks::IsOthelloCellPlayable(grid, currentPlayer, idCell))) {
+				line += DisplayCellOthello(grid.GetCell(idCell)) + " |  ";
+			}
+			else if ((grid.GetCell(idCell).GetIdCell() < 10) && (grid.IsCellFree(idCell))){
+				line += "   |  ";
+			}
+			else if ((grid.GetCell(idCell).GetIdCell() > 9) && (grid.IsCellFree(idCell))){
+				line += "   |  ";
+			}
+			else if (!grid.IsCellFree(idCell)) {
+				line += DisplayCellOthello(grid.GetCell(idCell)) + "  |  ";
+			}
 			idCell++;
 		}
 		cout << line << endl;
