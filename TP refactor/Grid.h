@@ -47,6 +47,9 @@ public:
 	bool IsPositionInRange(const int& positionLine, const int& positionColumn) const;
 	void FlipCell(const int& newOwner, const int& IdCellToFlip);
 
+	bool SetCellOwner(const int& idCell, const int& value);
+	bool SetCellOwner(const int& line, const int& column, const int& value);
+
 	bool SetCellOwnerIfEmpty(const int& idCell, const int& value);
 	bool SetCellOwnerIfEmpty(const int& line, const int& column, const int& value);
 	

@@ -159,9 +159,19 @@ void Grid::FlipCell(const int& newOwner, const int& IdCellToFlip) {
 	gameGrid[IdCellToFlip].SetOwner(newOwner);
 }
 
-bool Grid::SetCellOwnerIfEmpty(const int& idCelll, const int& value) {
-	if (IsCellFree(idCelll)) {
-		GetCell(idCelll).SetOwner(value);
+bool Grid::SetCellOwner(const int& idCell, const int& value){
+	GetCell(idCell).SetOwner(value);
+	return true;
+}
+
+bool Grid::SetCellOwner(const int& line, const int& column, const int& value){
+	GetCell(line, column).SetOwner(value);
+	return true;
+}
+
+bool Grid::SetCellOwnerIfEmpty(const int& idCell, const int& value) {
+	if (IsCellFree(idCell)) {
+		GetCell(idCell).SetOwner(value);
 		return true;
 	}
 	return false;

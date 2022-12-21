@@ -26,6 +26,8 @@ public:
 	static void SetInputOthello(Grid& grid, Player& player, const int& input, const int& maxInput);
 	static void SetInputtedCellOthello(Grid& grid, Player& player, const int& input, const int& maxInput);
 
+	static void FlipCellsOthello(Grid& grid, Player& player, const int& input);
+
 	static void InputBotPlayerMorpion(Grid& grid, Player& player);
 	static void InputBotPlayerMPuissance4(Grid& grid, Player& player);
 

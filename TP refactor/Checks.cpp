@@ -59,14 +59,16 @@ bool Checks::IsOthelloCellFlipable(const Grid& grid, const Player& player, const
 }
 
 vector<Cell> Checks::GetCellsToFlipOthello(const Grid& grid, const Player& player, const int& input) {
-	vector<Cell> adjacentCells = grid.GetOpponentAdjacentCells(input-1, player.GetId());
-	
-	vector<Cell> CellsToFlip = GetOthelloFlipableCell(grid, player, input-1, adjacentCells[0].GetIdCell()-1);
-	for (int i = 0; i < CellsToFlip.size(); i++) {
-		cout << "adj : " << adjacentCells[0].GetIdCell();
-		cout << "flip : " << CellsToFlip[i].GetIdCell()+1 << endl;
+	vector<Cell> adjacentCells = grid.GetOpponentAdjacentCells(input, player.GetId());
+	vector<Cell> CellsToFlip;
+	vector<Cell> FinalResult;
+	for (int i = 0; i < adjacentCells.size(); i++) {
+
+		CellsToFlip = GetOthelloFlipableCell(grid, player, input, adjacentCells[i].GetIdCell());
+		FinalResult.push_back(CellsToFlip[i].GetIdCell());
+		cout << "test : " << CellsToFlip[i].GetIdCell() << endl;
 	}
-	return CellsToFlip;
+	return FinalResult;
 }
 
 //from input to adjacent cell
@@ -81,6 +83,7 @@ vector<Cell> Checks::GetOthelloFlipableCell(const Grid& grid, const Player& play
 	int direction = grid.GetAdjacentCellPosition(input, adjacentCellIdToCheck);
 	int current_line = lineAjacentCellIdToCheck;
 	int current_column = columnAjacentCellIdToCheck;
+	FlipableCells.push_back(grid.GetCell(current_line, current_column));
 
 	while (grid.IsPositionInRange(current_line + positions[direction][0], current_column + positions[direction][1])) {
 

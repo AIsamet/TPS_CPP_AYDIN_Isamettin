@@ -145,7 +145,16 @@ void Inputs::SetInputOthello(Grid& grid, Player& player, const int& input, const
 
 void Inputs::SetInputtedCellOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
 	grid.SetCellOwnerIfEmpty(input - 1, player.GetId());
-	Checks::GetCellsToFlipOthello(grid, player, input-1);
+	//Checks::GetCellsToFlipOthello(grid, player, input-1);
+	FlipCellsOthello(grid, player, input-1);
+}
+
+void Inputs::FlipCellsOthello(Grid& grid, Player& player, const int& input) {
+	vector<Cell> CellsToFlip = Checks::GetCellsToFlipOthello(grid, player, input);
+
+	for (int i = 0; i < CellsToFlip.size(); i++) {
+		grid.SetCellOwner(CellsToFlip[i].GetIdCell(), player.GetId());
+	}
 }
 
 /**
