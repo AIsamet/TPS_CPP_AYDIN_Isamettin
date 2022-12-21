@@ -21,7 +21,7 @@ Player Puissance4::PlayRound() {
 	{
 		currentPlayer = RoundGenerator(round);
 		Outputs::DisplayGamePuissance4(GetGrid(), GetPlayer1(), GetPlayer2(), currentPlayer);
-		Inputs::InputByColumn(grid, currentPlayer, grid.GetColumn());
+		Inputs::InputByColumn(grid, currentPlayer, grid.GetColumnSize());
 		round++;
 	}
 	return currentPlayer;
@@ -87,9 +87,9 @@ bool Puissance4::CheckWinByLine(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (line = 0; line < grid.GetLine(); line++) {
+	for (line = 0; line < grid.GetLineSize(); line++) {
 
-		for (column = 0; column < grid.GetColumn(); column++) {
+		for (column = 0; column < grid.GetColumnSize(); column++) {
 
 			if (grid.GetCell(line, column).GetOwner() == player.GetId()) {
 				count++;
@@ -117,9 +117,9 @@ bool Puissance4::CheckWinByColumn(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (column = 0; column < grid.GetColumn(); column++) {
+	for (column = 0; column < grid.GetColumnSize(); column++) {
 
-		for (line = 0; line < grid.GetLine(); line++) {
+		for (line = 0; line < grid.GetLineSize(); line++) {
 
 			if (grid.GetCell(line, column).GetOwner() == player.GetId()) {
 				count++;
@@ -143,7 +143,7 @@ bool Puissance4::CheckWinByColumn(const Player& player) const {
  * @return  true si le joueur a gagne en diagonale, false sinon
 **/
 bool Puissance4::CheckWinByDiagonal(const Player& player) const {
-	const int gridColumnNumber = grid.GetColumn() - 1;
+	const int gridColumnNumber = grid.GetColumnSize() - 1;
 	int line = 0;
 	int column = 0;
 	int totalCount = 0;

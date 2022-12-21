@@ -88,9 +88,9 @@ bool Morpion::CheckWinByLine(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (line = 0; line < grid.GetLine(); line++) {
+	for (line = 0; line < grid.GetLineSize(); line++) {
 
-		for (column = 0; column < grid.GetColumn(); column++) {
+		for (column = 0; column < grid.GetColumnSize(); column++) {
 
 			if (grid.GetCell(line, column).GetOwner() == player.GetId()) {
 				count++;
@@ -114,9 +114,9 @@ bool Morpion::CheckWinByColumn(const Player& player) const {
 	int column = 0;
 	int count = 0;
 
-	for (column = 0; column < grid.GetColumn(); column++) {
+	for (column = 0; column < grid.GetColumnSize(); column++) {
 
-		for (line = 0; line < grid.GetLine(); line++) {
+		for (line = 0; line < grid.GetLineSize(); line++) {
 
 			if (grid.GetCell(line, column).GetOwner() == player.GetId()) {
 				count++;

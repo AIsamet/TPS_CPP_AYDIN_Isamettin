@@ -32,22 +32,22 @@ Cell Grid::GetCell(const int& idCell) const {
  * @return  la case si elle est trouvée
 **/
 Cell& Grid::GetCell(const int& line, const int& column) {
-	int index = line * GetColumn() + column;
+	int index = line * GetColumnSize() + column;
 	return gameGrid[index];
 }
 
 Cell Grid::GetCell(const int& line, const int& column) const {
-	int index = line * GetColumn() + column;
+	int index = line * GetColumnSize() + column;
 	return gameGrid[index];
 }
 
 int Grid::GetCellLineCoordinate(const int& idCell) const {
-	int coordinateY = idCell / GetColumn();
+	int coordinateY = idCell / GetColumnSize();
 	return coordinateY;
 }
 
 int Grid::GetCellColumnCoordinate(const int& idCell) const {
-	int coordinateX = idCell % GetColumn();
+	int coordinateX = idCell % GetColumnSize();
 	return coordinateX;
 }
 
@@ -150,7 +150,7 @@ int Grid::GetAdjacentCellPosition(const int& idCell, const int& cellIdToCheck) c
 }
 
 bool Grid::IsPositionInRange(const int& positionLine, const int& positionColumn) const {
-	if (positionLine < 0 || positionLine >= GetColumn() || positionColumn < 0 || positionColumn >= GetLine()) {
+	if (positionLine < 0 || positionLine >= GetColumnSize() || positionColumn < 0 || positionColumn >= GetLineSize()) {
 		return false;
 	} return true;
 }
@@ -159,9 +159,8 @@ void Grid::FlipCell(const int& newOwner, const int& IdCellToFlip) {
 	gameGrid[IdCellToFlip].SetOwner(newOwner);
 }
 
-bool Grid::SetCellOwner(const int& idCell, const int& value){
+void Grid::SetCellOwner(const int& idCell, const int& value){
 	GetCell(idCell).SetOwner(value);
-	return true;
 }
 
 bool Grid::SetCellOwner(const int& line, const int& column, const int& value){

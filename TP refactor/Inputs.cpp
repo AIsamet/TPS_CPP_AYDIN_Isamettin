@@ -116,12 +116,12 @@ void Inputs::SetInputByColumn(Grid& grid, Player& player, const int& input, cons
  * @return  void
 **/
 void Inputs::SetInputtedColumn(Grid& grid, Player& player, const int& input, const int& maxInput) {
-	for (int ligne = 0; ligne < grid.GetLine(); ligne++) {
+	for (int ligne = 0; ligne < grid.GetLineSize(); ligne++) {
 		if (grid.IsCellFree(ligne, input - 1)) {
 			grid.SetCellOwnerIfEmpty(ligne, input - 1, player.GetId());
 			break;
 		}
-		else if (ligne == grid.GetLine() - 1) {
+		else if (ligne == grid.GetLineSize() - 1) {
 			Outputs::DisplayColumnIsFullErrorMessagePuissance4();
 			InputByColumnPlayer(grid, player, maxInput);
 		}
@@ -150,12 +150,20 @@ void Inputs::SetInputtedCellOthello(Grid& grid, Player& player, const int& input
 }
 
 void Inputs::FlipCellsOthello(Grid& grid, Player& player, const int& input) {
-	vector<Cell> CellsToFlip = Checks::GetCellsToFlipOthello(grid, player, input);
-
-	for (int i = 0; i < CellsToFlip.size(); i++) {
-		grid.SetCellOwner(CellsToFlip[i].GetIdCell(), player.GetId());
+	vector<Cell> FlipableCells;
+	vector<Cell> AjacentCells;
+	for (int i = 0; i < grid.GetSize(); i++) {
+		if (!grid.IsCellFree(i)) {
+			//A FINIR
+			AjacentCells = grid.GetNotFreeAdjacentCells(i);
+			for (int j = 0; j < AjacentCells.size(); j++) {
+				FlipableCells = Checks::GetOthelloFlipableCell(grid, player, i, AjacentCells[j].GetIdCell());
+			}
+		}
 	}
+	
 }
+
 
 /**
  * @brief   Attribue la propriete d'une case a un bot (morpion)
@@ -172,7 +180,7 @@ void Inputs::InputBotPlayerMorpion(Grid& grid, Player& player) {
  * @return  void
 **/
 void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player& player) {
-	for (int ligne = 0; ligne < grid.GetLine(); ligne++) {
+	for (int ligne = 0; ligne < grid.GetLineSize(); ligne++) {
 
 		if (grid.IsCellFree(ligne, BotRandomInputGeneratorPuissance4(grid))) {
 
@@ -194,7 +202,7 @@ int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid) {
 	while (true) {
 
 		randomPlay = rand() % 7;
-		for (int ligne = 0; ligne < grid.GetLine(); ligne++) {
+		for (int ligne = 0; ligne < grid.GetLineSize(); ligne++) {
 
 			if (grid.GetCell(ligne, randomPlay).GetOwner() == 0) {
 				return randomPlay;
