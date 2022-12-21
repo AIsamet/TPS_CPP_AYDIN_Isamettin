@@ -81,7 +81,7 @@ void Inputs::SetInputByCell(Grid& grid, Player& player, const int& input, const 
 void Inputs::SetInputtedCell(Grid& grid, Player& player, const int& input, const int& maxInput) {
 	if (!grid.SetCellOwnerIfEmpty(input - 1, player.GetId())) {
 		Outputs::DisplayCellIsNotEmptyErrorMessageMorpion();
-		InputByCellPlayer(grid, player, maxInput);
+		 InputByCellPlayer(grid, player, maxInput);
 	}
 }
 
@@ -135,7 +135,7 @@ void Inputs::InputOthelloPlayer(Grid& grid, Player& player, const int& maxInput)
 
 void Inputs::SetInputOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
 	if (Checks::IsInputByCellValid(input, maxInput) && Checks::IsOthelloCellPlayable(grid, player, input-1)) {
-		Inputs::SetInputtedCell(grid, player, input, maxInput);
+		Inputs::SetInputtedCellOthello(grid, player, input, maxInput);
 	}
 	else {
 		Outputs::DisplayInputtedCellIsNotValidOthello();
@@ -145,7 +145,7 @@ void Inputs::SetInputOthello(Grid& grid, Player& player, const int& input, const
 
 void Inputs::SetInputtedCellOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
 	grid.SetCellOwnerIfEmpty(input - 1, player.GetId());
-	//grid.FlipCell
+	Checks::GetCellsToFlipOthello(grid, player, input-1);
 }
 
 /**
@@ -259,4 +259,3 @@ void Inputs::InputPlayer2Name(Player& player2) {
 		player2.SetName(namePlayer);
 	}
 }
-

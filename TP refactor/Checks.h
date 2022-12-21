@@ -13,7 +13,9 @@ public:
 	static bool IsInputByColumnValid(const int& input, const int& maxInput);
 
 	static bool IsOthelloCellPlayable(const Grid& grid, const Player& player, const int& input);
-	static bool IsOthelloCellValid(const Grid& grid, const Player& player, const int& input, const int& cellIdToCheck);
+	static bool IsOthelloCellFlipable(const Grid& grid, const Player& player, const int& input, const int& cellIdToCheck) ;
+	static vector<Cell> GetCellsToFlipOthello(const Grid& grid, const Player& player, const int& input);
+	static vector<Cell> GetOthelloFlipableCell(const Grid& grid, const Player& player, const int& input, const int& adjacentCellIdToCheck);
 
 	static bool IsInputValidGameModes(const int& input);
 	

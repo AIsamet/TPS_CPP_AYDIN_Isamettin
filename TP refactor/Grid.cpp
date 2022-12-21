@@ -117,6 +117,21 @@ vector<Cell> Grid::GetNotFreeAdjacentCells(const int& idCell) const {
 	return adjacentCells;
 }
 
+vector<Cell> Grid::GetOpponentAdjacentCells(const int& idCell, const int& idPlayer) const {
+	vector<Cell> adjacentCells;
+	int line = GetCellLineCoordinate(idCell);
+	int column = GetCellColumnCoordinate(idCell);
+
+	for (int i : {-1, 0, 1}) {
+		for (int j : {-1, 0, 1}) {
+			if (IsPositionInRange(line + i, column + j) && !IsCellFree(line + i, column + j) && GetCell(line + i, column + j).GetOwner()!= idPlayer) {
+				adjacentCells.push_back(GetCell(line + i, column + j));
+			}
+		}
+	}
+	return adjacentCells;
+}
+
 int Grid::GetAdjacentCellPosition(const int& idCell, const int& cellIdToCheck) const {
 	int line = GetCellLineCoordinate(idCell);
 	int column = GetCellColumnCoordinate(idCell);

@@ -34,7 +34,6 @@ void Outputs::DisplayGameOthello(const Grid& grid, const Player& player1, const 
 	Outputs::DisplayPlayersOthello(player1, player2);
 	Outputs::DisplayGridOthello(grid, currentPlayer);
 	Outputs::DisplayInputMessageOthello(currentPlayer);
-	//Checks::IsOthelloCellFlipable(grid, currentPlayer, 46-1, 37-1);
 }
 
 /**
