@@ -30,7 +30,7 @@ void Outputs::DisplayGamePuissance4(const Grid& grid, const Player& player1, con
  * @return  void
 **/
 void Outputs::DisplayGameOthello(const Grid& grid, const Player& player1, const Player& player2, const Player& currentPlayer) {
-	//system("cls");
+	system("cls");
 	Outputs::DisplayPlayersOthello(player1, player2);
 	Outputs::DisplayGridOthello(grid, currentPlayer);
 	Outputs::DisplayInputMessageOthello(currentPlayer);
@@ -60,7 +60,7 @@ void Outputs::DisplayPlayersPuissance4(const Player& player1, const Player& play
  * @return  void
 **/
 void Outputs::DisplayPlayersOthello(const Player& player1, const Player& player2) {
-	cout << GetRedText("Joueur " + player1.GetName()) << "  -  " << GetGreenText("Joueur " + player2.GetName()) << endl << endl;
+	cout << GetRedText("Joueur " + player1.GetName()) << "  -  " << GetGreenText("Joueur " + player2.GetName()) << endl;
 }
 
 /**
