@@ -25,6 +25,10 @@ public:
 	bool CheckWinByColumn(const Player& player) const override;
 	bool CheckWinByDiagonal(const Player& player) const override;
 
+	void FlipCellsByLine(const Player& player);
+	void FlipCellsByColumn(const Player& player);
+	void FlipCellsByDiagonal(const Player& player);
+
 private:
 
 };

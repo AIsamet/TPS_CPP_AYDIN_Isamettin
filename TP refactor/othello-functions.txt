@@ -1,0 +1,111 @@
+********** CLASS GRID **********
+
+/**
+ * @brief   Determine si une grille est pleine
+ * @return  void
+**/
+bool Grid::IsFull() {
+	for (int line = 0; line < GetLine(); line++) {
+		for (int column = 0; column < GetColumn(); column++) {
+			if (IsCellFree(line, column)) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+Rq : IsFull() est à compléter au niveau de la condition "if (IsCellFree(line, column))" qui doit donner "if (IsCellFree(line, column) && IsOthelloCellPlayable(line, column))"
+
+/**
+ * @brief   Determine si les cellules appartiennent toutes à un joueur
+ * @param	cellsByPlayer : nombre de cellules pour chaque joueur
+ * @return  true si les cellules appartiennent toutes à un joueur, false sinon
+**/
+bool Grid::IsCellsAllBelongToOnePlayer(pair<int, int> cellsByPlayer) {
+	if (cellsByPlayer.first > 0 && cellsByPlayer.second > 0) {
+		return false;
+	}
+	return true;
+}
+
+/**
+ * @brief   Compte le nombre de cellules pour chaque joueur
+ * @return  nombre de cellules pour chaque joueur
+**/
+pair<int, int> Grid::CountCellsByPlayer() {
+	int emptyCells = 0;
+	pair<int, int> cellsByPlayer;
+	cellsByPlayer.first = 0, cellsByPlayer.second = 0;
+
+	for (int line = 0; line < GetLine(); line++) {
+		for (int column = 0; column < GetColumn(); column++) {
+			if (GetCellOwner(line, column) == 1) {
+				cellsByPlayer.first++;
+			}
+			else if (GetCellOwner(line, column) == 2) {
+				cellsByPlayer.second++;
+			}
+			else {
+				emptyCells++;
+			}
+		}
+	}
+
+	// les cellules vides sont donnees au joueur gagnant
+	if (cellsByPlayer.first > cellsByPlayer.second) {
+		cellsByPlayer.first += emptyCells;
+	}
+	else if (cellsByPlayer.second > cellsByPlayer.first) {
+		cellsByPlayer.second += emptyCells;
+	}
+
+	return cellsByPlayer;
+}
+
+********** CLASS OUTPUT **********
+
+/**
+ * @brief   Informe le joueur que son tour saute
+ * @param	player : joueur courant
+ * @return  void
+**/
+void Outputs::DisplayMessageSkipRound(const Player& player) {
+	cout << "Le joueur " << player.Name << " ne peut pas jouer. Le tour saute !" << endl;
+}
+
+
+/**
+ * @brief   Affiche un message en cas de victoire (othello)
+ * @param	cellsByPlayer : nombre de cellules pour chaque joueur
+ * @return  void
+**/
+void Outputs::DisplayNumberCellsByPlayer(pair<int, int> cellsByPlayer, const Player& player1, const Player& player2) {
+	cout << "Joueur " << player1.Name << " : " << cellsByPlayer.first << " pions  -  Joueur " << player2.Name << " : " << cellsByPlayer.second << " pions" << endl;
+}
+
+/**
+ * @brief   Affiche le resultat du jeu en cas de victoire (othello)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA, winner : le gagnant, cellsByPlayer : nombre de cellules pour chaque joueur
+ * @return  void
+**/
+void Outputs::DisplayGameResultWinPuissance4(const Grid& grid, const Player& player1, const Player& player2, const Player& winner, pair<int, int> cellsByPlayer) {
+	system("cls");
+	Outputs::DisplayPlayersOthello(player1, player2);
+	Outputs::DisplayGridOthello(grid);
+	Outputs::DisplayWinMessage(winner);
+	Outputs::DisplayNumberCellsByPlayer(cellsByPlayer);
+}
+
+/**
+ * @brief   Affiche le resultat du jeu en cas d'egalite (othello)
+ * @params  grid : la grille de jeu, player1 : joueur 1, player2 : joueur 2 ou IA, cellsByPlayer : nombre de cellules pour chaque joueur
+ * @return  void
+**/
+void Outputs::DisplayGameResultEqualityPuissance4(const Grid& grid, const Player& player1, const Player& player2, pair<int, int> cellsByPlayer) {
+	system("cls");
+	Outputs::DisplayPlayersOthello(player1, player2);
+	Outputs::DisplayGridOthello(grid);
+	Outputs::DisplayEqualityMessage();
+	Outputs::DisplayNumberCellsByPlayer(cellsByPlayer);
+}
