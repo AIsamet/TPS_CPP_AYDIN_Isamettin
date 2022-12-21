@@ -1,0 +1,59 @@
+***************** Refactoring *****************
+
+	- Classe Cell : 
+FAIT		- modifier gestion IdStatic (deplacer vers Grid)
+FAIT		- supprimer GetCellPositionFromId
+FAIT		- constantes pour l'affichage des cells
+		- Simplifier affichage des Cell avec nouvelle classe Pion
+
+
+	- Classe Grid :
+FAIT		- modifier dimmension grid : mettre a plat avec x,y
+FAIT		- gestion IdStatic cell par nouvelle struture de Grid
+FAIT		- deplacer les affichages dans la nouvelle classe Output
+?		- revoir le type des retour des fonctions = ajouter un wrapper de struct
+
+	- Globalement :
+En cours	- reduire taille des methodes
+En cours	- revoir loi de demetter et single level abstraction :
+			- créer de nouvelles methodes (ex : classe Morpion avec checks, 
+			  remplacer "grid.GetGameGrid()[line][2 - line].GetOwner() == player.GetId()" par grid.CellOwnerIs(ligne, colonne, player)
+
+	- Morpion & Puissance 4 :
+En cours	- simplifications grace aux nouvelles classes
+
+	Input : 
+		- refactorer les methodes pour les mettre en conformité avec les nouvelles classes InputByCell et InputByColumn
+
+	- Création de classes:
+FAIT	- Output :
+FAIT			- Simplifier les display
+FAIT			- Remettre le noms des joueurs selon round en couleur apres implementation de toutes les methodes dans Outputs
+Attente de retour	- Simplifier la classe si possible (trop de methodes, voir si bonne chose ou pas)
+Créée		- Pawn (Pion)
+Créée		- Checks
+
+***************** Othello *****************
+
+	- Classe Othello :
+A FAIRE	- IsGameEnded : bool => determine si le jeu est terminee (grille est pleine OU cases vides non jouables pour les 2 joueurs OU tous les pions sont de la mm couleur apres un retournement)
+EN COURS- RoundisPlayable : bool => determine si un tour est jouable pour un joueur.
+EN COURS- AreEmptyCellsPlayable : bool => determine s'il y a des cases vides jouables par le joueur, c'est-à-dire que ces cases peuvent provoquer des retournements de pions).
+A FAIRE	- ArePawnsSameColor : bool => determine si tous les pions sont de la meme couleur 
+FAIT	- IsAdjacent : bool => determine si la case jouée est adjacente à un pion adverse
+EN COURS- isValidMove : bool => determine si le mouvement du joueur est valide (obligatoire de retourner au moins un pion adverse)
+A FAIRE	- CheckMovesByLine : bool => regarder en ligne (x2) s'il y a des pions adverses à retourner
+A FAIRE	- CheckMovesByColumn : bool => regarder en colonne (x2)  s'il y a des pions adverses à retourner
+A FAIRE	- CheckMovesByDiagonal : bool => regarder en diagonale (x4) s'il y a des pions adverses à retourner
+A FAIRE	- CountPawns : void => compte les pions des joueurs. Les cases vides sont données au vainqueur
+
+	- Classe Outputs :
+A FAIRE	- DisplayMessageSkipRound() : void => informe l'utilisateur que son tour saute dans le jeu d'Othello (la méthode est appelée quand RoundisPlayable() renvoie false)
+
+	- Classe Grid :
+A FAIRE	- IsFull : bool => determine si la grille est pleine pour le jeu d'Othello.
+
+	A voir :
+A FAIRE	- Il y a des méthodes identiques comme DisplayPlayersMorpion() / DisplayPlayersOthello(), ou DisplayInputMessageMorpion() / DisplayInputMessageMorpion(), on factorise ?
+A FAIRE	- Avertissement pour Othello : les pions retournés ne peuvent pas retourner d'autres pions. En d'autres termes, il n'y a pas de reaction en chaine.
+A FAIRE	- Mettre en evidence les cases ou l'on peut jouer dans Othello ?

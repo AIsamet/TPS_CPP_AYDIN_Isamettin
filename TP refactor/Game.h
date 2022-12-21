@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "Grid.h"
 #include "Inputs.h"
+#include "Outputs.h"
+#include "Checks.h"
 #include <chrono>
 #include <thread>
 
@@ -11,11 +13,6 @@
 class Game
 {
 public:
-	/**
-	 * Constructeur
-	**/
-	Game();
-
 	/**
 	 * Getters
 	**/
@@ -29,22 +26,23 @@ public:
 	 * Setters
 	**/
 	inline void SetGameMode(const int& NewSetting) { gameMode = NewSetting; }
-	
+
 	/**
 	 * Methodes
 	**/
 	virtual void AskGameMode();
-	virtual void AskPlayersNames();
-	
-	virtual Player PlayRound() = 0;
+
 	virtual void StartGame() = 0;
-	
+	virtual Player PlayRound() = 0;
+	Player RoundGenerator(int round);
+	virtual void EndGame(const Player& PotentialWinner) = 0;
+
 	virtual bool CheckEquality() const = 0;
 	virtual bool CheckWin(const Player& player) const = 0;
 	virtual bool CheckWinByLine(const Player& player) const = 0;
 	virtual bool CheckWinByColumn(const Player& player) const = 0;
 	virtual bool CheckWinByDiagonal(const Player& player) const = 0;
-	
+
 protected:
 	/**
 	 * Attributs

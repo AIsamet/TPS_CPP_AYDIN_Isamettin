@@ -1,20 +1,13 @@
 #include "Inputs.h"
 
 /**
- * @brief   Construit un nouveau input
-**/
-Inputs::Inputs()
-{
-}
-
-/**
  * @brief   Appelle les methodes appropriees en fonction du type de joueur (morpion)
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputMorpion(Grid& grid, Player player) {
-	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMorpion(grid, player); }
-	else if (player.GetIsBot() == 0) { Inputs::InputPlayerMorpion(grid, player); }
+void Inputs::InputByCell(Grid& grid, Player& player, const int& maxInput) {
+	if (Checks::IsPlayerBot(player)) { Inputs::InputBotPlayerMorpion(grid, player); }
+	else { Inputs::InputByCellPlayer(grid, player, maxInput); }
 }
 
 /**
@@ -22,97 +15,163 @@ void Inputs::InputMorpion(Grid& grid, Player player) {
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputPuissance4(Grid& grid, Player player) {
-	if (player.GetIsBot() == 1) { Inputs::InputBotPlayerMPuissance4(grid, player); }
-	else if (player.GetIsBot() == 0) { Inputs::InputPlayerPuissance4(grid, player); }
+void Inputs::InputByColumn(Grid& grid, Player& player, const int& maxInput) {
+	if (Checks::IsPlayerBot(player)) { Inputs::InputBotPlayerMPuissance4(grid, player); }
+	else { Inputs::InputByColumnPlayer(grid, player, maxInput); }
+}
+
+void Inputs::InputOthello(Grid& grid, Player& player, const int& maxInput) {
+	if (Checks::IsPlayerBot(player)) { Inputs::InputBotPlayerMPuissance4(grid, player); }
+	else { Inputs::InputOthelloPlayer(grid, player, maxInput); }
 }
 
 /**
- * @brief   Traite la saisie du joueur (morpion)
- * @params  grid : grille de jeu, player : joueur actuel
- * @return  void
+ * @brief   Demande une entrée de type int et la retourne
+ * @return  int
 **/
-void Inputs::InputPlayerMorpion(Grid& grid, Player player)
-{
+int Inputs::GetNumericInput() {
 	int input = 0;
 	cin >> input;
 
-	// verifie si l'entree est un int
-	while (!std::cin.good())
-	{
+	while (!Checks::IsNumericInput(input)) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		cout << "Veuillez entrer un chiffre valide" << endl;
+		Outputs::DisplayInputIsNotNumericErrorMessage();
 		cin >> input;
 	}
+	return input;
+}
 
-	// verifie si l'entree est valide
-	if (input < 10 && input > 0) {
+string Inputs::GetStringInput() {
+	string input;
+	cin >> input;
+	return input;
+}
 
-		if (grid.GetCellPositionFromId(input - 1).GetOwner() == 0) {
+/**
+ * @brief   Traite la saisie du joueur en appellant SetInputByCell
+ * @params  grid : grille de jeu, player : joueur actuel
+ * @return  void
+**/
+void Inputs::InputByCellPlayer(Grid& grid, Player& player, const int& maxInput) {
+	int input = Inputs::GetNumericInput();
+	Inputs::SetInputByCell(grid, player, input, maxInput);
+}
 
-			grid.GetCellPositionFromId(input - 1).SetOwner(player.GetId());
-		}
-		else {
-
-			cout << "Case deja prise" << endl; InputPlayerMorpion(grid, player);
-		}
+/**
+ * @brief   Si l'entrée est valide il appelle SetInputCellMorpion afin de changer l'Owner du Cell demandé sinon demande une ressaisie
+ * @params  grid : grille de jeu, player : joueur actuel, input : l'entrée du joueur
+ * @return  void
+**/
+void Inputs::SetInputByCell(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	if (Checks::IsInputByCellValid(input, maxInput)) {
+		Inputs::SetInputtedCell(grid, player, input, maxInput);
 	}
 	else {
-		cout << "Veuillez saisir un chiffre entre 1 et 9" << endl;
-		InputPlayerMorpion(grid, player);
+		Outputs::DisplayInputtedCellIsNotValid(maxInput);
+		InputByCellPlayer(grid, player, maxInput);
 	}
 }
 
 /**
- * @brief   Traite la saisie du joueur (puissance 4)
+ * @brief   Si le Cell n'a pas deja un Owner il effectue le changement d'Owner, sinon demande une ressaisie
+ * @params  grid : grille de jeu, player : joueur actuel, input : l'entrée du joueur
+ * @return  void
+**/
+void Inputs::SetInputtedCell(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	if (!grid.SetCellOwnerIfEmpty(input - 1, player.GetId())) {
+		Outputs::DisplayCellIsNotEmptyErrorMessageMorpion();
+		 InputByCellPlayer(grid, player, maxInput);
+	}
+}
+
+/**
+ * @brief   Traite la saisie du joueur en appellant SetInputByColumn (puissance 4)
  * @params  grid : grille de jeu, player : joueur actuel
  * @return  void
 **/
-void Inputs::InputPlayerPuissance4(Grid& grid, Player player)
-{
-	int input = 0;
-	cin >> input;
+void Inputs::InputByColumnPlayer(Grid& grid, Player& player, const int& maxInput) {
+	int input = Inputs::GetNumericInput();
+	Inputs::SetInputByColumn(grid, player, input, maxInput);
+}
 
-	// verifie si l'entrée est un int
-	while (!std::cin.good())
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		cout << "Veuillez entrer un chiffre valide" << endl;
-		cin >> input;
+/**
+ * @brief   Si l'entrée est valide il appelle SetInputCellPuissance4 afin de changer l'Owner du Cell demandé sinon demande une ressaisie
+ * @params  grid : grille de jeu, player : joueur actuel, input : l'entrée du joueur
+ * @return  void
+**/
+void Inputs::SetInputByColumn(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	if (Checks::IsInputByColumnValid(input, maxInput)) {
+		Inputs::SetInputtedColumn(grid, player, input, maxInput);
 	}
+	else {
+		Outputs::DisplayInputtedCellIsNotValid(maxInput);
+		InputByColumnPlayer(grid, player, maxInput);
+	}
+}
 
-	// verifie si l'entrée est valide
-	if (input < 8 && input > 0) {
+/**
+ * @brief   Si le Cell le plus bas de la colonne n'a pas deja un Owner il effectue le changement d'Owner, sinon demande une ressaisie
+ * @params  grid : grille de jeu, player : joueur actuel, input : l'entrée du joueur
+ * @return  void
+**/
+void Inputs::SetInputtedColumn(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	for (int ligne = 0; ligne < grid.GetLineSize(); ligne++) {
+		if (grid.IsCellFree(ligne, input - 1)) {
+			grid.SetCellOwnerIfEmpty(ligne, input - 1, player.GetId());
+			break;
+		}
+		else if (ligne == grid.GetLineSize() - 1) {
+			Outputs::DisplayColumnIsFullErrorMessagePuissance4();
+			InputByColumnPlayer(grid, player, maxInput);
+		}
+	}
+}
 
-		for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
+void Inputs::InputOthelloPlayer(Grid& grid, Player& player, const int& maxInput) {
+	int input = Inputs::GetNumericInput();
+	Inputs::SetInputOthello(grid, player, input, maxInput);
+}
 
-			if (grid.GetGameGrid()[ligne][input - 1].GetOwner() == 0) {
+void Inputs::SetInputOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	if (Checks::IsInputByCellValid(input, maxInput) && Checks::IsOthelloCellPlayable(grid, player, input-1)) {
+		Inputs::SetInputtedCellOthello(grid, player, input, maxInput);
+	}
+	else {
+		Outputs::DisplayInputtedCellIsNotValidOthello();
+		InputOthelloPlayer(grid, player, maxInput);
+	}
+}
 
-				grid.GetGameGridByReference()[ligne][input - 1].SetOwner(player.GetId());
-				break;
-			}
-			else if (ligne == grid.GetGameGrid().size() - 1) {
-				cout << "La colonne est pleine, veuillez choisir une autre colonne" << endl;
-				InputPlayerPuissance4(grid, player);
+void Inputs::SetInputtedCellOthello(Grid& grid, Player& player, const int& input, const int& maxInput) {
+	grid.SetCellOwnerIfEmpty(input - 1, player.GetId());
+	//Checks::GetCellsToFlipOthello(grid, player, input-1);
+	FlipCellsOthello(grid, player, input-1);
+}
+
+void Inputs::FlipCellsOthello(Grid& grid, Player& player, const int& input) {
+	vector<Cell> FlipableCells;
+	vector<Cell> AjacentCells;
+	for (int i = 0; i < grid.GetSize(); i++) {
+		if (!grid.IsCellFree(i)) {
+			//A FINIR
+			AjacentCells = grid.GetNotFreeAdjacentCells(i);
+			for (int j = 0; j < AjacentCells.size(); j++) {
+				FlipableCells = Checks::GetOthelloFlipableCell(grid, player, i, AjacentCells[j].GetIdCell());
 			}
 		}
 	}
-	else {
-		cout << "Veuillez saisir un chiffre entre 1 et 7" << endl;
-		InputPlayerPuissance4(grid, player);
-	}
+	
 }
+
 
 /**
  * @brief   Attribue la propriete d'une case a un bot (morpion)
  * @params  grid : grille de jeu, player : bot
  * @return  void
 **/
-void Inputs::InputBotPlayerMorpion(Grid& grid, Player player)
-{
-	grid.GetCellPositionFromId(BotRandomInputGeneratorMorpion(grid, player)).SetOwner(player.GetId());
+void Inputs::InputBotPlayerMorpion(Grid& grid, Player& player) {
+	grid.GetCell(BotRandomInputGeneratorMorpion(grid)).SetOwner(player.GetId());
 }
 
 /**
@@ -120,13 +179,12 @@ void Inputs::InputBotPlayerMorpion(Grid& grid, Player player)
  * @params  grid : grille de jeu, player : bot
  * @return  void
 **/
-void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player player)
-{
-	for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
+void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player& player) {
+	for (int ligne = 0; ligne < grid.GetLineSize(); ligne++) {
 
-		if (grid.GetGameGrid()[ligne][BotRandomInputGeneratorPuissance4(grid, player)].GetOwner() == 0) {
+		if (grid.IsCellFree(ligne, BotRandomInputGeneratorPuissance4(grid))) {
 
-			grid.GetGameGridByReference()[ligne][BotRandomInputGeneratorPuissance4(grid, player)].SetOwner(player.GetId());
+			grid.SetCellOwnerIfEmpty(ligne, BotRandomInputGeneratorPuissance4(grid), player.GetId());
 			break;
 		}
 	}
@@ -137,16 +195,16 @@ void Inputs::InputBotPlayerMPuissance4(Grid& grid, Player player)
  * @params  grid : grille de jeu, player : bot
  * @return  void
 **/
-int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
+int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid) {
 	srand(time(NULL));
 	int randomPlay;
 
 	while (true) {
 
 		randomPlay = rand() % 7;
-		for (int ligne = 0; ligne < grid.GetGameGrid().size(); ligne++) {
+		for (int ligne = 0; ligne < grid.GetLineSize(); ligne++) {
 
-			if (grid.GetGameGrid()[ligne][randomPlay].GetOwner() == 0) {
+			if (grid.GetCell(ligne, randomPlay).GetOwner() == 0) {
 				return randomPlay;
 			}
 		}
@@ -158,11 +216,11 @@ int Inputs::BotRandomInputGeneratorPuissance4(Grid& grid, Player player) {
  * @params  grid : grille de jeu, player : bot
  * @return  void
 **/
-int Inputs::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
+int Inputs::BotRandomInputGeneratorMorpion(Grid& grid) {
 	srand(time(NULL));
 	int randomPlay = rand() % 9;
 
-	while (grid.GetCellPositionFromId(randomPlay).GetOwner() != 0) {
+	while (grid.GetCell(randomPlay).GetOwner() != 0) {
 		randomPlay = rand() % 9;
 	}
 
@@ -173,13 +231,9 @@ int Inputs::BotRandomInputGeneratorMorpion(Grid& grid, Player player) {
  * @brief   Traite la saisie pour le choix de jeu
  * @return  choix du jeu
 **/
-string Inputs::InputGameChoice()
-{
+string Inputs::InputGameChoice() {
+	Outputs::DisplayGameChoices();
 	string choice;
-	cout << "1. Puissance 4" << endl;
-	cout << "2. Morpion" << endl;
-	cout << "3. Quitter" << endl << endl;
-	cout << "Choix : ";
 	cin >> choice;
 	return choice;
 }
@@ -188,43 +242,37 @@ string Inputs::InputGameChoice()
  * @brief   Traite la saisie pour le mode de jeu
  * @return  mode de jeu
 **/
-int Inputs::InputGameMode()
-{
-	int input = 0;
+int Inputs::InputGameMode() {
+	Outputs::DisplayGameModes();
+	int input = Inputs::GetNumericInput();
 
-	cout << "\nA quelle mode de jeu voulez vous jouer ? " << endl;
-	cout << "1 - Joueur contre Joueur" << endl;
-	cout << "2 - Joueur contre IA" << endl << endl;
-	cout << "Choix : ";
-	cin >> input;
-
-	//verifie si l'entrée est un int
-	while (!std::cin.good())
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		cout << "\nVeuillez entrer un chiffre" << endl;
-		cout << "Choix : ";
-		cin >> input;
-	}
-	if (input < 3 && input > 0) {
-		return input;
-	}
-	else {
-		system("cls");
-		cout << "Veuillez saisir un choix valide" << endl;
+	if (!Checks::IsInputValidGameModes(input)) {
+		Outputs::DisplayInputIsNotValidErrorMessageGameModes();
 		InputGameMode();
 	}
+
+	return input;
 }
 
 /**
  * @brief   Traite la saisie pour les noms des joueurs
  * @return  nom du joueur actuel
 **/
-string Inputs::InputPlayersNames()
-{
-	string namePlayer;
-	cin >> namePlayer;	
-	return namePlayer;
+void Inputs::InputPlayersNames(Player& player1, Player& player2) {
+	Inputs::InputPlayer1Name(player1);
+	Inputs::InputPlayer2Name(player2);
 }
 
+void Inputs::InputPlayer1Name(Player& player1) {
+	Outputs::DisplayInputMessagePlayer1Name();
+	string namePlayer = Inputs::GetStringInput();
+	player1.SetName(namePlayer);
+}
+
+void Inputs::InputPlayer2Name(Player& player2) {
+	if (!player2.GetIsBot()) {
+		Outputs::DisplayInputMessagePlayer2Name();
+		string namePlayer = Inputs::GetStringInput();
+		player2.SetName(namePlayer);
+	}
+}

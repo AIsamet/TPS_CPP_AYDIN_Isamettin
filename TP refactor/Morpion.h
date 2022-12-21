@@ -11,14 +11,14 @@ public:
 	 * Constructeur
 	**/
 	Morpion();
-	Morpion(string player1Name, string player2Name);
-		
+
 	/**
 	 * Methodes
 	**/
 	Player PlayRound() override;
 	void StartGame() override;
-	
+	void EndGame(const Player& PotentialWinner);
+
 	bool CheckEquality() const override;
 	bool CheckWin(const Player& player) const override;
 	bool CheckWinByLine(const Player& player) const override;

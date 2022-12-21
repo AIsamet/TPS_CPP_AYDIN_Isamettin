@@ -14,8 +14,8 @@ public:
 	 * Constructeur
 	**/
 	Player();
-	Player(int id, string name);
-	
+	Player(const int& id, const string& name);
+
 	/**
 	 * Getters
 	**/
@@ -28,12 +28,6 @@ public:
 	**/
 	inline void SetName(const string& NewName) { name = NewName; }
 	inline void SetIsBot(const int& NewSetting) { isBot = NewSetting; }
-	
-	/**
-	 * Methodes
-	**/
-	static void DisplayPlayersMorpion(Player player1, Player player2);
-	static void DisplayPlayersPuissance4(Player player1, Player player2);
 
 private:
 	/**

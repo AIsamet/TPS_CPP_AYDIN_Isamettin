@@ -7,98 +7,179 @@
 Grid::Grid()
 {
 }
-Grid::Grid(int line, int column) {
 
-	gameGrid.resize(line);
-
-	for (int k = 0; k < line; k++) {
-		gameGrid[k].resize(column);
-	}
-	Cell::SetIdStatic(1);
+Grid::Grid(const int& line, const int& column) {
+	InitializeSizeGrid(line, column);
+	InitializeGameGrid(line, column);
 }
 
 /**
  * @brief   Retourne une case a partir de son id
  * @params  idCell : id de la case
- * @return  la case si elle est trouvée, une case vide sinon
+ * @return  la case si elle est trouvée
 **/
-Cell& Grid::GetCellPositionFromId(const int& idCell) {
-	switch (idCell) {
-	case 0:
-		return gameGrid[0][0];
-	case 1:
-		return gameGrid[0][1];
-	case 2:
-		return gameGrid[0][2];
-	case 3:
-		return gameGrid[1][0];
-	case 4:
-		return gameGrid[1][1];
-	case 5:
-		return gameGrid[1][2];
-	case 6:
-		return gameGrid[2][0];
-	case 7:
-		return gameGrid[2][1];
-	case 8:
-		return gameGrid[2][2];
-	default:
-		Cell emptyCell;
-		return emptyCell;
+Cell& Grid::GetCell(const int& idCell) {
+	return gameGrid[idCell];
+}
+
+Cell Grid::GetCell(const int& idCell) const {
+	return gameGrid[idCell];
+}
+
+/**
+ * @brief   Retourne une case a partir d'une ligne et une colonne
+ * @params  line : ligne de la case, column : colonne de la case
+ * @return  la case si elle est trouvée
+**/
+Cell& Grid::GetCell(const int& line, const int& column) {
+	int index = line * GetColumnSize() + column;
+	return gameGrid[index];
+}
+
+Cell Grid::GetCell(const int& line, const int& column) const {
+	int index = line * GetColumnSize() + column;
+	return gameGrid[index];
+}
+
+int Grid::GetCellLineCoordinate(const int& idCell) const {
+	int coordinateY = idCell / GetColumnSize();
+	return coordinateY;
+}
+
+int Grid::GetCellColumnCoordinate(const int& idCell) const {
+	int coordinateX = idCell % GetColumnSize();
+	return coordinateX;
+}
+
+int Grid::GetCellOwner(const int& idCell) {
+	return gameGrid[idCell].GetOwner();
+}
+
+int Grid::GetCellOwner(const int& idCell) const {
+	return GetCell(idCell).GetOwner();
+}
+
+int Grid::GetCellOwner(const int& line, const int& column) {
+	return GetCell(line, column).GetOwner();
+}
+
+int Grid::GetCellOwner(const int& line, const int& column) const {
+	return GetCell(line, column).GetOwner();
+}
+
+/**
+ * @brief   Initialise la grille de jeu
+ * @params  line : nombre de lignes, column : nombre de colonnes
+**/
+void Grid::InitializeGameGrid(const int& line, const int& column) {
+	for (int i = 0; i <= line * column; i++) {
+		gameGrid.push_back(Cell(i));
 	}
 }
 
 /**
- * @brief   Affiche la grille de jeu (morpion)
- * @return  void
+ * @brief   Initialise le pair qui contient la taille de la grille
+ * @params  line : nombre de lignes, column : nombre de colonnes
 **/
-void Grid::DisplayGridMorpion() const {
-	cout << endl;
-
-	cout << "     |     |     " << endl;
-	cout << "  " << gameGrid[0][0].DisplayCellMorpion() << "  |  " << gameGrid[0][1].DisplayCellMorpion() << "  |  " << gameGrid[0][2].DisplayCellMorpion() << endl;
-
-	cout << "_____|_____|_____" << endl;
-	cout << "     |     |     " << endl;
-
-	cout << "  " << gameGrid[1][0].DisplayCellMorpion() << "  |  " << gameGrid[1][1].DisplayCellMorpion() << "  |  " << gameGrid[1][2].DisplayCellMorpion() << endl;
-
-	cout << "_____|_____|_____" << endl;
-	cout << "     |     |     " << endl;
-
-	cout << "  " << gameGrid[2][0].DisplayCellMorpion() << "  |  " << gameGrid[2][1].DisplayCellMorpion() << "  |  " << gameGrid[2][2].DisplayCellMorpion() << endl;
-
-	cout << "     |     |     " << endl << endl;
+void Grid::InitializeSizeGrid(const int& line, const int& column) {
+	sizeGrid.first = line;
+	sizeGrid.second = column;
 }
 
-/**
- * @brief   Affiche la grille de jeu (puissance 4)
- * @return  void
-**/
-void Grid::DisplayGridPuissance4() const {
-	cout << endl;
+bool Grid::IsCellFree(const int& idCell) const {
+	if (GetCellOwner(idCell) == 0) {
+		return true;
+	}
+	else
+		return false;
+}
 
-	cout << "|  " << "1" << "  |  " << "2" << "  |  " << "3" << "  |  " << "4" << "  |  " << "5" << "  |  " << "6" << "  |  " << "7" << "  |  " << endl;
+bool Grid::IsCellFree(const int& line, const int& column) const {
+	if (GetCellOwner(line, column) == 0) {
+		return true;
+	}
+	else
+		return false;
+}
 
+vector<Cell> Grid::GetNotFreeAdjacentCells(const int& idCell) const {
+	vector<Cell> adjacentCells;
+	int line = GetCellLineCoordinate(idCell);
+	int column = GetCellColumnCoordinate(idCell);
 
-	cout << " _________________________________________" << endl;
-	cout << "|     |     |     |     |     |     |     |" << endl;
-	cout << "|  " << gameGrid[3][0].DisplayCellPuissance4() << "  |  " << gameGrid[3][1].DisplayCellPuissance4() << "  |  " << gameGrid[3][2].DisplayCellPuissance4() << "  |  " << gameGrid[3][3].DisplayCellPuissance4() << "  |  " << gameGrid[3][4].DisplayCellPuissance4() << "  |  " << gameGrid[3][5].DisplayCellPuissance4() << "  |  " << gameGrid[3][6].DisplayCellPuissance4() << "  |  " << endl;
+	for (int i : {-1, 0, 1}) {
+		for (int j : {-1, 0, 1}) {
+			if (IsPositionInRange(line + i, column + j) && !IsCellFree(line + i, column + j)) {
+				adjacentCells.push_back(GetCell(line + i, column + j));
+			}
+		}
+	}
+	return adjacentCells;
+}
 
-	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
-	cout << "|     |     |     |     |     |     |     |" << endl;
+vector<Cell> Grid::GetOpponentAdjacentCells(const int& idCell, const int& idPlayer) const {
+	vector<Cell> adjacentCells;
+	int line = GetCellLineCoordinate(idCell);
+	int column = GetCellColumnCoordinate(idCell);
 
-	cout << "|  " << gameGrid[2][0].DisplayCellPuissance4() << "  |  " << gameGrid[2][1].DisplayCellPuissance4() << "  |  " << gameGrid[2][2].DisplayCellPuissance4() << "  |  " << gameGrid[2][3].DisplayCellPuissance4() << "  |  " << gameGrid[2][4].DisplayCellPuissance4() << "  |  " << gameGrid[2][5].DisplayCellPuissance4() << "  |  " << gameGrid[2][6].DisplayCellPuissance4() << "  |  " << endl;
+	for (int i : {-1, 0, 1}) {
+		for (int j : {-1, 0, 1}) {
+			if (IsPositionInRange(line + i, column + j) && !IsCellFree(line + i, column + j) && GetCell(line + i, column + j).GetOwner()!= idPlayer) {
+				adjacentCells.push_back(GetCell(line + i, column + j));
+			}
+		}
+	}
+	return adjacentCells;
+}
 
-	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
-	cout << "|     |     |     |     |     |     |     |" << endl;
+int Grid::GetAdjacentCellPosition(const int& idCell, const int& cellIdToCheck) const {
+	int line = GetCellLineCoordinate(idCell);
+	int column = GetCellColumnCoordinate(idCell);
+	int lineCellIdToCheck = GetCellLineCoordinate(cellIdToCheck);
+	int columnCellIdToCheck = GetCellColumnCoordinate(cellIdToCheck);
 
-	cout << "|  " << gameGrid[1][0].DisplayCellPuissance4() << "  |  " << gameGrid[1][1].DisplayCellPuissance4() << "  |  " << gameGrid[1][2].DisplayCellPuissance4() << "  |  " << gameGrid[1][3].DisplayCellPuissance4() << "  |  " << gameGrid[1][4].DisplayCellPuissance4() << "  |  " << gameGrid[1][5].DisplayCellPuissance4() << "  |  " << gameGrid[1][6].DisplayCellPuissance4() << "  |  " << endl;
+	int positions[8][2] = { {-1, -1}, {-1, 0}, {-1, 1}, // 3 positions above
+						    {0, -1},		   {0, 1}, // 2 positions on same row
+							{1, -1}, {1, 0}, {1, 1} }; // 3 positions below
 
-	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl;
-	cout << "|     |     |     |     |     |     |     |" << endl;
+	for (int i = 0; i < sizeof(positions); i++) {
+		if (line + positions[i][0] == lineCellIdToCheck && column + positions[i][1] == columnCellIdToCheck) {
+			return i;
+		}
+	}
+}
 
-	cout << "|  " << gameGrid[0][0].DisplayCellPuissance4() << "  |  " << gameGrid[0][1].DisplayCellPuissance4() << "  |  " << gameGrid[0][2].DisplayCellPuissance4() << "  |  " << gameGrid[0][3].DisplayCellPuissance4() << "  |  " << gameGrid[0][4].DisplayCellPuissance4() << "  |  " << gameGrid[0][5].DisplayCellPuissance4() << "  |  " << gameGrid[0][6].DisplayCellPuissance4() << "  |  " << endl;
-	cout << "|_____|_____|_____|_____|_____|_____|_____|" << endl << endl;
+bool Grid::IsPositionInRange(const int& positionLine, const int& positionColumn) const {
+	if (positionLine < 0 || positionLine >= GetColumnSize() || positionColumn < 0 || positionColumn >= GetLineSize()) {
+		return false;
+	} return true;
+}
 
+void Grid::FlipCell(const int& newOwner, const int& IdCellToFlip) {
+	gameGrid[IdCellToFlip].SetOwner(newOwner);
+}
+
+void Grid::SetCellOwner(const int& idCell, const int& value){
+	GetCell(idCell).SetOwner(value);
+}
+
+bool Grid::SetCellOwner(const int& line, const int& column, const int& value){
+	GetCell(line, column).SetOwner(value);
+	return true;
+}
+
+bool Grid::SetCellOwnerIfEmpty(const int& idCell, const int& value) {
+	if (IsCellFree(idCell)) {
+		GetCell(idCell).SetOwner(value);
+		return true;
+	}
+	return false;
+}
+
+bool Grid::SetCellOwnerIfEmpty(const int& line, const int& column, const int& value) {
+	if (IsCellFree(line, column)) {
+		GetCell(line, column).SetOwner(value);
+		return true;
+	}
+	return false;
 }

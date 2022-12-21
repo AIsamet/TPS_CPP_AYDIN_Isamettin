@@ -1,16 +1,16 @@
-#ifndef Puissance4_h
-#define Puissance4_h
+#ifndef Othello_h
+#define Othello_h
 
 #include "Game.h"
 
-// Classe du jeu de puissance 4
-class Puissance4 : public Game
+// Classe du jeu de othello
+class Othello : public Game
 {
 public:
 	/**
 	 * Constructeur
 	**/
-	Puissance4();
+	Othello();
 
 	/**
 	 * Methodes
@@ -25,8 +25,13 @@ public:
 	bool CheckWinByColumn(const Player& player) const override;
 	bool CheckWinByDiagonal(const Player& player) const override;
 
+	void FlipCellsByLine(const Player& player);
+	void FlipCellsByColumn(const Player& player);
+	void FlipCellsByDiagonal(const Player& player);
+
 private:
 
 };
 
 #endif
+
