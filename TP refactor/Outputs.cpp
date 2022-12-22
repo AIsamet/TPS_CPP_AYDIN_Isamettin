@@ -71,7 +71,7 @@ void Outputs::DisplayGridMorpion(const Grid& grid) {
 	cout << endl;
 
 	cout << "     |     |     " << endl;
-	cout << "  " << DisplayCellMorpion(grid.GetCell(0)) << "  |  " << DisplayCellMorpion(grid.GetCell(128)) << "  |  " << DisplayCellMorpion(grid.GetCell(2)) << endl;
+	cout << "  " << DisplayCellMorpion(grid.GetCell(0)) << "  |  " << DisplayCellMorpion(grid.GetCell(1)) << "  |  " << DisplayCellMorpion(grid.GetCell(2)) << endl;
 
 	cout << "_____|_____|_____" << endl;
 	cout << "     |     |     " << endl;
